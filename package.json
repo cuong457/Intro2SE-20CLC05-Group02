@@ -1,0 +1,41 @@
+{
+  "name": "intro2se-20clc05-group02",
+  "version": "1.0.0",
+  "description": "Group project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:prod": "SET NODE_ENV=production && nodemon src/index.js",
+    "golive": "nodemon src/index.js",
+    "watch": "node-sass -w src/resources/scss -o src/public/css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:js": "parcel watch ./src/public/js/index.js --out-dir ./src/public/js --out-file bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuong457/Intro2SE-20CLC05-Group02.git"
+  },
+  "keywords": [
+    "web",
+    "ecommerce"
+  ],
+  "author": "Group2-Intro2SE-HCMUS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cuong457/Intro2SE-20CLC05-Group02/issues"
+  },
+  "homepage": "https://github.com/cuong457/Intro2SE-20CLC05-Group02#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.7.2",
+    "mongoose-slug-generator": "^1.0.4"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.20",
+    "parcel-bundler": "^1.12.5",
+    "prettier": "^2.7.1"
+  }
+}
