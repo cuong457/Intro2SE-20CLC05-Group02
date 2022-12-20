@@ -11,7 +11,6 @@ import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
 import flavorofindia_logo from '../../assets/images/logo/FlavourOfIndia-logo.png'
 
 
-import FoodList from '../FoodList/FoodList'
 
 /*import Orders from '../Orders/Orders';
 

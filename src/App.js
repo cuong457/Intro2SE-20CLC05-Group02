@@ -64,7 +64,7 @@ function App() {
                 </Routes>
 
                 <Routes>
-                    <Route path="/seller/add" element={<><AddItem/></>} />
+                    <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
                 </Routes>
 
             </div>
