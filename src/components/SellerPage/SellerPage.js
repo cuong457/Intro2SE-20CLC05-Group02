@@ -10,7 +10,8 @@ import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
 
 import flavorofindia_logo from '../../assets/images/logo/FlavourOfIndia-logo.png'
 
-import SellerStore from '../SellerStore/SellerStore'
+
+import FoodList from '../FoodList/FoodList'
 
 /*import Orders from '../Orders/Orders';
 
@@ -95,9 +96,9 @@ const SellerPage = () => {
                                     </a>
                                 </h4>
                             </div>
+                            {/* Hiện danh sách món ăn của seller */}
                             <div class="card-body">
                                 <div class="row">
-                                    {/* Hiện danh sách món ăn của seller */}
 
                                 </div>
                             </div>
