@@ -34,7 +34,7 @@ class Header extends React.Component {
                                 {/* {{! Left links field }} */}
                                 <ul className="navbar-nav me-auto" id="nav-leftlink">
                                     <li className="nav-item">
-                                        <a className="nav-link active navbar-font-link pb-2 m-0" href="#">Trở thành người bán hàng</a>
+                                        <a className="nav-link active navbar-font-link pb-2 m-0" href="/seller">Trở thành người bán hàng</a>
                                     </li>
 
                                     <li className="nav-item"><p
@@ -75,7 +75,7 @@ class Header extends React.Component {
                                         </a>
                                         <ul className="dropdown-menu dropdown-menu-dark">
                                             <li className="nav-item">
-                                                <a className="dropdown-item" href="#">Trở thành người bán hàng</a>
+                                                <a className="dropdown-item" href="/seller">Trở thành người bán hàng</a>
                                             </li>
                                             <li className="nav-item">
                                                 <a className="dropdown-item" href="#">Hỗ trợ</a>

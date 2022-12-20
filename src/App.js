@@ -9,6 +9,7 @@ import Products from './components/Products/Products'
 import Footer from './components/Footer/Footer'
 import LoginPage from './components/Login/Login'
 import RegisterPage from './components/Register/Register'
+import SellerPage from './components/SellerPage/SellerPage'
 
 import {
     BrowserRouter,
@@ -55,6 +56,10 @@ function App() {
 
                 <Routes>
                     <Route path="/products" element={<><Header/><Products/><Footer/></>} />
+                </Routes>
+
+                <Routes>
+                    <Route path="/seller" element={<><Header/><SellerPage/><Footer/></>} />
                 </Routes>
 
             </div>
