@@ -67,6 +67,9 @@ function App() {
                     <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
                 </Routes>
 
+                <Routes>
+                    <Route path="/seller/profile" element={<><Header/><Footer/></>} />
+                </Routes>
             </div>
         </BrowserRouter>
     );
