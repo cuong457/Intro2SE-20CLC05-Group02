@@ -11,6 +11,8 @@ import LoginPage from './components/Login/Login'
 import RegisterPage from './components/Register/Register'
 import SellerPage from './components/SellerPage/SellerPage'
 import AddItem from './components/AddItem/AddItem'
+import SellerOrderPage from './components/SellerOrderPage/SellerOrderPage';
+import SellerPageTest from './components/SellerPageTest/SellerPageTest';
 
 import {
     BrowserRouter,
@@ -19,8 +21,8 @@ import {
   } from "react-router-dom";
 import BuyDetail from './components/BuyDetail/BuyDetail';
 
-
-
+/* check is Seller */
+const isSeller = true;
 
 function App() {
     return (
@@ -59,17 +61,27 @@ function App() {
                     <Route path="/products" element={<><Header/><Products/><Footer/></>} />
                 </Routes>
 
-                <Routes>
-                    <Route path="/seller" element={<><Header/><SellerPage/><Footer/></>} />
-                </Routes>
+                {/* Seller Part start */}
+                
+                {
+                    isSeller === true ? (
+                        <Routes>
+                            <Route path="/seller" element={<><Header/><SellerPageTest/><Footer/></>} />,
+                            <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
+                            <Route path="/seller/orders" element={<><Header/><SellerOrderPage/><Footer/></>} />
+                            <Route path="/seller/profile" element={<><Header/><Footer/></>} />
+                        </Routes>
+                        
+                    ) : (
+                        <LoginPage/>
+                    )
+                }
 
-                <Routes>
-                    <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
-                </Routes>
+                <Routes></Routes>
+                <Routes></Routes>
+                <Routes></Routes>
 
-                <Routes>
-                    <Route path="/seller/profile" element={<><Header/><Footer/></>} />
-                </Routes>
+                {/* Seller Part end */}
             </div>
         </BrowserRouter>
     );
