@@ -1,5 +1,6 @@
 
 import $ from 'jquery'; 
+import {Link} from 'react-router-dom'
 
 import RatingStarGenerator from '../RatingStars/RatingStars'
 import FoodMenu  from '../FoodMenu/FoodMenu'
@@ -26,7 +27,9 @@ const food = {
     name: "SALAD NGŨ VỊ HOÀNG GIA ANH",
     link: "/item",
     brand: "Sunrise Foods",
-    fstar: 4, hstar: 1, nstar: 0, rvcount: "41.002", price: 49,
+    rating: 4.5,
+    rvcount: "41.002", 
+    price: 49,
     status: "Còn hàng"
 };
 
@@ -44,16 +47,29 @@ function changeSellectToInput() {
         $('#qty-itdetail').replaceWith('<input type="number" class="form-control small-img" min=0 id="qty-itdetail">');
 }
 
+function checkAndAnimate() {
+    var reveals = document.querySelectorAll(".ani");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        }
+    }
+}
+
 const ItemDetail = () => {
+    window.addEventListener('scroll', checkAndAnimate);
     return (
         <div className="bg-white">
             <div className="container pt-5">
                 {/* {{!-- Item Detail --}} */}
-                <div className="row pt-4">
+                <div className="row pt-4 moveup-fadein-animation">
                     <div className="col-3" id="itdetail-mainimg">
-                        <a href={food.link}>
+                        <Link to={food.link}>
                             <img src={food.img} className="img-fluid itdetail-food-img" alt={food.name}/>
-                        </a>
+                        </Link>
                     </div>
                     <div className="col-12 col-md-8 col-lg-6">
                         <p className="itdetail-lger-title">{food.name}</p>
@@ -65,9 +81,9 @@ const ItemDetail = () => {
                         {/* {{!-- Alternative item image --}} */}
                         <div className="row pt-3" id="itdetail-alterimg">
                             <div className="col-4">
-                                <a href={food.link}>
+                                <Link to={food.link}>
                                     <img src={food.img} className="img-fluid itdetail-food-img" alt={food.name}/>
-                                </a>
+                                </Link>
                             </div>
                             <div className="col-8">
                                 <p className="itdetail-me-title text-green">1 Order from &nbsp;<span className="itdetail-lg-money">{food.price}.000 VNĐ</span></p>
@@ -138,7 +154,7 @@ const ItemDetail = () => {
                             <div className="row w-75 m-auto">
                                 <div className="col text-center">
                                     <button className="btn-addtocart mt-3">Thêm vào giỏ hàng</button>
-                                    <a href="/buy"><button className="btn-buynow mt-2" id="item-final-single-buy">Mua ngay</button></a>
+                                    <Link to="/buy"><button className="btn-buynow mt-2" id="item-final-single-buy">Mua ngay</button></Link>
                                 </div>
                             </div>
                         </div>  
@@ -146,45 +162,47 @@ const ItemDetail = () => {
                 </div>
                 <br/><br/><br/><br/><hr/><br/><br/>
                 {/* {{!-- About Restaurant --}} */}
-                <p className="itdetail-lg-title text-center opacity-50">ABOUT US</p>
-                <p className="itdetail-main-lg-title text-center">Về nhà hàng của chúng tôi</p>
-                
-                <div className="itdetail-about">
-                    <div className="row">
-                        <div className="col-12 col-lg-6 col-xl-7 pe-0 pb-4">
-                            <img src={about_1} className="img-fluid itdetail-food-img" alt='restaurant'/>
-                        </div>
-                        <div className="col-12 col-lg-6 col-xl-5 ps-5">
-                            <p className="itdetail-lg-title text-center"><b>ĐƯỢC THÀNH LẬP VÀ PHÂN PHỐI BỞI<br/>SUNRISE COMPANY</b><br/><br/></p>
-                            <p className="itdetail-me-title wrap-text text-justify light-text">
-                                <i>Chuỗi nhà hàng Sunrise Foods được hình thành và phát triển hơn 69 năm. 
-                                Với uy tín và chất lượng thuộc top đầu thế giới với vô số đầu bếp sở hữu 
-                                sao Michelin và muôn vẻ sáng tạo trong việc đưa những món ăn độc lạ hay 
-                                đặc sản đến mọi miền đất nước trên thế giới. Chúng tôi luôn chú tâm vào 
-                                những nhu cầu và cảm giác của khách hàng, đặt ra những tiêu chí hàng đầu để
-                                có thể làm hài lòng dù là những vị khách khó tính nhất.</i><br/>
-                                <span className="align-right">- Dương Minh -</span>
-                            </p>
-                            <div className="d-flex justify-content-center pt-4">
-                                <span className="itdetail-achievement-icon text-center">
-                                    <img src={star_icon} className="itdetail-icon" alt="star"/>
-                                    <p className="p-3 itdetail-me-title">Ngon chuẩn 5 sao</p>
-                                </span>
-                                <span className="itdetail-achievement-icon text-center">
-                                    <img src={certificate_icon} className="itdetail-icon" alt="star"/>
-                                    <p className="p-3 itdetail-me-title">Chứng nhận quốc tế</p>
-                                </span>
-                                <span className="itdetail-achievement-icon text-center">
-                                    <img src={achievement_icon} className="itdetail-icon" alt="star"/>
-                                    <p className="p-3 itdetail-me-title">Top 1 thịnh hành</p>
-                                </span>
+                <div className='ani' id="about-wrapper">
+                    <p className="itdetail-lg-title text-center opacity-50">ABOUT US</p>
+                    <p className="itdetail-main-lg-title text-center">Về nhà hàng của chúng tôi</p>
+                    
+                    <div className="itdetail-about">
+                        <div className="row">
+                            <div className="col-12 col-lg-6 col-xl-7 pe-0 pb-4">
+                                <img src={about_1} className="img-fluid itdetail-food-img" alt='restaurant'/>
+                            </div>
+                            <div className="col-12 col-lg-6 col-xl-5 ps-5">
+                                <p className="itdetail-lg-title text-center"><b>ĐƯỢC THÀNH LẬP VÀ PHÂN PHỐI BỞI<br/>SUNRISE COMPANY</b><br/><br/></p>
+                                <p className="itdetail-me-title wrap-text text-justify light-text">
+                                    <i>Chuỗi nhà hàng Sunrise Foods được hình thành và phát triển hơn 69 năm. 
+                                    Với uy tín và chất lượng thuộc top đầu thế giới với vô số đầu bếp sở hữu 
+                                    sao Michelin và muôn vẻ sáng tạo trong việc đưa những món ăn độc lạ hay 
+                                    đặc sản đến mọi miền đất nước trên thế giới. Chúng tôi luôn chú tâm vào 
+                                    những nhu cầu và cảm giác của khách hàng, đặt ra những tiêu chí hàng đầu để
+                                    có thể làm hài lòng dù là những vị khách khó tính nhất.</i><br/>
+                                    <span className="align-right">- Dương Minh -</span>
+                                </p>
+                                <div className="d-flex justify-content-center pt-4">
+                                    <span className="itdetail-achievement-icon text-center">
+                                        <img src={star_icon} className="itdetail-icon" alt="star"/>
+                                        <p className="p-3 itdetail-me-title">Ngon chuẩn 5 sao</p>
+                                    </span>
+                                    <span className="itdetail-achievement-icon text-center">
+                                        <img src={certificate_icon} className="itdetail-icon" alt="star"/>
+                                        <p className="p-3 itdetail-me-title">Chứng nhận quốc tế</p>
+                                    </span>
+                                    <span className="itdetail-achievement-icon text-center">
+                                        <img src={achievement_icon} className="itdetail-icon" alt="star"/>
+                                        <p className="p-3 itdetail-me-title">Top 1 thịnh hành</p>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr/>
                 {/* {{!-- Recommend --}} */}
-                <div className="pb-5">
+                <div className="pb-5 ani" id="recommend-wrapper">
                     <p className='menu-large-font'>Gợi ý hôm nay</p>
                     <div className="row">
                         <FoodMenu imgs={recommend} type={MENU_TYPE.SMALL}/>

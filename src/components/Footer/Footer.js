@@ -1,4 +1,5 @@
 
+import {Link} from 'react-router-dom'
 
 function Footer() {
     return (
@@ -31,9 +32,9 @@ function Footer() {
                     <div className="col-6 col-md-3 pt-3 ps-4">
                         <h4 className='footer-font-bold'>Follow Us</h4>
                         <div className="d-flex">
-                            <a href="#" className="erase-underline"><i className="bi bi-twitter footer-social-icon"></i></a>
-                            <a href="#" className="erase-underline"><i className="bi bi-facebook footer-social-icon"></i></a>
-                            <a href="#" className="erase-underline"><i className="bi bi-instagram footer-social-icon"></i></a>
+                            <Link to="#" className="erase-underline"><i className="bi bi-twitter footer-social-icon"></i></Link>
+                            <Link to="#" className="erase-underline"><i className="bi bi-facebook footer-social-icon"></i></Link>
+                            <Link to="#" className="erase-underline"><i className="bi bi-instagram footer-social-icon"></i></Link>
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,7 @@ function Footer() {
                     &copy; Copyright <strong><span>Sunrise</span></strong>. All Rights Reserved
                 </div>
                 <div className="footer-font text-center">
-                    Designed by <a href="#" className="footer-link">Sunrise Company</a>
+                    Designed by <Link to="#" className="footer-link">Sunrise Company</Link>
                 </div>
             </div>
         </footer>

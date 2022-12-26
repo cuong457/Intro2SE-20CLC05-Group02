@@ -15,7 +15,7 @@ function RatingStars(props) {
     for (let i = 0; i < nstars; i++)    
         stars.push(<i className="bi bi-star" key={"nstar" + i}></i>)
 
-    if(props.optionClass != undefined)
+    if(props.optionClass !== undefined)
         rating_class += " " + props.optionClass;
         
     return (

@@ -1,3 +1,6 @@
+
+import {Link} from 'react-router-dom'
+
 import Banner from '../Banner/Banner'
 import FoodMenu from '../FoodMenu/FoodMenu'
 
@@ -58,18 +61,12 @@ let sale_thumnails_1 = [
     {img: foodThum2, name: "Cơm Tấm Thôn Quê", link: "/item", brand: "Sunrise Foods", rating: 3.5, rvcount: 8.291, price: 25, status: "Còn hàng"},
 ]
 
-let sale_thumnails_2 = [
-    {img: foodThum2, name: "Thập Cẩm Chả Biết Tên", link: "/item", brand: "Sunrise Foods", rating: 4, rvcount: 15.927, price: 102, status: "Còn hàng"},
-    {img: foodThum5, name: "Cơm Chay Chỉ Thiên", link: "/item", brand: "Sunrise Foods", rating: 3, rvcount: 26.546, price: 89, status: "Còn hàng"}
-]
-
 const HomeDetail = () => {
     return (
-        <div className="container pt-4 mt-4">
-            <img src="" />
+        <div className="container pt-4 mt-4 moveup-fadein-animation">
             <section>
                 <div className='row'>
-                    <div className='col-12 col-md-8'>
+                    <div className='col-12 col-md-8 '>
                         <div id="main-large-banner" className="carousel slide" data-bs-ride="carousel">
                             <Banner imgs={large_banner}/>
                         </div>
@@ -91,12 +88,12 @@ const HomeDetail = () => {
             <div className="mt-3 bg-white">
                 <p className='menu-large-font'>Bạn muốn ăn gì?
                     <span>
-                        <a 
-                            href='/products' 
+                        <Link 
+                            to='/products' 
                             className='erase-underline sm-title ps-2 text-green'
                         >
                                 Xem thêm
-                        </a>
+                        </Link>
                     </span>
                 </p>
                 <div className='m-0 pb-2'>
@@ -106,12 +103,12 @@ const HomeDetail = () => {
             <div className="mt-3 bg-white">
                 <p className='menu-large-font'>Đang giảm giá siêu sốc!
                     <span>
-                        <a 
-                            href='/products' 
+                        <Link 
+                            to='/products' 
                             className='erase-underline sm-title ps-2 text-green'
                         >
                                 Xem thêm
-                        </a>
+                        </Link>
                     </span>
                 </p>
                 <div className='row'>
@@ -133,12 +130,12 @@ const HomeDetail = () => {
             <div className="mt-3 bg-white mb-5">
                 <p className='menu-large-font'>Gợi ý hôm nay
                     <span>
-                        <a 
-                            href='/products' 
+                        <Link 
+                            to='/products' 
                             className='erase-underline sm-title ps-2 text-green'
                         >
                                 Xem thêm
-                        </a>
+                        </Link>
                     </span>
                 </p>
                 <div className='m-0'>

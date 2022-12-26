@@ -1,6 +1,7 @@
 
 import $ from 'jquery'; 
 import React from 'react';
+import {Link} from 'react-router-dom'
 // Import subcomponent
 import RightTab from '../RightTab/RightTab'
 // Import image
@@ -29,13 +30,12 @@ class CartDetail extends React.Component {
         ],
         cart: [] // Empty
     };
-
     ChangeQuantity(e, targetkey) {
         const new_quantity = parseInt(e.target.value);
         
         // Change quantity in items
         let new_items = this.state.items.map((item) => {
-            if(item.key == targetkey) {
+            if(item.key === targetkey) {
                 item.quantity = new_quantity;
             }
             return item;
@@ -44,22 +44,21 @@ class CartDetail extends React.Component {
 
         // Change quantity in cart
         let new_cart = this.state.cart.map((cart_item) => {
-            if(cart_item.key == targetkey) {
+            if(cart_item.key === targetkey) {
                 cart_item.quantity = new_quantity;
             }
             return cart_item;
         });
         this.setState({cart: new_cart});
-        
     }
     
     handleDeleteItem(target_item) {
         // Delete in items
-        let new_items = this.state.items.filter(item => item.key != target_item.key);
+        let new_items = this.state.items.filter(item => item.key !== target_item.key);
         this.setState({items: new_items});
 
         //Delete in cart
-        let new_cart = this.state.cart.filter(cart_item => cart_item.key != target_item.key);
+        let new_cart = this.state.cart.filter(cart_item => cart_item.key !== target_item.key);
         this.setState({cart: new_cart});
     }
 
@@ -89,17 +88,17 @@ class CartDetail extends React.Component {
                             onChange={e => this.handleChooseCartItem(e.target.checked, item)}
                         />
                     </div>
-                    <a href={item.link}>
-                        <img src={item.img} className="img-fluid"/>
-                    </a>
+                    <Link to={item.link}>
+                        <img src={item.img} className="img-fluid" alt='item'/>
+                    </Link>
                 </div>
                 <div className="col-7 ctdetail-itemdetail">
-                    <a 
-                        href={item.link} 
+                    <Link 
+                        to={item.link} 
                         className="ctdetail-item-title erase-underline text-black"
                     >
                         {item.name}
-                    </a>
+                    </Link>
                     <p className="ctdetail-item-sm-detail text-green"><b>{item.status}</b></p>
                     <p className="ctdetail-item-sm-detail">Delivered from and sold by {item.brand}</p>
                     <p className="ctdetail-item-me-detail"><b>Your option: </b>{item.notice}</p>
@@ -152,7 +151,7 @@ class CartDetail extends React.Component {
             this.state.items.map((item) => {
                 let isExist = false;
                 this.state.cart.map((cartitem) => {
-                    if(cartitem.key == item.key)
+                    if(cartitem.key === item.key)
                         isExist = true;
                 });
                 if(!isExist) {     
@@ -169,7 +168,7 @@ class CartDetail extends React.Component {
             this.setState({subtotal: 0});
             this.setState({item_count: 0});
             // Empty the cart
-            this.state.cart = [];
+            this.setState({cart: []});
         }
     };
 
@@ -182,7 +181,7 @@ class CartDetail extends React.Component {
             this.setState({cart: newCart});
 
             // Check if all item is select, then check the select all
-            if($('.sellectItem:checked').length == $('.sellectItem').length) {
+            if($('.sellectItem:checked').length === $('.sellectItem').length) {
                 $('#selectAll').prop('checked', true);
             }
         }
@@ -190,7 +189,7 @@ class CartDetail extends React.Component {
             // Remove item from cart
             let newCart = this.state.cart;
             for(let i = 0; i < newCart.length; i++) {
-                if(newCart[i].key == item.key) {
+                if(newCart[i].key === item.key) {
                     newCart.splice(i, 1);
                     break;
                 }
@@ -209,24 +208,24 @@ class CartDetail extends React.Component {
             result = itemlist.map((item, index) => {
                 return this.CartItem(item);
             });
-        else if(Array.isArray(itemlist) && itemlist.length == 0) {
+        else if(Array.isArray(itemlist) && itemlist.length === 0) {
             result = (
-                <a 
-                    href="/" 
+                <Link 
+                    to="/" 
                     className='erase-underline'
                 >
                     Your cart is empty, go to buy something?
-                </a>
+                </Link>
             );
         }
         else {
             result = (
-                <a 
-                    href="/" 
+                <Link 
+                    to="/" 
                     className='erase-underline'
                 >
                     Cart error! Go back to home page.
-                </a>
+                </Link>
             );
         }
     
@@ -238,7 +237,7 @@ class CartDetail extends React.Component {
     };
 
     RenderCast(amount) {
-        if(amount == 0) return amount + " VNĐ";
+        if(amount === 0) return amount + " VNĐ";
         else return amount + ".000 VNĐ";
     }
 
@@ -247,7 +246,7 @@ class CartDetail extends React.Component {
             <div className="container mt-5">
                 <div className="row pb-5">
                     {/* {{!-- Main content --}} */}
-                    <div className="col-12 col-xl-9">
+                    <div className="col-12 col-xl-9 moveup-fadein-animation">
                         <div className="bg-white ctdetail">
                             <p className="ctdetail-xxlg-title">Shopping Cart</p>
                             <div>
@@ -278,14 +277,14 @@ class CartDetail extends React.Component {
                                         </b>
                                     </p>
                                 </span>
-                                <a href="/buy">
+                                <Link to="/buy">
                                     <button 
                                         className="btn btn-outline-dark rtab-detail-button align-right" 
                                         id="checkout-btn-main"
                                     >
                                         Checkout
                                     </button>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         {/* {{!-- End page expand --}} */}
@@ -295,7 +294,7 @@ class CartDetail extends React.Component {
                         </div>
                     </div>
                     {/* {{!-- Right site bar --}} */}
-                    <div className="col-12 col-xl-3">
+                    <div className="col-12 col-xl-3 moveleft-fadein-animation">
                         <div className="bg-white rtab mb-4" id="subtotal-rtab">
                             <i className="bi bi-credit-card-2-front-fill"><span className="lg-title"> Payment</span></i>
                             <div className="text-center">
@@ -308,9 +307,9 @@ class CartDetail extends React.Component {
                                         {this.RenderCast(this.getSubtotal())}
                                     </b>
                                 </p>
-                                <a href="/buy">
+                                <Link to="/buy">
                                     <button className="rtab-buying-button" id="checkout-btn-rtab">Checkout</button>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <RightTab items={recommend}/>
