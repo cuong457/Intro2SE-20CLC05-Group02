@@ -20,6 +20,10 @@ import UserCenter from './components/UserCenter/UserCenter'
 import SellerCenter from './components/SellerCenter/SellerCenter'
 import Posts from './components/Posts/Posts'
 
+import SellerOrderPage from './components/SellerOrderPage/SellerOrderPage';
+import SellerPage from './components/SellerPage/SellerPage';
+import AddItem from './components/AddItem/AddItem'
+
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 const STATUS = {
@@ -33,7 +37,7 @@ const TYPE = {
     ADMIN: 1,
     SELLER: -1
 }
-
+const isSeller = true;
 export default class App extends React.Component {
     state = {
         user_account: {
@@ -144,6 +148,23 @@ export default class App extends React.Component {
                                 path={"/register"} 
                                 element={<RegisterPage/>} 
                             />
+
+                            {/*{
+                                isSeller === true ? (
+                                    <Routes>
+                                        
+                                    </Routes>
+                                                    
+                                ) : (
+                                    <LoginPage/>
+                                )
+                            }
+                            */}
+                            <Route path="/seller" element={<><Header/><SellerPage/><Footer/></>} />
+                            <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
+                            <Route path="/seller/orders" element={<><Header/><SellerOrderPage/><Footer/></>} />
+                            <Route path="/seller/profile" element={<><Header/><Footer/></>} />
+
                             <Route 
                                 path={"/admin"}  
                                 // element={

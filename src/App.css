@@ -1111,3 +1111,44 @@ Notification Popup */
   0% {width: 0%;opacity: 0%;}
   100% {width: 100%;opacity: 100%;}
 }
+
+/* css */
+.w-full {
+  width: 100%;
+}
+.w-0 {
+  width: 0px;
+}
+.h-full {
+  height: 100%;
+}
+.h-0 {
+  height: 0px;
+}
+.border-dotted {
+  border-style: dotted;
+}
+.ph-225 {
+  height: 225px !important; 
+}
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-3xl {
+  font-size: 1.875rem/* 30px */;
+  line-height: 2.25rem/* 36px */;
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+.hover\:text-gray-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
