@@ -1,6 +1,10 @@
 
 import {Link} from 'react-router-dom'
 
+//
+import { useDispatch } from "react-redux";
+import * as actions from "../../redux/actions"
+
 import Banner from '../Banner/Banner'
 import FoodMenu from '../FoodMenu/FoodMenu'
 
@@ -62,6 +66,10 @@ let sale_thumnails_1 = [
 ]
 
 const HomeDetail = () => {
+    const dispatch = useDispatch();
+    dispatch(actions.getProducts.getProductsRequest());
+
+
     return (
         <div className="container pt-4 mt-4 moveup-fadein-animation">
             <section>
