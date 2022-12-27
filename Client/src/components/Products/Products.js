@@ -183,7 +183,7 @@ export default class Products extends React.Component {
         minPrice === "" ? minPrice = 0 : minPrice = Number(minPrice);
         maxPrice === "" ? maxPrice = 0 : maxPrice = Number(maxPrice);
 
-        foods = [];
+        foods = []; 
         for(let i = 0; i < datapage_callAPI.length; i++) {
             if(datapage_callAPI[i].price >= minPrice && datapage_callAPI[i].price <= maxPrice) {
                 foods.push(datapage_callAPI[i]);
