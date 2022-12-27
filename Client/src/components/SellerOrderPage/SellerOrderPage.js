@@ -10,6 +10,7 @@ import foodThum5 from '../../assets/images/FoodThumnail/lau.png'
 import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
 
 import SellerStore from '../SellerStore/SellerStore'
+import Orders from '../Orders/Orders'
 
 import flavorofindia_logo from '../../assets/images/logo/FlavourOfIndia-logo.png'
 
@@ -52,8 +53,16 @@ const foods = [
     {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"}
 ];
 
+const orders = [
+    {id: 1, buyername: "Lưu Minh Phát", addr: "Đại học KHTN", total: '1.500'},
+    {id: 2, buyername: "Lý Văn Đạt", addr: "Đại học KHTN", total:'2.000'},
+    {id: 3, buyername: "Phạm Nguyễn Cao Cường", addr: "Đại học KHTN", total: '1.000'},
+    {id: 4, buyername: "Phan Phúc Đạt", addr: "Đại học KHTN", total: '600'}
+];
+
 class SellerPageTest extends React.Component {
     state = {
+        orders: orders,
         current_food: [
             {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
             {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
@@ -66,11 +75,11 @@ class SellerPageTest extends React.Component {
             {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"}, 
         ],
         lastfood_index: 8,
-        page_count: foods.length % 9 !== 0 ? Math.floor(foods.length / 9) + 1 : Math.floor(foods.length / 9)
+        page_count: orders.length % 6 !== 0 ? Math.floor(orders.length / 6) + 1 : Math.floor(orders.length / 6)
     }
     changepagenumber = (index, total) => {
         if(index > 0 && index <= total) {
-            let newFoodList = [];
+            let newOrderList = [];
             let start = (index - 1) * LIST_LENGTH;
             let end = start + LIST_LENGTH;
 
@@ -80,10 +89,10 @@ class SellerPageTest extends React.Component {
             if(foods.length <= end)
                 end = foods.length;
             for(; start < end; start++) {
-                newFoodList.push(foods[start]);
+                newOrderList.push(orders[start]);
             }
             this.setState({lastfood_index:--end});
-            this.setState({current_food: newFoodList});
+            this.setState({current_food: newOrderList});
         }
     }
     createPageNumber(total) {
@@ -96,7 +105,7 @@ class SellerPageTest extends React.Component {
             pageNumBtn.push (
                 <span className='pe-1' key='prev'>
                     <button type='button' className='page-number-btn' onClick={() => this.changepagenumber(current_page - 1, total)}>
-                        Previous
+                        <img src={leftArrow} class="img-fluid" alt="" />
                     </button>
                 </span>
             )
@@ -127,7 +136,7 @@ class SellerPageTest extends React.Component {
             pageNumBtn.push (
                 <span className='pe-1' key='next'>
                     <button type='button' className='page-number-btn' onClick={() => this.changepagenumber(current_page + 1, total)}>
-                        Next
+                        <img src={rightArrow} class="img-fluid" alt="" />
                     </button>
                 </span>
             )
@@ -189,16 +198,13 @@ class SellerPageTest extends React.Component {
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-header d-flex justify-content-between">
-                                        Store
-                                        <a class="btn btn-sm btn-outline-primary" href="/seller/add" role="button">
-                                            <i class="fa fa-plus pe-1" aria-hidden="true"></i>Add
-                                        </a>
+                                        Orders
                                     </h4>
                                 </div>
                                 {/* Hiện danh sách món ăn của seller */}
                                 <div class="card-body">
-                                    <div class="row">
-                                        <SellerStore foods={this.state.current_food} />
+                                    <div class="row d-flex justify-content-center align-content-center">
+                                        <Orders orders={this.state.orders} />
                                     </div>
                                 </div>
                                 {/* Thanh đổi trang */}

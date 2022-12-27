@@ -26,7 +26,7 @@ function Header() {
                             {/* {{! Left links field }} */}
                             <ul className="navbar-nav me-auto" id="nav-leftlink">
                                 <li className="nav-item">
-                                    <Link className="nav-link active navbar-font-link pb-2 m-0" to="#">Trở thành người bán hàng</Link>
+                                    <Link className="nav-link active navbar-font-link pb-2 m-0" to="/seller">Trở thành người bán hàng</Link>
                                 </li>
 
                                 <li className="nav-item"><p
@@ -67,7 +67,7 @@ function Header() {
                                     </Link>
                                     <ul className="dropdown-menu dropdown-menu-dark">
                                         <li className="nav-item">
-                                            <Link className="dropdown-item" to="#">Trở thành người bán hàng</Link>
+                                            <Link className="dropdown-item" to="/seller">Trở thành người bán hàng</Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link className="dropdown-item" to="#">Hỗ trợ</Link>
