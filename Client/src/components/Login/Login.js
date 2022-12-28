@@ -1,29 +1,40 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchUsers } from "../../api";
+
 import $ from 'jquery'
 
-const STATUS = {
-    BAN: -1,
-    NORMAL: 1,
-    ANONYOUS: 0
-}
+// const STATUS = {
+//     BAN: -1,
+//     NORMAL: 1,
+//     ANONYOUS: 0
+// }
 
-const TYPE = {
-    NORMAL_USER: 0,
-    ADMIN: 1,
-    SELLER: -1
-}
+// const TYPE = {
+//     NORMAL_USER: 0,
+//     ADMIN: 1,
+//     SELLER: -1
+// }
 
-const accounts = [
-    {usn: "user1", psw: "user123456", status: STATUS.NORMAL, type: TYPE.NORMAL_USER},
-    {usn: "admin", psw: "admin123456", status: STATUS.NORMAL, type: TYPE.ADMIN},
-    {usn: "seller", psw: "seller123456", status: STATUS.NORMAL, type: TYPE.SELLER}
-];
+// const accounts = [
+//     {usn: "user1", psw: "user123456", status: STATUS.NORMAL, type: TYPE.NORMAL_USER},
+//     {usn: "admin", psw: "admin123456", status: STATUS.NORMAL, type: TYPE.ADMIN},
+//     {usn: "seller", psw: "seller123456", status: STATUS.NORMAL, type: TYPE.SELLER}
+// ];
 
 function Login(props) {
     let navigate = useNavigate();
     const [error_login, setError_login] = useState("");
+
+    const [accounts, setAccounts] = useState([]);
+    useEffect(() => {
+        fetchUsers()
+            .then((users) => {
+                setAccounts(users.data);
+            })
+            .catch(console.error());
+    }, []);
 
     // Methods
     function is_validate (input) {
@@ -76,7 +87,7 @@ function Login(props) {
                         break;
                     }
                     else {
-                        setError_login("Incorrect Password");
+                        setError_login("Username or Password is incorrect");
                         valid = false;
                         break;
                     }
@@ -84,7 +95,7 @@ function Login(props) {
             };
             // If username is not exist
             if(!is_exist) {
-                setError_login("Username is not exist");
+                setError_login("Username or Password is incorrect");
                 valid = false;
             }
         }

@@ -12,12 +12,12 @@
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Cơm Tấm Hoàng Diệu 2", "rating": 3.5, "rvcount": 8.291, "price": 25, "status": "true", "brand": "Flavour of India"
 },{
   "img": {
     "thumbnail": "doannhanh.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cá Viên Chiên Makima", "rating": 5, "rvcount": 163.523, "price": 999, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
@@ -27,12 +27,12 @@
 },{
   "img": {
     "thumbnail": "donhat.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Thập Cẩm Chả Biết Tên", "rating": 1, "rvcount": 15.927, "price": 102, "status": "true", "brand": "Panzer Hot"
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cơm Chay Chỉ Thiên", "rating": 3, "rvcount": 26.546, "price": 89, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
@@ -42,12 +42,12 @@
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Cơm Tấm Lê Hồng Phong", "rating": 2.5, "rvcount": 8.291, "price": 25, "status": "true", "brand": "Flavour of India"
 },{
   "img": {
     "thumbnail": "doannhanh.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cá Viên Chiên", "rating": 5, "rvcount": 163.523, "price": 999, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
@@ -57,12 +57,12 @@
 },{
   "img": {
     "thumbnail": "donhat.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Xalach trộn đặc biệt", "rating": 4, "rvcount": 15.927, "price": 102, "status": "true", "brand": "Panzer Hot"
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cơm Chay số 512", "rating": 3, "rvcount": 26.546, "price": 89, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
@@ -72,12 +72,12 @@
 },{
   "img": {
     "thumbnail": "bun.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Bún Đậu Mắm Tôm tạm được", "rating": 1, "rvcount": 12.567, "price": 89, "status": "true", "brand": "Friggitoria"
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cơm Tấm Kha Vạn Cân", "rating": 3.5, "rvcount": 8.291, "price": 25, "status": "true", "brand": "Flavour of India"
 },{
   "img": {
@@ -87,12 +87,12 @@
 },{
   "img": {
     "thumbnail": "dohan.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Nem Cuốn Ba Phương", "rating": 3.5, "rvcount": 1.286, "price": 56, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
     "thumbnail": "donhat.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Thập Cẩm Ai Biết Gì", "rating": 4, "rvcount": 15.927, "price": 102, "status": "true", "brand": "Panzer Hot"
 },{
   "img": {
@@ -102,12 +102,12 @@
 },{
   "img": {
     "thumbnail": "donhat.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Salat bò lá lốt", "rating": 4, "rvcount": 15.927, "price": 102, "status": "true", "brand": "Panzer Hot"
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cơm Sườn Bì Chả", "rating": 2, "rvcount": 26.546, "price": 89, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
@@ -117,12 +117,12 @@
 },{
   "img": {
     "thumbnail": "bun.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Bún Đậu Mắm Tôm vô địch", "rating": 4, "rvcount": 12.567, "price": 89, "status": "true", "brand": "Friggitoria"
 },{
   "img": {
     "thumbnail": "pho.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Cơm Tấm Sư Vạn Hạnh", "rating": 3.5, "rvcount": 8.291, "price": 25, "status": "true", "brand": "Flavour of India"
 },{
   "img": {
@@ -132,12 +132,12 @@
 },{
   "img": {
     "thumbnail": "dohan.png",
-    "detail": "food_1.png"
+    "detail": "food_2.png"
   }, "name": "Nem Cuốn", "rating": 3.5, "rvcount": 1.286, "price": 56, "status": "true", "brand": "Sunrise Foods"
 },{
   "img": {
     "thumbnail": "donhat.png",
-    "detail": "food_1.png"
+    "detail": "food_3.png"
   }, "name": "Thập Cẩm Gì Gì đó", "rating": 4, "rvcount": 15.927, "price": 102, "status": "true", "brand": "Panzer Hot"
 },{
   "img": {

@@ -73,9 +73,7 @@ const HomeDetail = () => {
             .then((data) => {
                 setRecommend(data);
             })
-    }, [])
-
-    console.log(recommend);
+    }, []);
 
     return (
         <div className="container pt-4 mt-4 moveup-fadein-animation">

@@ -1,17 +1,34 @@
 
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import $ from 'jquery'
 
+import { createUser, fetchUsers } from "../../api";
+
+const STATUS = {
+    BAN: -1,
+    NORMAL: 1,
+    ANONYOUS: 0
+}
+
+const TYPE = {
+    NORMAL_USER: 0,
+    ADMIN: 1,
+    SELLER: -1
+}
+
 function Register(props) {
-    const [accounts, setAccounts] = useState([
-        {usn: "user1", psw: "user123456"},
-        {usn: "admin", psw: "admin123456"},
-        {usn: "seller", psw: "seller123456"}
-    ]);
+    const [accounts, setAccounts] = useState([]);
     const [register_error, setRegisterError] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchUsers()
+            .then((accounts) => {
+                setAccounts(accounts.data);
+            })
+            .catch(console.error());
+    }, [])
 
     // Methods
     const redirectLogin = () => {
@@ -53,6 +70,12 @@ function Register(props) {
         // If all requirements is meet, then upload account to database and show noti
         if(valid) {
 
+            createUser({
+                usn: input_list.usn_input.val(),
+                psw: input_list.psw_input.val(),
+                status: STATUS.NORMAL,
+                type: TYPE.NORMAL_USER,
+            })
             window.location.href = "#success";
         }
         return valid;

@@ -89,7 +89,7 @@ export default class App extends React.Component {
                                 } 
                             />
                             <Route 
-                                path={"/item/:id"}  
+                                path={"/item/:slug"}  
                                 element={ 
                                     this.state.user_account.status === STATUS.NORMAL ? (
                                         <><HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>

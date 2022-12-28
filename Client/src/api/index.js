@@ -17,7 +17,7 @@ export const GetRandom = (arr, n) => {
 }
 
 export const fetchProducts = () => {
-    return axios.get(`http://localhost:5000/api/v1/products`)
+    return axios.get(`${URL}/api/v1/products`)
         .then(function (response) {
             return response.data;
         })
@@ -26,8 +26,9 @@ export const fetchProducts = () => {
             return error;
         })
 };
+
 export const fetchRecommend = () => {
-    return axios.get('http://localhost:5000/api/v1/products')
+    return axios.get(`${URL}/api/v1/products`)
         .then(function (response) {
             return GetRandom(response.data, 6);
         })
@@ -36,3 +37,30 @@ export const fetchRecommend = () => {
             return error;
         })
 };
+
+export const fetchProductDetail = (slug) => {
+    return axios.get(`${URL}/api/v1/products/${slug}`)
+        .then(function (response) {
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+            return error;
+        })
+};
+
+export const fetchUsers = () => {
+    return axios.get(`${URL}/api/v1/users`);
+        // .then(function (response) {
+        //     return response.data;
+        // })
+        // .catch(console.error());
+};
+
+export const createUser = function(data) {
+    axios.post(`${URL}/api/v1/users/create`, data)
+        .then((response) => {
+            //console.log(response);
+        })
+        .catch(console.error());
+}

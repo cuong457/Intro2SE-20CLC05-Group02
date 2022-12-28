@@ -11,14 +11,14 @@ const modelsPath = "../src/app/models";
 // const Order = require(`${modelsPath}/Order`);
 const Product = require(`${modelsPath}/Product`);
 // const ProductReview = require(`${modelsPath}/ProductReview`);
-// const User = require(`${modelsPath}/User`);
+const User = require(`${modelsPath}/User`);
 
 // Nếu muốn sử dụng database khác thì đổi connection string thành của database đó.
 const connectionString = 'mongodb+srv://cuongpham:211319539@cluster0.b87mt4q.mongodb.net/Intro2SE-20CLC5-FinalProject-Group2';
 mongoose.connect(connectionString);
 
 // nếu để file json trong thư mục gốc thì khỏi cần đổi
-// const fileDataUsers = fs.readFileSync(`${__dirname}/users.json`, "utf-8");
+const fileDataUsers = fs.readFileSync(`${__dirname}/users.json`, "utf-8");
 const fileDataProducts = fs.readFileSync(`${__dirname}/products.json`, "utf-8");
 // const fileDataOrders = fs.readFileSync(`${__dirname}/orders.json`, "utf-8");
 // const fileDataCarts = fs.readFileSync(`${__dirname}/carts.json`, "utf-8");
@@ -27,7 +27,7 @@ const fileDataProducts = fs.readFileSync(`${__dirname}/products.json`, "utf-8");
 //   "utf-8"
 // );
 
-// const users = JSON.parse(fileDataUsers);
+const users = JSON.parse(fileDataUsers);
 const products = JSON.parse(fileDataProducts);
 // const orders = JSON.parse(fileDataOrders);
 // const carts = JSON.parse(fileDataCarts);
@@ -35,7 +35,7 @@ const products = JSON.parse(fileDataProducts);
 
 const importData = async () => {
   try {
-    // await User.create(users);
+    await User.create(users);
     await Product.create(products);
     // await Order.create(orders);
     // await Cart.create(carts);
@@ -50,7 +50,7 @@ const importData = async () => {
 
 const deleteData = async () => {
   try {
-    // await User.deleteMany();
+    await User.deleteMany();
     await Product.deleteMany();
     // await Order.deleteMany();
     // await Cart.deleteMany();
