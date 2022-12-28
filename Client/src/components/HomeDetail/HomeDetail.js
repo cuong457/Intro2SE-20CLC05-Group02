@@ -1,9 +1,7 @@
 
-import {Link} from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
-//
-import { useDispatch } from "react-redux";
-import * as actions from "../../redux/actions"
+import {Link} from 'react-router-dom'
 
 import Banner from '../Banner/Banner'
 import FoodMenu from '../FoodMenu/FoodMenu'
@@ -28,6 +26,8 @@ import foodThum4 from '../../assets/images/FoodThumnail/dohan.png'
 import foodThum5 from '../../assets/images/FoodThumnail/lau.png'
 import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
 
+import { fetchRecommend } from '../../api'
+
 const MENU_TYPE = {SMALL: 0,LARGE: 1};
 
 let large_banner = [
@@ -51,6 +51,11 @@ let rect_banners = [
     {img: rectbanner2, link: "re_banner2.com", index: 1, id: "#sale-banner"}
 ]
 
+let sale_thumnails_1 = [
+    {img: foodThum1, name: "Bún Đậu Mắm Tôm", link: "/item", brand: "Sunrise Foods", rating: 4, rvcount: 12.567, price: 89, status: "Còn hàng"},
+    {img: foodThum2, name: "Cơm Tấm Thôn Quê", link: "/item", brand: "Sunrise Foods", rating: 3.5, rvcount: 8.291, price: 25, status: "Còn hàng"},
+]
+
 let recommend = [
     {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89},
     {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item",rating: 3.5, rvcount: 8.291, price: 25},
@@ -60,15 +65,17 @@ let recommend = [
     {img: foodThum6, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89}
 ]
 
-let sale_thumnails_1 = [
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm", link: "/item", brand: "Sunrise Foods", rating: 4, rvcount: 12.567, price: 89, status: "Còn hàng"},
-    {img: foodThum2, name: "Cơm Tấm Thôn Quê", link: "/item", brand: "Sunrise Foods", rating: 3.5, rvcount: 8.291, price: 25, status: "Còn hàng"},
-]
-
 const HomeDetail = () => {
-    const dispatch = useDispatch();
-    dispatch(actions.getProducts.getProductsRequest());
+    let [recommend, setRecommend] = useState([]);
 
+    useEffect(() => {
+        fetchRecommend()
+            .then((data) => {
+                setRecommend(data);
+            })
+    }, [])
+
+    console.log(recommend);
 
     return (
         <div className="container pt-4 mt-4 moveup-fadein-animation">

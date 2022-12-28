@@ -20,6 +20,10 @@ import achievement_icon from '../../assets/images/icons/achievement.png'
 import certificate_icon from '../../assets/images/icons/certificate.png'
 import star_icon from '../../assets/images/icons/star.png'
 
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { fetchRecommend, GetRandom } from '../../api';
+
 const MENU_TYPE = {SMALL: 0,LARGE: 1};
 
 const food = {
@@ -60,6 +64,17 @@ function checkAndAnimate() {
 }
 
 const ItemDetail = () => {
+    console.log('vãi');
+
+    let [recommend, setRecommend] = useState([]);
+
+    useEffect(() => {
+        fetchRecommend()
+            .then((data) => {
+                setRecommend(data);
+            })
+    }, [])  
+
     window.addEventListener('scroll', checkAndAnimate);
     return (
         <div className="bg-white">

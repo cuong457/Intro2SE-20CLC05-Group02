@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const {
-  getItems
+  getItems,
+  getRecommend,
 } = require('../app/controllers/ProductController');
 
 router.all('/', function(req, res, next) {
@@ -11,6 +12,7 @@ router.all('/', function(req, res, next) {
     next()
 });
 
+// router.get('/recommend', getRecommend);
 router.get('/', getItems);
 
 

@@ -7,11 +7,18 @@ const MENU_TYPE = {SMALL: 0,LARGE: 1}
 
 function FoodMenu(props) {
     const foods = props.imgs;
+
+    if (!foods) {
+        return (
+            <div className='row d-flex'></div>
+        );
+    };
+
     let menu;
     if(props.type === MENU_TYPE.SMALL) 
         menu = foods.map((food, index) => {
             return  <div className="col-6 col-md-4 col-xl-2 m-auto p-4 large-thumnail" key={index}>
-                        <Link to={food.link}><img src={food.img} className="img-fluid pb-3" alt='food'/></Link>
+                        <Link to={`/item/${food._id}`}><img src={require(`../../assets/images/FoodThumnail/${food.img.thumbnail}`)} className="img-fluid pb-3" alt='food'/></Link>
                         <Link to={food.link} className="erase-underline"><p className="me-title text-lightblue">{food.name}</p></Link>
                         <RatingStarGenerator star={food.rating}/>
                         <p className="review-count">{food.rvcount}</p>
