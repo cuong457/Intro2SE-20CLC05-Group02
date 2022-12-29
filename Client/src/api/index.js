@@ -17,25 +17,17 @@ export const GetRandom = (arr, n) => {
 }
 
 export const fetchProducts = () => {
-    return axios.get(`${URL}/api/v1/products`)
-        // .then(function (response) {
-        //     return response.data;
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        //     return error;
-        // })
+    return axios.get(`${URL}/api/v1/products`);
 };
 
-export const fetchRecommend = () => {
-    return axios.get(`${URL}/api/v1/products`)
-        .then(function (response) {
-            return GetRandom(response.data, 6);
-        })
-        .catch(function (error) {
-            console.log(error);
-            return error;
-        })
+export const fetchRecommend = async () => {
+    try {
+        const response = await axios.get(`${URL}/api/v1/products`);
+        return GetRandom(response.data, 6);
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 };
 
 export const fetchProductDetail = (slug) => {

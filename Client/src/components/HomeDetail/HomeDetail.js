@@ -56,23 +56,21 @@ let sale_thumnails_1 = [
     {img: foodThum2, name: "Cơm Tấm Thôn Quê", link: "/item", brand: "Sunrise Foods", rating: 3.5, rvcount: 8.291, price: 25, status: "Còn hàng"},
 ]
 
-let recommend = [
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89},
-    {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item",rating: 3.5, rvcount: 8.291, price: 25},
-    {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999},
-    {img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56},
-    {img: foodThum5, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102},
-    {img: foodThum6, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89}
-]
-
 const HomeDetail = () => {
     let [recommend, setRecommend] = useState([]);
 
     useEffect(() => {
-        fetchRecommend()
-            .then((data) => {
-                setRecommend(data);
-            })
+        const getData = async () => {
+            try {
+                const food_data = await fetchRecommend();
+                
+                setRecommend(food_data);    
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        getData();
     }, []);
 
     return (
