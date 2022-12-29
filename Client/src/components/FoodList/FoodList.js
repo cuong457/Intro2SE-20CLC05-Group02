@@ -8,14 +8,15 @@ import qiqifallen from '../../assets/images/others/qiqi-fallen.png'
 
 function FoodList(props) {
     const foods = props.foods;
+
     let foodlist = foods.map((food, index) => {
         return  (
             <div className="col-6 col-lg-4 pb-3" key={index}>
                 <div className="card card-hover">
-                    <Link to={food.link}><img src={food.img} className="card-img-top p-3" alt='card'/></Link>
+                    <Link to={`/item/${food.slug}`}><img src={require(`../../assets/images/FoodThumnail/${food.img.thumbnail}`)} className="card-img-top p-3" alt='card'/></Link>
                     <div className="card-body">
                         <Link 
-                            to={food.link} 
+                            to={`/item/${food.slug}`} 
                             className="erase-underline"
                         >
                             <p className="me-title text-lightblue">{food.name}</p>

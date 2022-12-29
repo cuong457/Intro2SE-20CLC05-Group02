@@ -64,14 +64,14 @@ class CartDetail extends React.Component {
 
     getSubtotal() {
         let subtotal = 0;
-        this.state.cart.map((cart_item) => {
+        this.state.cart.forEach((cart_item) => {
             subtotal += cart_item.price * cart_item.quantity;
         })
         return subtotal;
     }
     getItemCount() {
         let cart_item_count = 0;
-        this.state.cart.map((cart_item) => {
+        this.state.cart.forEach((cart_item) => {
             cart_item_count += cart_item.quantity;
         })
         return cart_item_count;
@@ -148,9 +148,9 @@ class CartDetail extends React.Component {
             $('.sellectItem').prop('checked', true); 
             let addTotal = 0;
             let addItemCount = 0;
-            this.state.items.map((item) => {
+            this.state.items.forEach((item) => {
                 let isExist = false;
-                this.state.cart.map((cartitem) => {
+                this.state.cart.forEach((cartitem) => {
                     if(cartitem.key === item.key)
                         isExist = true;
                 });

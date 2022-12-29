@@ -220,7 +220,7 @@ function HeaderUser(props) {
                                         className="form-control search-box"
                                         id="search-box"
                                         placeholder="Cùng tìm kiếm vài món ăn ngon nào!"
-                                        onKeyDown={() => handleKeydown()}
+                                        onKeyDown={(e) => handleKeydown(e)}
                                     />
                                     <button 
                                         type="button" 

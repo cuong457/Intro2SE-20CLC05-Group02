@@ -9,7 +9,7 @@ exports.getUsers = async function (req, res, next) {
     }
 };
 
-exports.createUser = async function (req, res, next) {
+exports.createUser = function (req, res, next) {
     const user = new UserModel(req.body);
     user.save()
         .then((newUser) => {

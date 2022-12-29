@@ -18,13 +18,13 @@ export const GetRandom = (arr, n) => {
 
 export const fetchProducts = () => {
     return axios.get(`${URL}/api/v1/products`)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-            return error;
-        })
+        // .then(function (response) {
+        //     return response.data;
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        //     return error;
+        // })
 };
 
 export const fetchRecommend = () => {
