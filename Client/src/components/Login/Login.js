@@ -81,7 +81,7 @@ function Login(props) {
                     is_exist = true;
                     if($(input_list.psw_input).val().trim() === account.psw) {
                         // Call callback
-                        props.setAccount(account.usn, account.psw, account.status, account.type);
+                        props.setAccount(account._id, account.usn, account.psw, account.status, account.type);
                         // Redirect if valid
                         navigate('/');
                         break;

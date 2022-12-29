@@ -1,7 +1,7 @@
 
 import $ from 'jquery'; 
-import React from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom'
 // Import subcomponent
 import RightTab from '../RightTab/RightTab'
 // Import image
@@ -19,65 +19,69 @@ const recommend = [
     {key:"com001", img: foodThum1, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89}
 ];
 
+function CartDetail () {
+    const [ subtotal, set_subtotal ] = useState(0);
+    const [ item_count, set_item_count ] = useState(0);
+    const [ items, set_items ] = useState([
+        {key:"bobittet001", img:foodThum5, link:"/item", name:"Bò Bít Tết Hoàng Gia", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 369, quantity: 1},
+        {key:"goi001", img:foodThum2, link:"/item", name:"Gỏi Gia Truyền Truyền Từ Thời Ông Cố Nội", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 171, quantity: 1}
+    ]);
+    const [ cart, set_cart ] = useState([]);
+    
+    const params = useParams();
+    const user_id = params.id;
 
-class CartDetail extends React.Component {
-    state = {
-        subtotal: 0,
-        item_count: 0,
-        items: [
-            {key:"bobittet001", img:foodThum5, link:"/item", name:"Bò Bít Tết Hoàng Gia", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 369, quantity: 1},
-            {key:"goi001", img:foodThum2, link:"/item", name:"Gỏi Gia Truyền Truyền Từ Thời Ông Cố Nội", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 171, quantity: 1}
-        ],
-        cart: [] // Empty
-    };
-    ChangeQuantity(e, targetkey) {
+    console.log(user_id);
+
+    const ChangeQuantity = (e, targetkey) => {
         const new_quantity = parseInt(e.target.value);
         
         // Change quantity in items
-        let new_items = this.state.items.map((item) => {
+        let new_items = items.map((item) => {
             if(item.key === targetkey) {
                 item.quantity = new_quantity;
             }
             return item;
         });
-        this.setState({items: new_items});
+        set_items(new_items);
 
         // Change quantity in cart
-        let new_cart = this.state.cart.map((cart_item) => {
+        let new_cart = cart.map((cart_item) => {
             if(cart_item.key === targetkey) {
                 cart_item.quantity = new_quantity;
             }
             return cart_item;
         });
-        this.setState({cart: new_cart});
+        set_cart(new_cart);
     }
     
-    handleDeleteItem(target_item) {
+    const handleDeleteItem = (target_item) => {
         // Delete in items
-        let new_items = this.state.items.filter(item => item.key !== target_item.key);
-        this.setState({items: new_items});
+        let new_items = items.filter(item => item.key !== target_item.key);
+        set_items(new_items);
 
         //Delete in cart
-        let new_cart = this.state.cart.filter(cart_item => cart_item.key !== target_item.key);
-        this.setState({cart: new_cart});
+        let new_cart = cart.filter(cart_item => cart_item.key !== target_item.key);
+        set_cart(new_cart);
     }
 
-    getSubtotal() {
+    const getSubtotal = () => {
         let subtotal = 0;
-        this.state.cart.forEach((cart_item) => {
+        cart.forEach((cart_item) => {
             subtotal += cart_item.price * cart_item.quantity;
         })
         return subtotal;
     }
-    getItemCount() {
+
+    const getItemCount = () => {
         let cart_item_count = 0;
-        this.state.cart.forEach((cart_item) => {
+        cart.forEach((cart_item) => {
             cart_item_count += cart_item.quantity;
         })
         return cart_item_count;
     }
 
-    CartItem(item) {
+    const CartItem = (item) => {
         return  (
             <div className="row" key={item.key}>
                 <div className="col-3 d-flex align-items-center">
@@ -85,7 +89,7 @@ class CartDetail extends React.Component {
                         <input 
                             className="form-check-input sellectItem" 
                             type="checkbox"
-                            onChange={e => this.handleChooseCartItem(e.target.checked, item)}
+                            onChange={e => handleChooseCartItem(e.target.checked, item)}
                         />
                     </div>
                     <Link to={item.link}>
@@ -113,7 +117,7 @@ class CartDetail extends React.Component {
                                     id={item.key} 
                                     defaultValue={item.quantity} 
                                     min={0}
-                                    onChange={e => this.ChangeQuantity(e, item.key)}
+                                    onChange={e => ChangeQuantity(e, item.key)}
                                 />
                             </span>
                         </div>
@@ -131,7 +135,7 @@ class CartDetail extends React.Component {
                         <div className="d-flex justify-content-end align-items-end">
                             <button 
                                 className="btn ctdetail-delete-button"
-                                onClick={e => this.handleDeleteItem(item)}
+                                onClick={e => handleDeleteItem(item)}
                             >
                                 Delete
                             </button>
@@ -143,14 +147,14 @@ class CartDetail extends React.Component {
         )
     }
 
-    sellectAllClick(e) {
+    const sellectAllClick = (e) => {
         if (e.currentTarget.checked) {
             $('.sellectItem').prop('checked', true); 
             let addTotal = 0;
             let addItemCount = 0;
-            this.state.items.forEach((item) => {
+            items.forEach((item) => {
                 let isExist = false;
-                this.state.cart.forEach((cartitem) => {
+                cart.forEach((cartitem) => {
                     if(cartitem.key === item.key)
                         isExist = true;
                 });
@@ -158,27 +162,28 @@ class CartDetail extends React.Component {
                     addTotal += item.price * item.quantity;
                     addItemCount += item.quantity;
                     // Add item to cart
-                    this.state.cart.push(item);
+                    cart.push(item);
                 }
             }); 
-            this.setState({subtotal: this.state.subtotal + addTotal});
-            this.setState({item_count: this.state.item_count + addItemCount});
+
+            set_subtotal(subtotal + addTotal);
+            set_item_count(item_count + addItemCount);
         } else {    
             $('.sellectItem').prop('checked', false);
-            this.setState({subtotal: 0});
-            this.setState({item_count: 0});
+            set_subtotal( 0 );
+            set_item_count( 0 );
             // Empty the cart
-            this.setState({cart: []});
+            set_cart([]);
         }
     };
 
-    handleChooseCartItem(type, item) {
+    const handleChooseCartItem = (type, item) => {
         if(type) {
             // Add item to cart
-            let newCart = this.state.cart;
-            // this.state.cart.push(item);
+            let newCart = cart;
+            // cart.push(item);
             newCart.push(item);
-            this.setState({cart: newCart});
+            set_cart(newCart);
 
             // Check if all item is select, then check the select all
             if($('.sellectItem:checked').length === $('.sellectItem').length) {
@@ -187,14 +192,14 @@ class CartDetail extends React.Component {
         }
         else{
             // Remove item from cart
-            let newCart = this.state.cart;
+            let newCart = cart;
             for(let i = 0; i < newCart.length; i++) {
                 if(newCart[i].key === item.key) {
                     newCart.splice(i, 1);
                     break;
                 }
             }
-            this.setState({cart: newCart});
+            set_cart(newCart);
             // Check if sellect all is checked, then uncheck it
             if(document.getElementById('selectAll').checked) {
                 $("#selectAll").prop('checked', false);
@@ -202,11 +207,11 @@ class CartDetail extends React.Component {
         }
     }
 
-    CartRenderItem(itemlist) {
+    const CartRenderItem = (itemlist) => {
         let result;
         if(Array.isArray(itemlist) && itemlist.length > 0)
             result = itemlist.map((item, index) => {
-                return this.CartItem(item);
+                return CartItem(item);
             });
         else if(Array.isArray(itemlist) && itemlist.length === 0) {
             result = (
@@ -236,93 +241,92 @@ class CartDetail extends React.Component {
         )
     };
 
-    RenderCast(amount) {
+    const RenderCast = (amount) => {
         if(amount === 0) return amount + " VNĐ";
         else return amount + ".000 VNĐ";
     }
 
-    render() {
-        return (
-            <div className="container mt-5">
-                <div className="row pb-5">
-                    {/* {{!-- Main content --}} */}
-                    <div className="col-12 col-xl-9 moveup-fadein-animation">
-                        <div className="bg-white ctdetail">
-                            <p className="ctdetail-xxlg-title">Shopping Cart</p>
-                            <div>
-                                <div className="form-check align-left">
-                                    <input 
-                                        className="form-check-input" 
-                                        type="checkbox" id="selectAll" 
-                                        onChange={e => this.sellectAllClick(e)}
-                                    />
-                                    <label className="form-check-label" htmlFor="selectAll">Sellect All</label>
-                                </div>
-                                <p className="align-right">Price</p>
+    return (
+        <div className="container mt-5"
+        >
+            <div className="row pb-5">
+                {/* {{!-- Main content --}} */}
+                <div className="col-12 col-xl-9 moveup-fadein-animation">
+                    <div className="bg-white ctdetail">
+                        <p className="ctdetail-xxlg-title">Shopping Cart</p>
+                        <div>
+                            <div className="form-check align-left">
+                                <input 
+                                    className="form-check-input" 
+                                    type="checkbox" id="selectAll" 
+                                    onChange={e => sellectAllClick(e)}
+                                />
+                                <label className="form-check-label" htmlFor="selectAll">Sellect All</label>
                             </div>
-                            <br/><hr/>
-
-                            {/* {{!-- Items --}} */}
-                            {this.CartRenderItem(this.state.items)}
-                    
-
-                            <div className="row" id="subtotal-main">
-                                <span>
-                                    <p 
-                                        className="me-title align-right wrap-text"
-                                    >
-                                        Subtotal ({this.getItemCount()} items):&nbsp; 
-                                        <b>
-                                            {this.RenderCast(this.getSubtotal())}
-                                        </b>
-                                    </p>
-                                </span>
-                                <Link to="/buy">
-                                    <button 
-                                        className="btn btn-outline-dark rtab-detail-button align-right" 
-                                        id="checkout-btn-main"
-                                    >
-                                        Checkout
-                                    </button>
-                                </Link>
-                            </div>
+                            <p className="align-right">Price</p>
                         </div>
-                        {/* {{!-- End page expand --}} */}
-                        <div id="endpage-expand">
-                            <div className="bg-white ctdetail mb-2"><br/></div>
-                            <p className="ctdetail-smler-text">The price and availability of items at Sunrise.sg are subject to change. The shopping cart is a temporary place to store a list of your items and reflects each item's most recent price. Do you have a promotional code? We'll ask you to enter your claim code when it's time to pay.</p>
-                        </div>
-                    </div>
-                    {/* {{!-- Right site bar --}} */}
-                    <div className="col-12 col-xl-3 moveleft-fadein-animation">
-                        <div className="bg-white rtab mb-4" id="subtotal-rtab">
-                            <i className="bi bi-credit-card-2-front-fill"><span className="lg-title"> Payment</span></i>
-                            <div className="text-center">
+                        <br/><hr/>
+
+                        {/* {{!-- Items --}} */}
+                        {CartRenderItem(items)}
+                
+
+                        <div className="row" id="subtotal-main">
+                            <span>
                                 <p 
-                                    className="lg-title mt-2 wrap-text" 
-                                    id="cart-subtotal"
+                                    className="me-title align-right wrap-text"
                                 >
-                                    Subtotal ({this.getItemCount()} items):&nbsp;
+                                    Subtotal ({getItemCount()} items):&nbsp; 
                                     <b>
-                                        {this.RenderCast(this.getSubtotal())}
+                                        {RenderCast(getSubtotal())}
                                     </b>
                                 </p>
-                                <Link to="/buy">
-                                    <button className="rtab-buying-button" id="checkout-btn-rtab">Checkout</button>
-                                </Link>
-                            </div>
+                            </span>
+                            <Link to="/buy">
+                                <button 
+                                    className="btn btn-outline-dark rtab-detail-button align-right" 
+                                    id="checkout-btn-main"
+                                >
+                                    Checkout
+                                </button>
+                            </Link>
                         </div>
-                        <RightTab items={recommend}/>
-                        {/* {{!-- second end page expand --}} */}
-                        <div id="scnd-endpage-expand">
-                            <div className="bg-white ctdetail mt-4 mb-2"><br/></div>
-                            <p className="ctdetail-smler-text">The price and availability of items at Sunrise.sg are subject to change. The shopping cart is a temporary place to store a list of your items and reflects each item's most recent price. Do you have a promotional code? We'll ask you to enter your claim code when it's time to pay.</p>
+                    </div>
+                    {/* {{!-- End page expand --}} */}
+                    <div id="endpage-expand">
+                        <div className="bg-white ctdetail mb-2"><br/></div>
+                        <p className="ctdetail-smler-text">The price and availability of items at Sunrise.sg are subject to change. The shopping cart is a temporary place to store a list of your items and reflects each item's most recent price. Do you have a promotional code? We'll ask you to enter your claim code when it's time to pay.</p>
+                    </div>
+                </div>
+                {/* {{!-- Right site bar --}} */}
+                <div className="col-12 col-xl-3 moveleft-fadein-animation">
+                    <div className="bg-white rtab mb-4" id="subtotal-rtab">
+                        <i className="bi bi-credit-card-2-front-fill"><span className="lg-title"> Payment</span></i>
+                        <div className="text-center">
+                            <p 
+                                className="lg-title mt-2 wrap-text" 
+                                id="cart-subtotal"
+                            >
+                                Subtotal ({getItemCount()} items):&nbsp;
+                                <b>
+                                    {RenderCast(getSubtotal())}
+                                </b>
+                            </p>
+                            <Link to="/buy">
+                                <button className="rtab-buying-button" id="checkout-btn-rtab">Checkout</button>
+                            </Link>
                         </div>
+                    </div>
+                    <RightTab items={recommend}/>
+                    {/* {{!-- second end page expand --}} */}
+                    <div id="scnd-endpage-expand">
+                        <div className="bg-white ctdetail mt-4 mb-2"><br/></div>
+                        <p className="ctdetail-smler-text">The price and availability of items at Sunrise.sg are subject to change. The shopping cart is a temporary place to store a list of your items and reflects each item's most recent price. Do you have a promotional code? We'll ask you to enter your claim code when it's time to pay.</p>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 };
 
 export default CartDetail;

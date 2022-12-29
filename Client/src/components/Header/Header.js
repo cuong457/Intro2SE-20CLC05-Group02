@@ -155,7 +155,7 @@ function Header() {
                                 </div>
                             </div>
                             <div className="col d-flex justify-content-end" id="cart">
-                                <Link to="/cartdetail">
+                                <Link to="/login">
                                     <i className="bi bi-cart cart-icon"></i>
                                 </Link>
                             </div>

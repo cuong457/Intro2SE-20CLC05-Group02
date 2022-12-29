@@ -1,0 +1,30 @@
+[{
+  "user": {
+    "$oid": "63ac6844d6f5f0c143c452a8"
+  },
+  "status": 1,
+  "type": 1
+},{
+  "user": {
+    "$oid": "63ac6844d6f5f0c143c452a9"
+  },
+  "psw": "seller123456",
+  "status": 1,
+  "type": -1
+},{
+  "user": {
+    "$oid": "63ac6844d6f5f0c143c452a7"
+  },
+  "usn": "user1",
+  "psw": "user123456",
+  "status": 1,
+  "type": 0
+},{
+  "user": {
+    "$oid": "63ac7d2186ebbd0d94707bef"
+  },
+  "usn": "hahaha31247",
+  "psw": "123",
+  "status": 1,
+  "type": 0
+}]

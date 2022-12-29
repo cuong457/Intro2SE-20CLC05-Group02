@@ -41,12 +41,16 @@ const isSeller = true;
 export default class App extends React.Component {
     state = {
         user_account: {
-            usn: "", psw: "", status: STATUS.ANONYOUS, type: TYPE.NORMAL_USER
+            _id: "",
+            usn: "",
+            psw: "",
+            status: STATUS.ANONYOUS, 
+            type: TYPE.NORMAL_USER
         }
     }
-    setUserAccount = (usn, psw, status, type) => {
+    setUserAccount = (id, usn, psw, status, type) => {
         if (status === STATUS.NORMAL) {
-            this.setState({user_account: {usn, psw, status, type}})
+            this.setState({user_account: {id, usn, psw, status, type}});
         }
         else if(status === STATUS.BAN) {
             // Handle
@@ -75,7 +79,7 @@ export default class App extends React.Component {
                                 }
                             />
                             <Route 
-                                path={"/cartdetail"} 
+                                path={"/cartdetail/:id"} 
                                 element={ 
                                     this.state.user_account.status === STATUS.NORMAL ? (
                                         <><HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>

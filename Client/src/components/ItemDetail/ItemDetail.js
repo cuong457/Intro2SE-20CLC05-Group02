@@ -5,16 +5,7 @@ import {Link} from 'react-router-dom'
 import RatingStarGenerator from '../RatingStars/RatingStars'
 import FoodMenu  from '../FoodMenu/FoodMenu'
 
-// import foodThum_1 from '../../assets/images/FoodThumnail/bun.png'
-// import foodThum_2 from '../../assets/images/FoodThumnail/pho.png'
-// import foodThum_3 from '../../assets/images/FoodThumnail/doannhanh.png'
-// import foodThum_4 from '../../assets/images/FoodThumnail/dohan.png'
-// import foodThum_5 from '../../assets/images/FoodThumnail/lau.png'
-// import foodThum_6 from '../../assets/images/FoodThumnail/donhat.png'
-
 import about_1 from '../../assets/images/abouts/about-1.png'
-
-// import food_item_1 from '../../assets/images/foods/food_1.png'
 
 import achievement_icon from '../../assets/images/icons/achievement.png'
 import certificate_icon from '../../assets/images/icons/certificate.png'
@@ -28,26 +19,6 @@ import {
 import { useParams } from 'react-router-dom';
 
 const MENU_TYPE = {SMALL: 0,LARGE: 1};
-
-// const food = {
-//     img: food_item_1,
-//     name: "SALAD NGŨ VỊ HOÀNG GIA ANH",
-//     link: "/item",
-//     brand: "Sunrise Foods",
-//     rating: 4.5,
-//     rvcount: "41.002", 
-//     price: 49,
-//     status: "Còn hàng"
-// };
-
-// const recommend = [
-//     {img: foodThum_1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89},
-//     {img: foodThum_2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25},
-//     {img: foodThum_3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999},
-//     {img: foodThum_4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56},
-//     {img: foodThum_5, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102},
-//     {img: foodThum_6, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89}
-// ];
 
 function changeSellectToInput() {
     if ($('#qty-itdetail').find(":selected").val() === 'many')

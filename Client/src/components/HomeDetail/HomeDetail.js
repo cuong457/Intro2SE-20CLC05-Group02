@@ -52,7 +52,7 @@ let rect_banners = [
 ]
 
 let sale_thumnails_1 = [
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm", link: "/item", brand: "Sunrise Foods", rating: 4, rvcount: 12.567, price: 89, status: "Còn hàng"},
+    {img: foodThum1, name: "Bún Đậu Mắm Tôm", link: "/item/bun-dau-mam-tom-chuan-ngon", brand: "Sunrise Foods", rating: 4, rvcount: 12.567, price: 89, status: "Còn hàng"},
     {img: foodThum2, name: "Cơm Tấm Thôn Quê", link: "/item", brand: "Sunrise Foods", rating: 3.5, rvcount: 8.291, price: 25, status: "Còn hàng"},
 ]
 

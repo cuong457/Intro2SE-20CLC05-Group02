@@ -33,6 +33,7 @@ function HeaderUser(props) {
     }
 
     const handleKeydown = (event) => {
+        console.log(props.userAccount.id);
         if(event.key === 'Enter') {
             navigate("/products");
         }
@@ -240,7 +241,7 @@ function HeaderUser(props) {
                                 </div>
                             </div>
                             <div className="col d-flex justify-content-end" id="cart">
-                                <Link to="/cartdetail">
+                                <Link to={`/cartdetail/${props.userAccount.id}`}>
                                     <i className="bi bi-cart cart-icon"></i>
                                 </Link>
                             </div>
