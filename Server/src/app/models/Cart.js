@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const ItemSchema = new Schema (
     {
         productId: {
-            type: Schema.Types.ObjectId,
-            ref: 'Product',
+            type: mongoose.Types.ObjectId,
+            ref: "Product",
             required: [true, "an item should have productId"],
         },
         quantity: {
@@ -30,5 +30,18 @@ const CartSchema = new Schema (
         timestamps: true,
     },
 );
+
+
+
+CartSchema.methods.getPopulatedCart = async function() {
+    // populate product data in productId field
+    const cartPopulatedPromises = this.items.map(async (item, index) => {
+        return this.populate(`items.${index}.productId`);
+    });
+
+    // [{}, {}, {}]: array of carts populated with product data
+    const carts = await Promise.all(cartPopulatedPromises);
+    return carts[0];
+}
 
 module.exports = mongoose.model('Cart', CartSchema);

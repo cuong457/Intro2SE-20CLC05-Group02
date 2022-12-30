@@ -56,3 +56,9 @@ export const createUser = function(data) {
         })
         .catch(console.error());
 }
+
+// ===============================================
+
+export const fetchCart = function (userId) {
+    return axios.get(`${URL}/api/v1/cart/${userId}`);
+}

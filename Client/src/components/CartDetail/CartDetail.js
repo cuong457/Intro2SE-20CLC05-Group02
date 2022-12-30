@@ -11,6 +11,7 @@ import foodThum3 from '../../assets/images/FoodThumnail/doannhanh.png'
 import foodThum4 from '../../assets/images/FoodThumnail/dohan.png'
 import foodThum5 from '../../assets/images/FoodThumnail/lau.png'
 import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
+import { fetchCart } from '../../api';
 
 const recommend = [
     {key:"cavienchien001", img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999},
@@ -23,22 +24,46 @@ function CartDetail () {
     const [ subtotal, set_subtotal ] = useState(0);
     const [ item_count, set_item_count ] = useState(0);
     const [ items, set_items ] = useState([
-        {key:"bobittet001", img:foodThum5, link:"/item", name:"Bò Bít Tết Hoàng Gia", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 369, quantity: 1},
-        {key:"goi001", img:foodThum2, link:"/item", name:"Gỏi Gia Truyền Truyền Từ Thời Ông Cố Nội", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 171, quantity: 1}
+        // {key:"bobittet001", img:foodThum5, link:"/item", name:"Bò Bít Tết Hoàng Gia", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 369, quantity: 1},
+        // {key:"goi001", img:foodThum2, link:"/item", name:"Gỏi Gia Truyền Truyền Từ Thời Ông Cố Nội", status: "Còn hàng", brand: "Sunrise Foods", notice: "Raw meet and clean decoration", price: 171, quantity: 1}
     ]);
     const [ cart, set_cart ] = useState([]);
     
     const params = useParams();
     const user_id = params.id;
 
-    console.log(user_id);
+    const getData = async () => {
+        const response = await fetchCart(user_id);
+
+        const items_from_API = response.data.items.map((my_item, index) => {
+            return {
+                _id: my_item.productId._id,
+
+                key: my_item.productId._id,
+                name: my_item.productId.name,
+                img: my_item.productId.img,
+                rating: my_item.productId.rating,
+                rvcount: my_item.productId.rvcount,
+                price: my_item.productId.price,
+                brand: my_item.productId.brand,
+                status: my_item.productId.status,
+                
+                slug: my_item.productId.slug,
+                quantity: my_item.quantity,
+            }
+        })
+
+        console.log('vcl', items_from_API);
+        
+        set_items(items_from_API);
+    }
 
     const ChangeQuantity = (e, targetkey) => {
         const new_quantity = parseInt(e.target.value);
         
         // Change quantity in items
         let new_items = items.map((item) => {
-            if(item.key === targetkey) {
+            if(item._id === targetkey) {
                 item.quantity = new_quantity;
             }
             return item;
@@ -47,7 +72,7 @@ function CartDetail () {
 
         // Change quantity in cart
         let new_cart = cart.map((cart_item) => {
-            if(cart_item.key === targetkey) {
+            if(cart_item._id === targetkey) {
                 cart_item.quantity = new_quantity;
             }
             return cart_item;
@@ -57,11 +82,11 @@ function CartDetail () {
     
     const handleDeleteItem = (target_item) => {
         // Delete in items
-        let new_items = items.filter(item => item.key !== target_item.key);
+        let new_items = items.filter(item => item._id !== target_item._id);
         set_items(new_items);
 
         //Delete in cart
-        let new_cart = cart.filter(cart_item => cart_item.key !== target_item.key);
+        let new_cart = cart.filter(cart_item => cart_item._id !== target_item._id);
         set_cart(new_cart);
     }
 
@@ -73,17 +98,18 @@ function CartDetail () {
         return subtotal;
     }
 
-    const getItemCount = () => {
+    function getItemCount () {
         let cart_item_count = 0;
-        cart.forEach((cart_item) => {
+        cart.map((cart_item) => {
             cart_item_count += cart_item.quantity;
         })
+        console.log(cart);
         return cart_item_count;
     }
 
     const CartItem = (item) => {
         return  (
-            <div className="row" key={item.key}>
+            <div className="row" key={item._id}>
                 <div className="col-3 d-flex align-items-center">
                     <div className="form-check d-flex align-items-center">
                         <input 
@@ -92,32 +118,32 @@ function CartDetail () {
                             onChange={e => handleChooseCartItem(e.target.checked, item)}
                         />
                     </div>
-                    <Link to={item.link}>
-                        <img src={item.img} className="img-fluid" alt='item'/>
+                    <Link to={`/item/${item.slug}`}>
+                        <img src={require(`../../assets/images/FoodThumnail/${item.img.thumbnail}`)} className="img-fluid" alt='item'/>
                     </Link>
                 </div>
                 <div className="col-7 ctdetail-itemdetail">
                     <Link 
-                        to={item.link} 
+                        to={`/item/${item.slug}`} 
                         className="ctdetail-item-title erase-underline text-black"
                     >
                         {item.name}
                     </Link>
                     <p className="ctdetail-item-sm-detail text-green"><b>{item.status}</b></p>
                     <p className="ctdetail-item-sm-detail">Delivered from and sold by {item.brand}</p>
-                    <p className="ctdetail-item-me-detail"><b>Your option: </b>{item.notice}</p>
+                    <p className="ctdetail-item-me-detail"><b>Your option: </b>{"Raw meet and clean decoration"}</p>
                     
                     <div className="row mt-2 mb-2">
                         <div className="col form-group">
-                            <label htmlFor={item.key}>Quantity: </label>
+                            <label htmlFor={item._id}>Quantity: </label>
                             <span className="d-inline-block">
                                 <input 
                                     type="number" 
                                     className="form-control small-img" 
-                                    id={item.key} 
+                                    id={item._id} 
                                     defaultValue={item.quantity} 
                                     min={0}
-                                    onChange={e => ChangeQuantity(e, item.key)}
+                                    onChange={e => ChangeQuantity(e, item._id)}
                                 />
                             </span>
                         </div>
@@ -154,8 +180,8 @@ function CartDetail () {
             let addItemCount = 0;
             items.forEach((item) => {
                 let isExist = false;
-                cart.forEach((cartitem) => {
-                    if(cartitem.key === item.key)
+                cart.forEach((cart_item) => {
+                    if(cart_item._id === item._id)
                         isExist = true;
                 });
                 if(!isExist) {     
@@ -178,12 +204,16 @@ function CartDetail () {
     };
 
     const handleChooseCartItem = (type, item) => {
+        console.log(type);
+
         if(type) {
             // Add item to cart
             let newCart = cart;
             // cart.push(item);
             newCart.push(item);
             set_cart(newCart);
+
+            console.log(newCart);
 
             // Check if all item is select, then check the select all
             if($('.sellectItem:checked').length === $('.sellectItem').length) {
@@ -194,7 +224,7 @@ function CartDetail () {
             // Remove item from cart
             let newCart = cart;
             for(let i = 0; i < newCart.length; i++) {
-                if(newCart[i].key === item.key) {
+                if(newCart[i].key === item._id) {
                     newCart.splice(i, 1);
                     break;
                 }
@@ -247,7 +277,7 @@ function CartDetail () {
     }
 
     return (
-        <div className="container mt-5"
+        <div className="container mt-5" onLoad={async () => { await getData() }}
         >
             <div className="row pb-5">
                 {/* {{!-- Main content --}} */}
