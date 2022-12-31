@@ -174,13 +174,28 @@ class SellerPageTest extends React.Component {
                                     </div>
                                     <span class="badge badge-pill bg-danger float-end text-center">12</span>
                                 </a>
-                                {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}
-                                <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
+                                {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}                                
+                                <a href="#Profilecollapse" data-bs-toggle="collapse" aria-expanded="false" aria-controls="Profilecollapse" class="list-group-item list-group-item-action nav-item">
                                     <div class="">
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         <span class="ps-4 me-title">Profile</span> 
                                     </div>
+                                    <div class="collapse" id="Profilecollapse">
+                                        
+                                            <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                                <div class="">
+                                                    <span class="ps-4 me-title">Seller Profile</span> 
+                                                </div>
+                                            </a>
+                                            <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                                <div class="">
+                                                    <span class="ps-4 me-title">Store Profile</span> 
+                                                </div>
+                                            </a>
+                                        
+                                    </div>
                                 </a>
+                        
                                 
                             </div>
                         </div>

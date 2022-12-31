@@ -23,6 +23,7 @@ import Posts from './components/Posts/Posts'
 import SellerOrderPage from './components/SellerOrderPage/SellerOrderPage';
 import SellerPage from './components/SellerPage/SellerPage';
 import AddItem from './components/AddItem/AddItem'
+import SellerProfile from './components/SellerProfile/SellerProfile';
 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
@@ -168,7 +169,9 @@ export default class App extends React.Component {
                             <Route path="/seller" element={<><Header/><SellerPage/><Footer/></>} />
                             <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
                             <Route path="/seller/orders" element={<><Header/><SellerOrderPage/><Footer/></>} />
-                            <Route path="/seller/profile" element={<><Header/><Footer/></>} />
+
+                            <Route path="/seller/item/edit" element={<><Header/><Footer/></>} />
+                            <Route path="/seller/profile" element={<><Header/><SellerProfile/><Footer/></>} />
 
                             <Route 
                                 path={"/admin"}  

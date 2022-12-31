@@ -1128,6 +1128,9 @@ Notification Popup */
 .border-dotted {
   border-style: dotted;
 }
+.border-0 {
+  border-style: none;
+}
 .ph-225 {
   height: 225px !important; 
 }
