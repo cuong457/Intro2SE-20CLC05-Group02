@@ -51,6 +51,13 @@ const foods = [
     {img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot"},
     {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"}
 ];
+const orders = [
+    {id: 1, buyername: "Lưu Minh Phát", addr: "Đại học KHTN", total: '1.500'},
+    {id: 2, buyername: "Lý Văn Đạt", addr: "Đại học KHTN", total:'2.000'},
+    {id: 3, buyername: "Phạm Nguyễn Cao Cường", addr: "Đại học KHTN", total: '1.000'},
+    {id: 4, buyername: "Phan Phúc Đạt", addr: "Đại học KHTN", total: '600'}
+];
+
 
 class SellerPageTest extends React.Component {
     state = {
@@ -172,29 +179,24 @@ class SellerPageTest extends React.Component {
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         <span class="ps-4 me-title">Orders</span> 
                                     </div>
-                                    <span class="badge badge-pill bg-danger float-end text-center">12</span>
+                                    <span class="badge badge-pill bg-danger float-end text-center">{orders.length}</span>
                                 </a>
                                 {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}                                
-                                <a href="#Profilecollapse" data-bs-toggle="collapse" aria-expanded="false" aria-controls="Profilecollapse" class="list-group-item list-group-item-action nav-item">
-                                    <div class="">
+                                <div class="list-group-item nav-item">
+                                    <div href="#Profilecollapse" data-bs-toggle="collapse" aria-controls="Profilecollapse" aria-expanded="false" >
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         <span class="ps-4 me-title">Profile</span> 
                                     </div>
                                     <div class="collapse" id="Profilecollapse">
-                                        
                                             <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
-                                                <div class="">
-                                                    <span class="ps-4 me-title">Seller Profile</span> 
-                                                </div>
+                                                <span class="ps-4 me-title">Seller Profile</span> 
                                             </a>
                                             <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
-                                                <div class="">
-                                                    <span class="ps-4 me-title">Store Profile</span> 
-                                                </div>
+                                                <span class="ps-4 me-title">Store Profile</span> 
                                             </a>
                                         
                                     </div>
-                                </a>
+                                </div>
                         
                                 
                             </div>

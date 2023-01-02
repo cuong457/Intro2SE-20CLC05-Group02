@@ -181,15 +181,24 @@ class SellerPageTest extends React.Component {
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         <span class="ps-4 me-title">Orders</span> 
                                     </div>
-                                    <span class="badge badge-pill bg-danger float-end text-center">12</span>
+                                    <span class="badge badge-pill bg-danger float-end text-center">{orders.length}</span>
                                 </a>
                                 {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}
-                                <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
-                                    <div class="">
+                                <div class="list-group-item nav-item">
+                                    <div href="#Profilecollapse" data-bs-toggle="collapse" aria-controls="Profilecollapse" aria-expanded="false" >
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         <span class="ps-4 me-title">Profile</span> 
                                     </div>
-                                </a>
+                                    <div class="collapse" id="Profilecollapse">
+                                            <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                                <span class="ps-4 me-title">Seller Profile</span> 
+                                            </a>
+                                            <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                                <span class="ps-4 me-title">Store Profile</span> 
+                                            </a>
+                                        
+                                    </div>
+                                </div>
                                 
                             </div>
                         </div>
