@@ -128,7 +128,7 @@ const HomeDetail = () => {
                             <Banner imgs={rect_banners}/>
                         </div>
                     </div>
-                    <div className='col-12 col-lg-8'>
+                    <div className='col-12 col-lg-8 '>
                         <div className='h-50'>
                             <FoodMenu imgs={sale_thumnails_1} type={MENU_TYPE.LARGE}/>
                         </div>

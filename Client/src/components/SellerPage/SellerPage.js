@@ -31,52 +31,45 @@ let recommend = [
 const LIST_LENGTH = 9;
 const MAX_PAGENUMBER_SHOW = 3;
 const foods = [
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
-    {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
-    {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"},
-    {img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods"},
-    {img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot"},
-    {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"},
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
-    {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
-    {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"},
-    {img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods"},
-    {img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot"},
-    {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"},
-    {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"},
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
-    {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
-    {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"},
-    {img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods"},
-    {img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot"},
-    {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"}
+    { img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria" },
+    { img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India" },
+    { img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods" },
+    { img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods" },
+    { img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot" },
+    { img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods" },
+    { img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria" },
+    { img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India" },
+    { img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods" },
+    { img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods" },
+    { img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot" },
+    { img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods" },
+    { img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods" },
+    { img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria" },
+    { img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India" },
+    { img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods" },
+    { img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods" },
+    { img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot" },
+    { img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods" }
 ];
-const orders = [
-    {id: 1, buyername: "Lưu Minh Phát", addr: "Đại học KHTN", total: '1.500'},
-    {id: 2, buyername: "Lý Văn Đạt", addr: "Đại học KHTN", total:'2.000'},
-    {id: 3, buyername: "Phạm Nguyễn Cao Cường", addr: "Đại học KHTN", total: '1.000'},
-    {id: 4, buyername: "Phan Phúc Đạt", addr: "Đại học KHTN", total: '600'}
-];
-
 
 class SellerPageTest extends React.Component {
     state = {
         current_food: [
-            {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
-            {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
-            {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"},
-            {img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods"},
-            {img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot"},
-            {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"},
-            {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
-            {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
-            {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"}, 
+            { img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria" },
+            { img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India" },
+            { img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods" },
+            { img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods" },
+            { img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 4, rvcount: 15.927, price: 102, brand: "Panzer Hot" },
+            { img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods" },
+            { img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria" },
+            { img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India" },
+            { img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods" },
         ],
         lastfood_index: 8,
         page_count: foods.length % 9 !== 0 ? Math.floor(foods.length / 9) + 1 : Math.floor(foods.length / 9)
     }
     changepagenumber = (index, total) => {
-        if(index > 0 && index <= total) {
+        if (index > 0 && index <= total) {
             let newFoodList = [];
             let start = (index - 1) * LIST_LENGTH;
             let end = start + LIST_LENGTH;
@@ -84,23 +77,23 @@ class SellerPageTest extends React.Component {
             // Move to the head of page
             $('html, body').animate({ scrollTop: 0 }, 'fast');
 
-            if(foods.length <= end)
+            if (foods.length <= end)
                 end = foods.length;
-            for(; start < end; start++) {
+            for (; start < end; start++) {
                 newFoodList.push(foods[start]);
             }
-            this.setState({lastfood_index:--end});
-            this.setState({current_food: newFoodList});
+            this.setState({ lastfood_index: --end });
+            this.setState({ current_food: newFoodList });
         }
     }
     createPageNumber(total) {
-        if(total > 1) {
+        if (total > 1) {
             let current_page = Math.floor(this.state.lastfood_index / LIST_LENGTH) + 1;
             let pageNumBtn = [];
             let numberOfNBTN = 0;
 
             // Create prevpage_btn
-            pageNumBtn.push (
+            pageNumBtn.push(
                 <span className='pe-1' key='prev'>
                     <button type='button' className='page-number-btn' onClick={() => this.changepagenumber(current_page - 1, total)}>
                         <img src={leftArrow} className='img-fluid' alt="" />
@@ -108,14 +101,14 @@ class SellerPageTest extends React.Component {
                 </span>
             )
             // Create numberpage_btn
-            for(let i = 1; i <= total && numberOfNBTN < MAX_PAGENUMBER_SHOW; i++) {
+            for (let i = 1; i <= total && numberOfNBTN < MAX_PAGENUMBER_SHOW; i++) {
                 let class_name = 'page-number-btn';
-                if(i === current_page)
+                if (i === current_page)
                     class_name += ' page-number-btn-active';
-                pageNumBtn.push (
+                pageNumBtn.push(
                     <span className='pe-1' key={i}>
-                        <button 
-                            type='button' 
+                        <button
+                            type='button'
                             className={class_name}
                             onClick={() => this.changepagenumber(i, total)}
                             id={'page-btn-' + i}
@@ -125,13 +118,13 @@ class SellerPageTest extends React.Component {
                     </span>
                 )
                 ++numberOfNBTN;
-                if(numberOfNBTN === MAX_PAGENUMBER_SHOW && current_page >= i && i + 1 <= total) {
+                if (numberOfNBTN === MAX_PAGENUMBER_SHOW && current_page >= i && i + 1 <= total) {
                     pageNumBtn.splice(1, 1);
                     --numberOfNBTN;
                 }
             }
             // Create nextpage_btn
-            pageNumBtn.push (
+            pageNumBtn.push(
                 <span className='pe-1' key='next'>
                     <button type='button' className='page-number-btn' onClick={() => this.changepagenumber(current_page + 1, total)}>
                         <img src={rightArrow} className='img-fluid' alt="" />
@@ -149,14 +142,14 @@ class SellerPageTest extends React.Component {
             return (<></>);
         }
     }
-    render(){
+    render() {
         return (
             <div class="bg-white">
                 <div class="container py-5">
                     <div className=''>
                         <p class="mb-0 h1">Seller Home</p>
                         <p class="me-title opacity-75">View food list, edit, add, delete item</p>
-                        <hr/>
+                        <hr />
                     </div>
                     {/* Side Bar */}
                     <div class="row mt-4">
@@ -169,7 +162,7 @@ class SellerPageTest extends React.Component {
                                 <a href="/seller" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
                                     <div class="">
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                        <span class="ps-4 me-title">Store</span> 
+                                        <span class="ps-4 me-title">Store</span>
                                     </div>
                                     <span class="badge badge-pill bg-danger float-end text-center">{foods.length}</span>
                                 </a>
@@ -177,28 +170,27 @@ class SellerPageTest extends React.Component {
                                 <a href="/seller/orders" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
                                     <div class="">
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                        <span class="ps-4 me-title">Orders</span> 
+                                        <span class="ps-4 me-title">Orders</span>
                                     </div>
-                                    <span class="badge badge-pill bg-danger float-end text-center">{orders.length}</span>
+                                    <span class="badge badge-pill bg-danger float-end text-center">12</span>
                                 </a>
-                                {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}                                
+                                {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}
                                 <div class="list-group-item nav-item">
                                     <div href="#Profilecollapse" data-bs-toggle="collapse" aria-controls="Profilecollapse" aria-expanded="false" >
                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                        <span class="ps-4 me-title">Profile</span> 
+                                        <span class="ps-4 me-title">Profile</span>
                                     </div>
                                     <div class="collapse" id="Profilecollapse">
-                                            <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
-                                                <span class="ps-4 me-title">Seller Profile</span> 
-                                            </a>
-                                            <a href="/seller/storeprofile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
-                                                <span class="ps-4 me-title">Store Profile</span> 
-                                            </a>
-                                        
+                                        <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                            <span class="ps-4 me-title">Seller Profile</span>
+                                        </a>
+                                        <a href="/seller/storeprofile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                            <span class="ps-4 me-title">Store Profile</span>
+                                        </a>
                                     </div>
                                 </div>
-                        
-                                
+
+
                             </div>
                         </div>
                         {/* Content */}
@@ -229,7 +221,7 @@ class SellerPageTest extends React.Component {
             </div>
         );
     }
-    
+
 };
 
 export default SellerPageTest;

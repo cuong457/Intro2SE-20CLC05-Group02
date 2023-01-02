@@ -12,7 +12,7 @@ function FoodList(props) {
     let foodlist = foods.map((food, index) => {
         return  (
             <div className="col-6 col-lg-4 pb-3" key={index}>
-                <div className="card card-hover">
+                <div className="card card-hover border">
                     <Link to={`/item/${food.slug}`}><img src={require(`../../assets/images/FoodThumnail/${food.img.thumbnail}`)} className="card-img-top p-3" alt='card'/></Link>
                     <div className="card-body">
                         <Link 
