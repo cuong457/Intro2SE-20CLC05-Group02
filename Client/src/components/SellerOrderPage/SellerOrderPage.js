@@ -210,7 +210,7 @@ class SellerPageTest extends React.Component {
                                         Orders
                                     </h4>
                                 </div>
-                                {/* Hiện danh sách món ăn của seller */}
+                                {/* Hiện danh đơn đặt hàng của seller */}
                                 <div class="card-body">
                                     <div class="row d-flex justify-content-center align-content-center">
                                         <Orders orders={this.state.orders} />
