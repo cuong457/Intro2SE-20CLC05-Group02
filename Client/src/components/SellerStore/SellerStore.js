@@ -5,7 +5,7 @@ function SellerStore(props) {
     const foods = props.foods;
     const foodlist = foods.map((food) => {
         return <div class="col-6 col-lg-4 pb-3">
-                    <div class="card card-hover">
+                    <div class="card card-hover border">
                         <a href={food.link}><img src={food.img} class="card-img-top p-3"/></a>
                         <div class="card-body">
                             <a href={food.link} class="erase-underline"><p class="me-title text-lightblue">{food.name}</p></a>

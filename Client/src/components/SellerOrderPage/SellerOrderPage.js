@@ -164,7 +164,7 @@ class SellerPageTest extends React.Component {
                     <div class="row mt-4">
                         <div class="col-12 col-md-3">
                             <div class="list-group list-group-flush gap-5">
-                                <div class="card">
+                                <div class="card border">
                                     <img src={flavorofindia_logo} class="" alt="" />
                                 </div>
                                 {/* Hiện các item mà seller đã đăng cũng là Layout Default của seller */}
@@ -193,7 +193,7 @@ class SellerPageTest extends React.Component {
                                             <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
                                                 <span class="ps-4 me-title">Seller Profile</span> 
                                             </a>
-                                            <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                                            <a href="/seller/storeprofile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
                                                 <span class="ps-4 me-title">Store Profile</span> 
                                             </a>
                                         

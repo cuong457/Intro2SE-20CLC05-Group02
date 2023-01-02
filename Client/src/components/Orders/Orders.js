@@ -24,18 +24,18 @@ const Orders = (props) => {
     const orderlist = orders.map((order) => {
         return (
             <div class="">
-                <div class="card card-hover mb-3">
+                <div class="card card-hover mb-3 bg-eee border">
                     <div class="card-header d-flex justify-content-between">
                         <h5>{order.buyername}</h5>
                         <a class="btn btn-sm btn-success" href="/seller/orders" role="button">
                             <i class="fa fa-plus pe-1" aria-hidden="true"></i>Get Order
                         </a>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-0 ">
                         {/* <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a> */}
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush p-0 m-0">
                             {
                                 detailorder.map((detail) => {
                                     if(detail.id === order.id) {
