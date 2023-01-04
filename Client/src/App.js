@@ -24,6 +24,7 @@ import SellerOrderPage from './components/SellerOrderPage/SellerOrderPage';
 import SellerPage from './components/SellerPage/SellerPage';
 import AddItem from './components/AddItem/AddItem'
 import SellerProfilePage from './components/SellerProfilePage/SellerProfilePage';
+import EditSellerItem from './components/EditSellerItem/EditSellerItem';
 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
@@ -171,7 +172,7 @@ export default class App extends React.Component {
                             <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
                             <Route path="/seller/orders" element={<><Header/><SellerOrderPage/><Footer/></>} />
 
-                            <Route path="/seller/item/edit" element={<><Header/><Footer/></>} />
+                            <Route path="/seller/item/edit/:slug" element={<><Header/><EditSellerItem/><Footer/></>} />
                             <Route path="/seller/profile" element={<><Header/><SellerProfilePage/><Footer/></>} />
 
                             <Route 
