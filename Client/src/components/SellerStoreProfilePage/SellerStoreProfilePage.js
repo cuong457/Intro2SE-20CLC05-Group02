@@ -1,7 +1,6 @@
 import React from 'react'
 //import $ from 'jquery'
-import './SellerProfilePage.css'
-import { Link } from 'react-router-dom'
+import './SellerStoreProfilePage.css'
 
 import avt3 from '../../assets/images/user/avt/003.jpeg'
 
@@ -48,7 +47,7 @@ const orders = [
   { id: 4, buyername: "Phan Phúc Đạt", addr: "Đại học KHTN", total: '600' }
 ];
 
-class SellerProfilePage extends React.Component {
+class SellerStoreProfilePage extends React.Component {
   state = {
 
   };
@@ -105,14 +104,14 @@ class SellerProfilePage extends React.Component {
               <div class="card border">
                 <div class="card-header">
                   <h4 class="card-header d-flex justify-content-between">
-                    Seller Profile
+                    Seller Store Profile
                   </h4>
                 </div>
                 <div class="card-body pt-3">
                   <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                       <div class="card h-100">
-                        <div class="card-body">
+                        <div class="card-body m-0 p-0">
                           <div class="account-settings">
                             <div class="user-profile">
                               <div class="user-avatar">
@@ -124,14 +123,14 @@ class SellerProfilePage extends React.Component {
                             <div class="about">
                               <h5>About</h5>
                               <p>
-                                Độc thân vui tính
+                                Không có gì ngoài hoàn hảo
                               </p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 m-0 p-0 card">
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 m-0 p-0 card m-0 p-0">
                       <div class="card-body h-100 m-0 p-0">
                         {/* ROW 1 */}
                         <div class="row">
@@ -219,7 +218,7 @@ class SellerProfilePage extends React.Component {
                         <div class="row gutters">
                           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="text-right">
-                              <Link to="/seller"><button type="button" class="btn btn-secondary me-2" onclick="location.href='/seller'">Cancel</button></Link>
+                              <button type="button" class="btn btn-secondary me-2" onclick="location.href='/teacher'">Cancel</button>
                               <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-check" aria-hidden="true"></i>
                                 Update
@@ -241,4 +240,4 @@ class SellerProfilePage extends React.Component {
   }
 };
 
-export default SellerProfilePage
+export default SellerStoreProfilePage

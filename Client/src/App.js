@@ -20,11 +20,13 @@ import UserCenter from './components/UserCenter/UserCenter'
 import SellerCenter from './components/SellerCenter/SellerCenter'
 import Posts from './components/Posts/Posts'
 
+import SellerRegister from './components/SellerRegister/SellerRegister';
 import SellerOrderPage from './components/SellerOrderPage/SellerOrderPage';
 import SellerPage from './components/SellerPage/SellerPage';
 import AddItem from './components/AddItem/AddItem'
 import SellerProfilePage from './components/SellerProfilePage/SellerProfilePage';
 import EditSellerItem from './components/EditSellerItem/EditSellerItem';
+import SellerStoreProfilePage from './components/SellerStoreProfilePage/SellerStoreProfilePage';
 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
@@ -167,13 +169,62 @@ export default class App extends React.Component {
                                 )
                             }
                             */}
-                            
-                            <Route path="/seller" element={<><Header/><SellerPage/><Footer/></>} />
-                            <Route path="/seller/add" element={<><Header/><AddItem/><Footer/></>} />
+                            <Route 
+                                path="/seller-register" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <SellerRegister setAccount={this.setUserAccount}/>
+                                    ) : (
+                                        <LoginPage setAccount={this.setUserAccount}
+                                    />
+                                    )
+                                    
+                                }
+
+                            />
+                            <Route 
+                                path="/seller" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerPage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Header/>
+                                            <SellerPage/>
+                                            <Footer/>
+                                        </>
+                                    )
+                                    
+                                } 
+
+                            />
+                            <Route 
+                                path="/seller/add" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <AddItem/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Header/>
+                                            <AddItem/>
+                                            <Footer/>
+                                        </>
+                                    )
+                                } 
+                            />
                             <Route path="/seller/orders" element={<><Header/><SellerOrderPage/><Footer/></>} />
 
                             <Route path="/seller/item/edit/:slug" element={<><Header/><EditSellerItem/><Footer/></>} />
                             <Route path="/seller/profile" element={<><Header/><SellerProfilePage/><Footer/></>} />
+                            <Route path="/seller/storeprofile" element={<><Header/><SellerStoreProfilePage/><Footer/></>} />
 
                             <Route 
                                 path={"/admin"}  

@@ -75,7 +75,7 @@ function HeaderUser(props) {
                             {/* {{! Left links field }} */}
                             <ul className="navbar-nav me-auto" id="nav-leftlink">
                                 <li className="nav-item">
-                                    <Link className="nav-link active navbar-font-link pb-2 m-0" to="#">Trở thành người bán hàng</Link>
+                                    <Link className="nav-link active navbar-font-link pb-2 m-0" to="/seller-register">Trở thành người bán hàng</Link>
                                 </li>
 
                                 <li className="nav-item"><p
@@ -116,7 +116,7 @@ function HeaderUser(props) {
                                     </Link>
                                     <ul className="dropdown-menu dropdown-menu-dark">
                                         <li className="nav-item">
-                                            <Link className="dropdown-item" to="#">Trở thành người bán hàng</Link>
+                                            <Link className="dropdown-item" to="/seller-register">Trở thành người bán hàng</Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link className="dropdown-item" to="#">Hỗ trợ</Link>
