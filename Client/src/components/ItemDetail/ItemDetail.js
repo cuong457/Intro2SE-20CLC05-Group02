@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import {
     fetchRecommend,
     fetchProductDetail,
+    addToCart,
 } from '../../api';
 import { useParams } from 'react-router-dom';
 
@@ -34,6 +35,17 @@ function checkAndAnimate() {
         if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("active");
         }
+    }
+}
+
+async function addItemToCart(cart, prod)  {
+    try {
+        console.log({
+            cart,
+            prod,
+        })        
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -79,8 +91,8 @@ const ItemDetail = () => {
                         {/* {{!-- Alternative item image --}} */}
                         <div className="row pt-3" id="itdetail-alterimg">
                             <div className="col-4">
-                                <Link to={food.link}>
-                                    <img src={require(`../../assets/images/foods/${food.img.detail}`)} className="img-fluid itdetail-food-img" alt={food.name} />
+                                <Link to={`/item/${food.slug}`}>
+                                    <img src={require(`../../assets/images/foods/${food.img.detail}`)} className="img-fluid itdetail-food-img" alt={food.name}/>
                                 </Link>
                             </div>
                             <div className="col-8">
@@ -151,7 +163,12 @@ const ItemDetail = () => {
                             </form>
                             <div className="row w-75 m-auto">
                                 <div className="col text-center">
-                                    <button className="btn-addtocart mt-3">Thêm vào giỏ hàng</button>
+
+                                    <button
+                                        className="btn-addtocart mt-3"
+                                        onClick={async (e) => { await addItemToCart(slug, food._id) }}
+                                    >Thêm vào giỏ hàng
+                                    </button>
                                     <Link to="/buy"><button className="btn-buynow mt-2" id="item-final-single-buy">Mua ngay</button></Link>
                                 </div>
                             </div>

@@ -6,7 +6,8 @@ const UserSchema = new Schema (
     {
         usn: { type: String, required: true },
         psw: { type: String, required: true },
-        avt: { type: String },
+        name: { type: String },
+        photo: { type: String },
         status: { type: Number },
         type: { type: Number },
         sales: { type: Number },

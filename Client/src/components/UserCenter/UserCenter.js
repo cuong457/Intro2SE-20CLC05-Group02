@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import $ from 'jquery'
 
 import SellerList from '../SellerList/SellerList'
@@ -23,6 +23,8 @@ import user16 from '../../assets/images/logo/vinny.png'
 
 import rightArrow from '../../assets/images/icons/right.png'
 import leftArrow from '../../assets/images/icons/left.png'
+
+import { fetchUsers } from '../../api'
 
 const user_detail = [
     {time: '4/9/2022', users: 3400, sales: 4000},
@@ -122,17 +124,44 @@ function renderPercent (type) {
 }
 
 function UserCenter() {
-    const [current_user, setCurrentUser] = useState([
-        {img: user1, name: "Raiden Shogun", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'sunrisefoods'},
-        {img: user2, name: "Kamisato Ayaka", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'assikoreanfood'},
-        {img: user3, name: "Ganyu", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'burgerzone'},
-        {img: user4, name: "I Dont Know", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'caravansekai'},
-        {img: user5, name: "Lightning Keqing", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'flavorofindia'},
-        {img: user6, name: "Nilou", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'lafriggitoria'},
-    ]);
+    const [initData, setInitData] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    const [current_user, setCurrentUser] = useState([]);
     const [lastuser_index, setLastUserIndex] = useState(current_user.length - 1);
     const [page_count, setPageCount] = useState(users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH));
     
+    useEffect(() => {
+        const getData = async function() {
+            try {
+                const users = await fetchUsers();
+                
+                const array = [];
+                users.data.forEach(element => {
+                    element["key"] = element._id;
+                    array.push(element);
+                });
+
+                console.log(array);
+
+                setUsers(array);
+                setInitData(array);
+
+                let current = [];
+                for (let index = 0; index < array.length && index < 6; index++) {
+                    current.push(array[index]);
+                }
+
+                setCurrentUser(current);
+
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        getData()
+    }, []);
+
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -233,7 +262,7 @@ function UserCenter() {
                     newCurrentUsers.push(users[i]);
                 }
             }
-            users = newCurrentUsers;
+            setUsers(newCurrentUsers);
             setPageCount(users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH));
             changepagenumber(1, page_count);
         }
@@ -242,7 +271,7 @@ function UserCenter() {
         let val = $('#seller-search-box').val().trim();
         if(val !== '') {
             $('#seller-search-box').val('');
-            users = thisIsCallFromAPI;
+            setUsers(initData);
             setPageCount(users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH));
             changepagenumber(1, page_count);
         }

@@ -62,3 +62,9 @@ export const createUser = function(data) {
 export const fetchCart = function (userId) {
     return axios.get(`${URL}/api/v1/cart/${userId}`);
 }
+
+export const addToCart = function (data) {
+    return axios.patch(`${URL}/api/v1/cart/${data.cart}/add`, {
+        productId: data.prod,
+    });
+}

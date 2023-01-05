@@ -31,7 +31,32 @@ const CartSchema = new Schema (
     },
 );
 
+CartSchema.methods.addItemToCart = async function(productId, quantity) {
+    try {
+        let productItemIndex = this.items.findIndex((prod) => {
+            // parse ObjectId to String
+            return String(prod.productId) === productId;
+        });
+        let newUpdatedItem = null;
+        // if item exists
+        if (productItemIndex !== -1) {
+            newUpdatedItem = this.items[productItemIndex];
+            newUpdatedItem.quantity += quantity;
+            this.items[productItemIndex] = newUpdatedItem;
+        } 
+        // if item does not exist
+        else {
+            newUpdatedItem = { productId, quantity };
+            this.items.push(newUpdatedItem);
+        }
 
+        const newCart = await this.save();
+        return newCart;
+    } catch(err) {
+        console.log(err);
+        return null;
+    }
+}
 
 CartSchema.methods.getPopulatedCart = async function() {
     // populate product data in productId field

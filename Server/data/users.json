@@ -2,24 +2,32 @@
   "_id": "63ac6844d6f5f0c143c452a8" ,
   "usn": "admin",
   "psw": "admin123456",
+  "name": "admin",
+  "photo": "assets/images/user/avt/default_ava.png",
   "status": 1,
   "type": 1
 },{
   "_id":"63ac6844d6f5f0c143c452a9",
   "usn": "seller",
   "psw": "seller123456",
+  "name": "seller",
+  "photo": "assets/images/user/avt/default_ava.png",
   "status": 1,
   "type": -1
 },{
   "_id": "63ac6844d6f5f0c143c452a7",
   "usn": "user1",
   "psw": "user123456",
+  "name": "user1",
+  "photo": "assets/images/user/avt/default_ava.png",
   "status": 1,
   "type": 0
 },{
   "_id": "63ac7d2186ebbd0d94707bef",
   "usn": "hahaha31247",
   "psw": "123",
+  "name": "Cường Phạm",
+  "photo": "assets/images/user/avt/default_ava.png",
   "status": 1,
   "type": 0
 }]

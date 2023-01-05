@@ -49,10 +49,13 @@ function SellerList(props) {
             <div className="col-12 col-sm-6 col-xxl-4 pb-4 d-flex justify-content-center" key={index}>
                 <div className="card admin-card" id={seller.usn}>
                     <div className="admin-card-front">
-                        <img src={seller.img} className="card-img-top p-3" alt='card'/>
+                        {/* <img src={require(`../../${seller.photo}`)} className="card-img-top p-3" alt='card'/> */}
                         <div className="card-body">
                             <p className="me-title text-lightblue">{seller.name}</p>
-                            <RatingStarGenerator star={seller.rating}/>
+                            {seller.rating
+                                ? <RatingStarGenerator star={seller.rating}/>
+                                : ''
+                            }
                             <p className="review-count">{seller.rvcount}</p>
                             <p className="sm-title">Total sales <span className="rtab-money">${seller.total_sales}</span></p>
                             <div className="text-center">
