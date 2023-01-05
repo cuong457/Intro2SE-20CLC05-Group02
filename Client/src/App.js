@@ -193,9 +193,9 @@ export default class App extends React.Component {
                                         </>
                                     ) : (
                                         <>
-                                            <Header/>
-                                            <SellerPage/>
-                                            <Footer/>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
                                         </>
                                     )
                                     
@@ -205,7 +205,7 @@ export default class App extends React.Component {
                             <Route 
                                 path="/seller/add" 
                                 element={
-                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
                                         <>
                                             <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
                                             <AddItem/>
@@ -213,18 +213,94 @@ export default class App extends React.Component {
                                         </>
                                     ) : (
                                         <>
-                                            <Header/>
-                                            <AddItem/>
-                                            <Footer/>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
                                         </>
                                     )
                                 } 
                             />
-                            <Route path="/seller/orders" element={<><Header/><SellerOrderPage/><Footer/></>} />
+                            <Route 
+                                path="/seller/orders" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerOrderPage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                }
 
-                            <Route path="/seller/item/edit/:slug" element={<><Header/><EditSellerItem/><Footer/></>} />
-                            <Route path="/seller/profile" element={<><Header/><SellerProfilePage/><Footer/></>} />
-                            <Route path="/seller/storeprofile" element={<><Header/><SellerStoreProfilePage/><Footer/></>} />
+                            />
+
+                            <Route 
+                                path="/seller/item/edit/:slug" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <EditSellerItem/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                }
+                                
+                            />
+                            <Route 
+                                path="/seller/profile" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerProfilePage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                } 
+
+                            />
+                            <Route 
+                                path="/seller/storeprofile" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerStoreProfilePage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                }
+
+                            />
 
                             <Route 
                                 path={"/admin"}  
