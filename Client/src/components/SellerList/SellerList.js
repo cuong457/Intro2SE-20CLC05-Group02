@@ -125,7 +125,7 @@ function SellerList(props) {
 
     if(sellerlist.length === 0) {
         sellerlist.push(
-            <div className='d-flex justify-content-center align-items-center'>
+            <div className='d-flex justify-content-center align-items-center' key='qiqi'>
                 <img src={qiqifallen} className='icon-qiqi' alt='qiqi'></img>
             </div>
         )

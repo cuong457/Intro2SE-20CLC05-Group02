@@ -46,12 +46,17 @@ body {
     padding-top: 1rem;
 }
 .v-nav-item {
+    display: flex!important;
     list-style-type: none;
     opacity: 50%;
     padding-bottom: 0.5rem;
     transition: transform 0.3s ease-in-out, opacity 0.3s;
 }
-.v-nav-item.active {
+.vertical-navbar {
+    padding-top: 20px;
+    padding-left: 50px;
+}
+.v-nav-active {
     opacity: 100%;
 }
 .v-nav-item:hover {
@@ -206,7 +211,7 @@ body {
     position: absolute;
     top:120px;
     left:0;
-    width: 100vw;
+    width: 98vw;
 }
 .admin-sm-card {
     position: relative;
