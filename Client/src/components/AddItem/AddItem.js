@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import $ from 'jquery'
+
+
 
 import sunrise_logo from '../../assets/images/logo/SunriseFoods-logo.png'
 import flavorofindia_logo from '../../assets/images/logo/FlavourOfIndia-logo.png'
@@ -6,7 +10,7 @@ import panzerhot_logo from '../../assets/images/logo/PanzerHot-logo.png'
 import friggitoria from '../../assets/images/logo/Friggitoria-logo.png'
 
 import { MdFastfood, MdCloudUpload, MdDelete, MdFoodBank, MdAttachMoney, MdOutlineRefresh } from 'react-icons/md';
-import BrandMenu from '../BrandMenu/BrandMenu'
+
 
 const restaurant_logo = [
   {img: sunrise_logo, name: "Sunrise Foods", link: "#"},
@@ -16,6 +20,7 @@ const restaurant_logo = [
 ];
 
 const AddItem = () => {
+
   return (
     <div class="bg-white d-flex justify-content-center align-content-center py-4">
       <div class="card w-75">
@@ -38,7 +43,7 @@ const AddItem = () => {
                   <MdCloudUpload className="text-gray-600 text-3xl hover:text-gray-700 align-self-center" />
                   <p className="text-gray-600 hover:text-gray-700">Upload Image</p>
                 </div>
-                <input type="file" name="uploadimage" accept="image/*" className="w-0 h-0"/>
+                <input type="file" name="uploadimage" accept="image/*" className="w-0 h-0" id="FoodIMG"/>
               </label>
             </div>
           </div>
@@ -52,7 +57,7 @@ const AddItem = () => {
             </div>
             <div class="col">
               <label for="FoodPrize" class="form-label h5">Categories</label>
-              <select class="form-select mb-3" aria-label=".form-select-lg example">
+              <select class="form-select mb-3" aria-label=".form-select-lg example" id="ItemCate">
                 <option selected>Default</option>
                 <option value="1">Cơm</option>
                 <option value="2">Phở</option>
@@ -67,7 +72,7 @@ const AddItem = () => {
           <a class="btn btn-sm btn-outline-danger" href="/seller" role="button">
             <i class="bi bi-arrow-bar-left pe-1" aria-hidden="true"></i>Back
           </a>
-          <a class="btn btn-sm btn-success" href="#" role="button">
+          <a class="btn btn-sm btn-success" href="#" role="button" >
             <i class="bi bi-check pe-1" aria-hidden="true"></i>Save
           </a>
         </div>

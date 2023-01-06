@@ -211,8 +211,8 @@ function Posts() {
     }
     return (
         <div className='admin-content pt-2'>
-            <div className='row bg-white'>
-                <div className='col-12 pt-4'>
+            <div className='row bg-white border-radius-smooth'>
+                <div className='col-12 p-4'>
                     <p className='formal-font text-lg text-bold'>POST CENTER</p>
                     <hr/>
                 </div>
@@ -245,7 +245,7 @@ function Posts() {
                     </div>
                 </div>
                 <div className='col-12 col-md-9'>
-                    <div className='row'>
+                    <div className='row pe-2'>
                         <PostList posts={current_post} callbackDelete={deletePost}/>
                     </div>
                     <div className='row pb-4'>

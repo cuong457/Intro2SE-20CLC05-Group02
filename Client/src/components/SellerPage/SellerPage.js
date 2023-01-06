@@ -239,6 +239,12 @@ import flavorofindia_logo from '../../assets/images/logo/FlavourOfIndia-logo.png
 const LIST_LENGTH = 9;
 const MAX_PAGENUMBER_SHOW = 3;
 
+const orders = [
+    { id: 1, buyername: "Lưu Minh Phát", addr: "Đại học KHTN", total: '1.500' },
+    { id: 2, buyername: "Lý Văn Đạt", addr: "Đại học KHTN", total: '2.000' },
+    { id: 3, buyername: "Phạm Nguyễn Cao Cường", addr: "Đại học KHTN", total: '1.000' },
+    { id: 4, buyername: "Phan Phúc Đạt", addr: "Đại học KHTN", total: '600' }
+];
 
 let foods = [];
 
@@ -358,7 +364,7 @@ const SellerPage = () => {
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                                     <span class="ps-4 me-title">Store</span>
                                 </div>
-                                <span class="badge badge-pill bg-danger float-end text-center">{current_food.length}</span>
+                                <span class="badge badge-pill bg-danger float-end text-center">{foods.length}</span>
                             </a>
                             {/* Tới trang đơn đặt hàng cùng thông báo */}
                             <a href="/seller/orders" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
@@ -366,7 +372,7 @@ const SellerPage = () => {
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                                     <span class="ps-4 me-title">Orders</span>
                                 </div>
-                                <span class="badge badge-pill bg-danger float-end text-center">12</span>
+                                <span class="badge badge-pill bg-danger float-end text-center">{orders.length}</span>
                             </a>
                             {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}
                             <div class="list-group-item nav-item">

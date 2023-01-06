@@ -37,6 +37,17 @@ function checkAndAnimate() {
   }
 }
 
+async function addItemToCart(cart, prod) {
+  try {
+    console.log({
+      cart,
+      prod,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const ItemDetail = () => {
   let [recommend, setRecommend] = useState([]);
   let [food, setFood] = useState(null);

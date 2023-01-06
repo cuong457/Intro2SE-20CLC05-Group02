@@ -46,12 +46,17 @@ body {
     padding-top: 1rem;
 }
 .v-nav-item {
+    display: flex!important;
     list-style-type: none;
     opacity: 50%;
     padding-bottom: 0.5rem;
     transition: transform 0.3s ease-in-out, opacity 0.3s;
 }
-.v-nav-item.active {
+.vertical-navbar {
+    padding-top: 20px;
+    padding-left: 50px;
+}
+.v-nav-active {
     opacity: 100%;
 }
 .v-nav-item:hover {
@@ -199,14 +204,18 @@ body {
 .text-thin {
     font-weight: 500;
 }
-
+.search-box {
+    border-top-left-radius: 0.5rem!important;
+    border-bottom-left-radius: 0.5rem!important;
+    border-right: 0!important;
+}
 .admin-content {
     /* Is the same as navbar size */
     padding-left: 39vh; 
     position: absolute;
     top:120px;
     left:0;
-    width: 100vw;
+    width: 98vw;
 }
 .admin-sm-card {
     position: relative;
@@ -216,6 +225,10 @@ body {
     margin-right: 1rem;
     box-shadow: 0px 2px 6px 0px #888888;
     padding: 5px;
+    border-radius: 1rem;
+}
+.border-radius-smooth {
+    border-radius: 1rem!important;
 }
 .card-icon {
     border-radius: 50%;
@@ -280,6 +293,16 @@ body {
 .admin-card-back {
     transform: rotateY(180deg);
     padding: 10px;
+}
+.admin-card-front-body {
+    padding: 20px;
+}
+.food-body {
+    background-color: transparent!important;
+}
+.food-card {
+    border: 1px solid black!important;
+    border-radius: 1rem!important;
 }
 .ban-icon {
     width: 100px;

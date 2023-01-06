@@ -4,6 +4,7 @@ import $ from 'jquery'
 import RatingStarGenerator from '../RatingStars/RatingStars'
 import qiqifallen from '../../assets/images/others/qiqi-fallen.png'
 import ban_icon from '../../assets/images/icons/ban.png'
+import user2 from '../../assets/images/user/avt/004.jpeg'
 
 function SellerList(props) {
     const sellers = props.seller_list;
@@ -49,12 +50,16 @@ function SellerList(props) {
             <div className="col-12 col-sm-6 col-xxl-4 pb-4 d-flex justify-content-center" key={index}>
                 <div className="card admin-card" id={seller.usn}>
                     <div className="admin-card-front">
-                        <img src={seller.img} className="card-img-top p-3" alt='card'/>
-                        <div className="card-body">
+                        {/* <img src={require(`../../${seller.photo}`)} className="card-img-top p-3" alt='card'/> */}
+                        <img src={user2} className="card-img-top p-3" alt='card'/>
+                        <div className="admin-card-front-body">
                             <p className="me-title text-lightblue">{seller.name}</p>
-                            <RatingStarGenerator star={seller.rating}/>
+                            {seller.rating ? <RatingStarGenerator star={seller.rating}/> : '' }
+                            {seller.type === 0 ? <p className="sm-title">Created at: <span className="rtab-money">{(new Date(seller.createdAt)).toDateString()}</span></p> : ''}
+                            {seller.type === 0 ? <p className="sm-title">Total spent: <span className="rtab-money">$5.324</span></p> : ''}
                             <p className="review-count">{seller.rvcount}</p>
-                            <p className="sm-title">Total sales <span className="rtab-money">${seller.total_sales}</span></p>
+                            {seller.type === -1 ? <p className="sm-title">Total sales <span className="rtab-money">${seller.total_sales}</span></p> : ''}
+                            
                             <div className="text-center">
                                 <button 
                                     onClick={() => moveToBan(seller)}
@@ -120,7 +125,7 @@ function SellerList(props) {
 
     if(sellerlist.length === 0) {
         sellerlist.push(
-            <div className='d-flex justify-content-center align-items-center'>
+            <div className='d-flex justify-content-center align-items-center' key='qiqi'>
                 <img src={qiqifallen} className='icon-qiqi' alt='qiqi'></img>
             </div>
         )

@@ -296,7 +296,7 @@ function SellerCenter() {
                         </div>
                     </div>
                 </div>
-                <div className='col-12 col-xl-9 bg-white ps-0'>
+                <div className='col-12 col-xl-9 bg-white ps-0 border-radius-smooth'>
                     <div className="row p-5 pt-4 pb-0">
                         <div className='col-12 col-xl-5 d-flex align-items-center'>
                             <p className='formal-font text-xlg text-bold'>SELLER LIST</p>

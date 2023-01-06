@@ -1,9 +1,10 @@
 
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import $ from 'jquery'
 
 import avt from '../../assets/images/user/avt/002.png'
+import logo from '../../assets/images/logo/SunriseFoods-logo.png'
 
 import AdminNotify from './AdminNotify'
 
@@ -31,6 +32,25 @@ function AdminNavbar() {
         $(id).addClass('active');
     }
 
+    // Onload select title to active
+    React.useEffect (
+        () => {
+            let cur_link = window.location.href;
+            let cur_page_key = cur_link.slice(cur_link.indexOf('/admin') + 7, cur_link.length).split('/')[0]
+            const v_navlink = document.querySelectorAll('.v-nav-item');
+            if (v_navlink) {
+                v_navlink.forEach(nav_item => {
+                    if (nav_item.id.indexOf(cur_page_key) !== -1) {
+                        nav_item.classList.add('v-nav-active');
+                    }
+                    else {
+                        nav_item.classList.remove('v-nav-active');
+                    }
+                })
+            }
+        }
+    )
+
     return (
         <div className="admin-wrapper">
             <div className="v-navbar-field">
@@ -42,13 +62,14 @@ function AdminNavbar() {
                         <li className='v-nav-title'>
                             <p className='sm-title text-white'>Menu</p>
                         </li>
-                        <li className='v-nav-item active' id='dashboard-title'>
+                        <li className='v-nav-item' id='dashboard-title'>
                             <Link 
                                 to='/admin/dashboard' 
                                 className='erase-underline text-white'
                                 onClick={() => clickTitle('#dashboard-title', 'Dashboard')}
                             >
                                 <i className="fa-solid fa-circle-dollar-to-slot pe-3"></i>
+                           
                                 Dashboard
                             </Link>
                         </li>
