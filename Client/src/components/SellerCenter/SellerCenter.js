@@ -257,6 +257,25 @@ function SellerCenter() {
             $('.cancel-btn-searchbox').addClass('undisplay');
         }
     }
+    // Order 1-increase 0-decrease
+    const sortEngine = () => {
+
+    }
+    const handleSort = (id) => {
+        let sort_btn_list = document.querySelectorAll(".sort-btn");
+        if(sort_btn_list) {
+            sort_btn_list.forEach(btn => {
+                if(btn.id === id) {
+                    if(btn.classList.contains('sort-btn-active')) {
+                        btn.classList.remove('sort-btn-active');
+                    }
+                    else {
+                        btn.classList.add('sort-btn-active');
+                    }
+                }
+            })
+        }
+    }
     return (
         <div className='admin-content pt-2'>
             <div className='row'>
@@ -292,6 +311,41 @@ function SellerCenter() {
                                     )}
                                 </p>
                                 {renderPercent('sales')}
+                            </div>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col'>
+                            <div className='filter-card'>
+                                <p className='formal-font text-me text-bold pb-1'>
+                                <i className="fa-solid fa-arrow-down-a-z"></i>
+                                    &nbsp;&nbsp;Sort by
+                                </p>
+                                <hr className='mt-2'/>
+                                <button 
+                                    type='button' 
+                                    className='sort-btn m-2'
+                                    id='seller-name-sort'
+                                    onClick={() => handleSort('seller-name-sort')}
+                                >
+                                    Name
+                                </button>
+                                <button 
+                                    type='button' 
+                                    className='sort-btn m-2'
+                                    id='seller-sales-sort'
+                                    onClick={() => handleSort('seller-sales-sort')}
+                                >
+                                    Total sales
+                                </button>
+                                <button 
+                                    type='button' 
+                                    className='sort-btn m-2'
+                                    id='seller-des-sort'
+                                    onClick={() => handleSort('seller-des-sort')}
+                                >
+                                    Desending Order
+                                </button>
                             </div>
                         </div>
                     </div>
