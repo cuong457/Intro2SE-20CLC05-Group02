@@ -54,6 +54,7 @@ body {
 }
 .vertical-navbar {
     padding-top: 20px;
+    padding-left: 10px;
 }
 .v-nav-active {
     opacity: 100%;

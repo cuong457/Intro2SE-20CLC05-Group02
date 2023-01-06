@@ -44,6 +44,7 @@ const thisIsCallFromAPI = [
     {img: seller6, name: "La Friggitoria", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'lafriggitoria'},
     {img: seller7, name: "Goichi", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'goichi'},
     {img: seller8, name: "Mr.G's Gyro Shop", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'gyroshop'},
+    
     {img: seller9, name: "Hawaii", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'hawaii'},
     {img: seller10, name: "Ichi Sando", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'ichisando'},
     {img: seller11, name: "Longboard", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'longboard'},

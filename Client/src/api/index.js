@@ -44,6 +44,8 @@ export const fetchProductDetail = (slug) => {
     });
 };
 
+// =======================================================
+
 export const fetchUsers = () => {
   return axios.get(`${URL}/api/v1/users`);
   // .then(function (response) {
@@ -51,6 +53,19 @@ export const fetchUsers = () => {
   // })
   // .catch(console.error());
 };
+
+export const fetchSortUser = (options) => {
+  let sortBy = '';
+  for (const key in options) {
+    if (Object.hasOwnProperty.call(options, key)) {
+      if (options[key]) {
+        sortBy += sortBy.length === 0 ? key : `-${key}`;
+      }
+    }
+  }
+
+  return axios.get(`${URL}/api/v1/users/?sort=${sortBy}`);
+}
 
 export const createUser = function (data) {
   axios
@@ -63,7 +78,15 @@ export const createUser = function (data) {
     .catch(console.error());
 };
 
-// ===============================================
+export const banUser = function(user) {
+    return axios.patch(`${URL}/api/v1/admin/ban/${user._id}`);
+}
+
+export const unbanUser = function(user) {
+    return axios.patch(`${URL}/api/v1/admin/unban/${user._id}`);
+}
+
+// =======================================================
 
 export const fetchCart = function (userId) {
   console.log(userId);

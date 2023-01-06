@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import $ from 'jquery'
 
 import PostList from '../PostList/PostList'
@@ -12,6 +12,8 @@ import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
 
 import rightArrow from '../../assets/images/icons/right.png'
 import leftArrow from '../../assets/images/icons/left.png'
+
+import { fetchProducts } from '../../api'
 
 const LIST_LENGTH = 6;
 const MAX_PAGENUMBER_SHOW = 3;
@@ -79,32 +81,53 @@ let posts = [
 ];
 
 function Posts() {
-    const [current_post, setCurrentPost] = useState([
-        {img: foodThum1, name: "Bún Đậu Mắm Tôm chuẩn ngon", link: "/item", rating: 4, rvcount: 12.567, price: 89, brand: "Friggitoria"},
-        {img: foodThum2, name: "Cơm Tấm Hoàng Diệu 2", link: "/item", rating: 3.5, rvcount: 8.291, price: 25, brand: "Flavour of India"},
-        {img: foodThum3, name: "Cá Viên Chiên Makima", link: "/item", rating: 5, rvcount: 163.523, price: 999, brand: "Sunrise Foods"},
-        {img: foodThum4, name: "Nem Cuốn Hàn Xẻng", link: "/item", rating: 3.5, rvcount: 1.286, price: 56, brand: "Sunrise Foods"},
-        {img: foodThum6, name: "Thập Cẩm Chả Biết Tên", link: "/item", rating: 1, rvcount: 15.927, price: 102, brand: "Panzer Hot"},
-        {img: foodThum2, name: "Cơm Chay Chỉ Thiên", link: "/item", rating: 3, rvcount: 26.546, price: 89, brand: "Sunrise Foods"}
-    ]);
-    const [lastpost_index, setLastPostIndex] = useState(current_post.length - 1);
-    const [page_count, setPageCount] = useState(posts.length % LIST_LENGTH !== 0 ? Math.floor(posts.length / LIST_LENGTH) + 1 : Math.floor(posts.length / LIST_LENGTH));
+    const [datapage_callAPI, setInitData] = useState([]);
+    const [posts, setPosts] = useState([]);
+
+    let [current_post, setCurrentPosts]= useState([]);
+    const [lastpost_index, setLastPostIndex] = useState(1);
+    const [page_count, setPageCount] = useState(1);
+    
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await fetchProducts();
+
+                const prods = response.data;
+
+                setInitData(prods);
+                setPosts(prods);
+
+                const current_posts = prods.slice(0, LIST_LENGTH);
+                setCurrentPosts(current_posts);
+                setLastPostIndex(current_posts.length - 1);
+                setPageCount(prods.length % LIST_LENGTH !== 0 ? Math.floor(prods.length / LIST_LENGTH) + 1 : Math.floor(prods.length / LIST_LENGTH))
+
+                // setCurrentPost();
+            } catch (err) {
+                
+            }
+        };
+
+        getData();
+    }, []);
+    
     const handleChangePost = (type) => {
         if(type === 'all') {
-            posts = datapage_callAPI;
+            setPosts(datapage_callAPI);
             let newPageCount = posts.length % LIST_LENGTH !== 0 ? Math.floor(posts.length / LIST_LENGTH) + 1 : Math.floor(posts.length / LIST_LENGTH);
             setPageCount(newPageCount)
             changepagenumber(1, newPageCount);
         }
         else if (type === '1star') {
-            posts = datapage_callAPI;
             let list_1star = [];
-            posts.map(post => {
+            datapage_callAPI.forEach(post => {
                 if(post.rating === 1)
                     list_1star.push(post);
             })
-            posts = list_1star;
-            let newPageCount = posts.length % LIST_LENGTH !== 0 ? Math.floor(posts.length / LIST_LENGTH) + 1 : Math.floor(posts.length / LIST_LENGTH);
+            console.log("vcl", list_1star);
+            setPosts(list_1star);
+            let newPageCount = list_1star.length % LIST_LENGTH !== 0 ? Math.floor(list_1star.length / LIST_LENGTH) + 1 : Math.floor(list_1star.length / LIST_LENGTH);
             setPageCount(newPageCount)
             changepagenumber(1, newPageCount);
         }
@@ -131,12 +154,13 @@ function Posts() {
             for(; start < end; start++) {
                 newPostList.push(posts[start]);
             }
+
             setLastPostIndex(--end);
-            setCurrentPost(newPostList);
+            setCurrentPosts(newPostList);
         }
         if(total === 0) {
             setLastPostIndex(0);
-            setCurrentPost([]);
+            setCurrentPosts([]);
         }
     }
     const createPageNumber = (total) => {

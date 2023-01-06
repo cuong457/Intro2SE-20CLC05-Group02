@@ -6,13 +6,15 @@ import qiqifallen from '../../assets/images/others/qiqi-fallen.png'
 import ban_icon from '../../assets/images/icons/ban.png'
 import user2 from '../../assets/images/user/avt/004.jpeg'
 
+import { banUser, unbanUser } from '../../api'
+import React from 'react'
+
 function SellerList(props) {
     const sellers = props.seller_list;
     const moveToBan = (target) => {
-        if ($('#' + target.usn).css( "transform") === 'none'){
+        if ($('#' + target.usn).css("transform") === 'none'){
             $('#' + target.usn).css("transform","rotateY(180deg)");
         }
-        // props.banSeller(target.usn);
     }
     const cancelBanSeller = (target) => {
         if ($('#' + target.usn).css( "transform") !== 'none'){
@@ -38,13 +40,26 @@ function SellerList(props) {
             }
             // Call API to set status of target to STATUS.BAN
             // and time till unban or never
+            banUser(target);
         }
     }
     const handleUnban = (target) => {
         $('#unban-btn' + target.usn).addClass('undisplay');
         $('#ban-btn' + target.usn).removeClass('undisplay');
         // Call API to set status of target to STATUS.NORMAL
+        unbanUser(target);
     }
+    React.useEffect(() => {
+        sellers.map((seller, index) => {
+            if(seller.status === -1) {
+                $('#ban-btn' + seller.usn).addClass('undisplay');
+            }
+            else {
+                $('#unban-btn' + seller.usn).addClass('undisplay');
+            }
+        })
+    })
+
     let sellerlist = sellers.map((seller, index) => {
         return  (
             <div className="col-12 col-sm-6 col-xxl-4 pb-4 d-flex justify-content-center" key={index}>
@@ -70,7 +85,7 @@ function SellerList(props) {
                                 </button>
                                 <button
                                      onClick={() => handleUnban(seller)}
-                                     className="btn btn-outline-dark rtab-detail-button w-75 undisplay"
+                                     className="btn btn-outline-dark rtab-detail-button w-75"
                                      id={'unban-btn' + seller.usn}
                                 >
                                     Unban
