@@ -172,11 +172,14 @@ export default class App extends React.Component {
                             <Route 
                                 path="/seller-register" 
                                 element={
-                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type !== TYPE.SELLER ? (
                                         <SellerRegister setAccount={this.setUserAccount}/>
                                     ) : (
-                                        <LoginPage setAccount={this.setUserAccount}
-                                    />
+                                        <>
+                                            <HeaderUser logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerPage/>
+                                            <Footer/>
+                                        </>
                                     )
                                     
                                 }
@@ -231,9 +234,7 @@ export default class App extends React.Component {
                                         </>
                                     ) : (
                                         <>
-                                            <LoginPage 
-                                        setAccount={this.setUserAccount}
-                                    />
+                                            <LoginPage setAccount={this.setUserAccount}/>
                                         </>
                                     )
                                     
