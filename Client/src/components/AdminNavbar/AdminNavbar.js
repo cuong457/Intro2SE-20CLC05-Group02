@@ -134,7 +134,7 @@ function AdminNavbar() {
             </div>
             <div className="v-navbar-field-instead">
                 <div className='admin-logo'>
-                    <p className='logo-font text-white'>SFs</p>
+                    <p className='logo-font text-white'>SFS</p>
                 </div>
                 <div className='admin-nav-list'>
                     <ul className='vertical-navbar ps-2 pe-2'>

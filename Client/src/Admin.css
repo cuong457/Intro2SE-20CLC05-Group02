@@ -54,7 +54,6 @@ body {
 }
 .vertical-navbar {
     padding-top: 20px;
-    padding-left: 50px;
 }
 .v-nav-active {
     opacity: 100%;
@@ -209,6 +208,10 @@ body {
     border-bottom-left-radius: 0.5rem!important;
     border-right: 0!important;
 }
+.admin-content-left-side {
+    padding-left: 5px;
+    padding-right: 10px;
+}
 .admin-content {
     /* Is the same as navbar size */
     padding-left: 39vh; 
@@ -226,6 +229,34 @@ body {
     box-shadow: 0px 2px 6px 0px #888888;
     padding: 5px;
     border-radius: 1rem;
+}
+.filter-card {
+    background-color: white;
+    border-radius: 1rem;
+    width: 100%;
+    padding: 15px;
+    box-shadow: 0px 2px 6px 0px #888888;
+}
+.sort-btn {
+    background-color: rgb(205, 205, 205);
+    border-radius: 1rem;
+    border: 0;
+    font-size: small;
+    font-family: Ubuntu-Regular;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0px 1px 2px 0px #888888;
+    transition: transform 0.4s ease-in-out, background-color 0.3s ease-in-out, color 0.2s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+.sort-btn:hover {
+    background-color: #4B38B3;
+    color: white;
+    box-shadow: 0px 2px 6px 0px #888888;
+    transform: scale(1.2);
+}
+.sort-btn-active {
+    background-color: red;
+    color: white;
 }
 .border-radius-smooth {
     border-radius: 1rem!important;
@@ -403,6 +434,10 @@ background-color: #a8bbbf;
     .post-square-num {
         display: none;
     }
+    .admin-content-left-side {
+        padding-left: 0;
+        padding-right: 0;
+    } 
 }
 @media (max-width: 860px) {
     .v-navbar-field-instead {
@@ -416,6 +451,18 @@ background-color: #a8bbbf;
     }
     .admin-content {
         padding-left: 10vh;
+    }
+    .v-nav-title {
+        display: none;
+    }
+    .v-nav-item {
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+    .v-nav-item:hover {
+        transform: scale(1.1);
     }
 }
 @media (max-width: 700px) {

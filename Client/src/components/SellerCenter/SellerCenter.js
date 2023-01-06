@@ -260,7 +260,7 @@ function SellerCenter() {
     return (
         <div className='admin-content pt-2'>
             <div className='row'>
-                <div className='col-12 col-xl-3 ps-0 pe-4'>
+                <div className='col-12 col-xl-3 admin-content-left-side'>
                     <div className='row'>
                         <div className='col-6 col-xl-12 pb-3'>
                             <div className='admin-sm-card'>
