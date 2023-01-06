@@ -9,9 +9,9 @@ function PostList(props) {
     let postlist = posts.map((post, index) => {
         return  (
             <div className="col-6 col-lg-4 pb-3" key={index}>
-                <div className="card card-hover">
+                <div className="card card-hover food-card">
                     <Link to={post.link}><img src={post.img} className="card-img-top p-3" alt='post'/></Link>
-                    <div className="card-body">
+                    <div className="card-body food-body">
                         <Link 
                             to={post.link} 
                             className="erase-underline"

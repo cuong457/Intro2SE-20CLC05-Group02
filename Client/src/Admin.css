@@ -281,6 +281,16 @@ body {
     transform: rotateY(180deg);
     padding: 10px;
 }
+.admin-card-front-body {
+    padding: 20px;
+}
+.food-body {
+    background-color: transparent!important;
+}
+.food-card {
+    border: 1px solid black!important;
+    border-radius: 1rem!important;
+}
 .ban-icon {
     width: 100px;
 }
