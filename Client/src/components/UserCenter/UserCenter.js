@@ -309,7 +309,7 @@ function UserCenter() {
                         <div className='col-6 col-xl-12 pb-3'>
                             <div className='admin-sm-card'>
                                 <p className='text-thin formal-font opacity-75 pt-2 ps-2 pb-1'>
-                                    Sales
+                                    Total spent
                                 </p>
                                 <div className='card-icon yellow-bg'>
                                     <i className="fa-solid fa-dollar-sign fa-lg"></i>
@@ -324,7 +324,7 @@ function UserCenter() {
                         </div>
                     </div>
                 </div>
-                <div className='col-12 col-xl-9 bg-white ps-0'>
+                <div className='col-12 col-xl-9 bg-white ps-0 border-radius-smooth'>
                     <div className="row p-5 pt-4 pb-0">
                         <div className='col-12 col-xl-5 d-flex align-items-center'>
                             <p className='formal-font text-xlg text-bold'>USER LIST</p>

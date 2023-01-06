@@ -170,7 +170,7 @@ function HeaderUser(props) {
                                                 className='text-black emptyBtn text-align-left' 
                                                 onClick={() => clickAdmin()}
                                             >
-                                                <i className="fa-solid fa-right-from-bracket"></i>
+                                                <i className="fa-solid fa-mug-hot"></i>
                                                 &nbsp; Trang Admin
                                             </button>
                                         </div>
