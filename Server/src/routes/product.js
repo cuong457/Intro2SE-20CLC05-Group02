@@ -1,13 +1,21 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 const {
   getItems,
   getItemDetail,
-} = require('../app/controllers/ProductController');
+  updateItemQuantity,
+  updateSelectFieldToItem,
+  deleteItem,
+} = require("../app/controllers/ProductController");
 
-router.get('/:slug', getItemDetail);
-router.get('/', getItems);
+const { protect, restrictTo } = require("../app/controllers/UserController");
 
+router
+  .route("/:slug")
+  .get(getItemDetail)
+  .patch([protect, updateItemQuantity])
+  .delete([protect, deleteItem]);
+router.route("/").get(getItems).patch([protect, updateSelectFieldToItem]);
 
 module.exports = router;

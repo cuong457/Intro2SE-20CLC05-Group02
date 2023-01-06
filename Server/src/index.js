@@ -1,10 +1,10 @@
-const app = require('./app');
-const dotenv = require('dotenv');
+const app = require("./app");
+const dotenv = require("dotenv");
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 const port = 5000;
 
-const db = require('./config/db');
+const db = require("./config/db");
 
 // Connect to DB
 db.connect();

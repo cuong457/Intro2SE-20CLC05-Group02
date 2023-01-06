@@ -1,20 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema (
-    {
-        usn: { type: String, required: true },
-        psw: { type: String, required: true },
-        avt: { type: String },
-        status: { type: Number },
-        type: { type: Number },
-        sales: { type: Number },
-        rvcount: { type: Number },
-    },
-    {
-        timestamps: true,
-    },
+const UserSchema = new Schema(
+  {
+    usn: { type: String },
+    psw: { type: String },
+    avt: { type: String },
+    status: { type: Number, default: 1 },
+    type: { type: Number, default: 0 },
+    sales: { type: Number },
+    rvcount: { type: Number },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
