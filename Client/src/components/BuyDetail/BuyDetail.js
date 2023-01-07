@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ItemContent from "../../store/ItemContent";
 import food from "../../assets/images/FoodThumnail/lau.png";
 import momo_icon from "../../assets/images/icons/momo.png";
@@ -7,6 +7,9 @@ import banking_icon from "../../assets/images/icons/debit-card.png";
 import cod_icon from "../../assets/images/icons/cod.png";
 import visa_icon from "../../assets/images/icons/visa.png";
 import React from "react";
+import axios from "axios";
+
+const URL = "http://localhost:5000";
 
 // const items = [
 //   {
@@ -26,21 +29,25 @@ const BuyDetail = function (props) {
   const payment_methods = [
     {
       key: "momo-method",
+      value: "card",
       img: momo_icon,
       label: "Thanh toán Online bằng Momo (Có mã ưu đãi)",
     },
     {
       key: "banking-method",
+      value: "card",
       img: banking_icon,
       label: "Chuyển khoản ngân hàng (Miễn phí phí chuyển)",
     },
     {
       key: "cod-method",
+      value: "cash",
       img: cod_icon,
       label: "Thanh toán khi nhận hàng (COD)",
     },
     {
       key: "visa-method",
+      value: "card",
       img: visa_icon,
       label: "Thanh toán Online bằng Visa, Master, JCB (Miễn phí phí chuyển)",
     },
@@ -48,6 +55,14 @@ const BuyDetail = function (props) {
 
   const cartCtx = useContext(ItemContent);
   const items = cartCtx.items;
+
+  // get information from input
+  const [nameValue, setName] = useState("");
+  const [phoneValue, setPhone] = useState("");
+  const [addressValue, setAddress] = useState("");
+  const [noteValue, setNote] = useState("");
+  const [paymentValue, setPayment] = useState("");
+
   console.log("items from cartCtx");
   console.log(items);
   console.log(cartCtx);
@@ -56,6 +71,7 @@ const BuyDetail = function (props) {
     if (e.target.checked) {
       methods.map((method) => {
         if (method.key !== targetkey) {
+          setPayment(method.value);
           return $("#" + method.key).prop("checked", false);
         }
         return "";
@@ -78,7 +94,7 @@ const BuyDetail = function (props) {
             <img src={method.img} className="itdetail-icon" alt="icon" />
           </div>
           <div className="col-auto d-flex align-items-center">
-            <label className="form-check-label" htmlFor="momo-method">
+            <label className="form-check-label" htmlFor={method.key}>
               {method.label}
             </label>
           </div>
@@ -124,6 +140,34 @@ const BuyDetail = function (props) {
     });
     return <>{item_list}</>;
   }
+  async function clickOrderBtn(e) {
+    if (
+      !nameValue ||
+      nameValue.trim().length === 0 ||
+      !phoneValue ||
+      phoneValue.trim().length === 0 ||
+      !addressValue ||
+      addressValue.trim().length === 0 ||
+      !noteValue ||
+      noteValue.trim().length === 0
+    ) {
+      alert("Vui lòng nhập đầy đủ thông tin mua hàng");
+      return;
+    }
+
+    const response = await axios.post(`${URL}/api/v1/orders`, {
+      name: nameValue,
+      phone: phoneValue,
+      address: addressValue,
+      note: noteValue,
+      payment: paymentValue,
+      products: items,
+    });
+
+    console.log(response);
+    alert("successfully");
+  }
+
   return (
     <div className="container pt-5">
       <div className="row pb-4">
@@ -140,6 +184,9 @@ const BuyDetail = function (props) {
                     type="text"
                     className="form-control"
                     placeholder="Họ và tên"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="col-6">
@@ -147,6 +194,9 @@ const BuyDetail = function (props) {
                     type="text"
                     className="form-control"
                     placeholder="Số điện thoại"
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -155,6 +205,9 @@ const BuyDetail = function (props) {
                   type="text"
                   className="form-control"
                   placeholder="Địa chỉ"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
                 />
               </div>
 
@@ -175,6 +228,9 @@ const BuyDetail = function (props) {
                   type="text"
                   className="form-control"
                   placeholder="Lời nhắn cho nhà hàng"
+                  onChange={(e) => {
+                    setNote(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -239,7 +295,10 @@ const BuyDetail = function (props) {
               </div>
               <div className="row p-4 pt-0">
                 <div className="d-flex justify-content-end p-0">
-                  <button className="rtab-buying-button">
+                  <button
+                    onClick={clickOrderBtn}
+                    className="rtab-buying-button"
+                  >
                     <p className="me-title">Đặt hàng</p>
                   </button>
                 </div>

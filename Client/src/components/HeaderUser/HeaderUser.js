@@ -182,13 +182,13 @@ function HeaderUser(props) {
                   </button>
                   <div className="user-dropdown-content">
                     <div className="row p-2 simple-white-btn">
-                      <Link to="" className="erase-underline text-black">
+                      <Link to="/me" className="erase-underline text-black">
                         <i className="fa-solid fa-user"></i>
                         &nbsp; Thông tin cá nhân
                       </Link>
                     </div>
                     <div className="row p-2 simple-white-btn">
-                      <Link to="" className="erase-underline text-black">
+                      <Link to="/orders" className="erase-underline text-black">
                         <i className="fa-sharp fa-solid fa-clock-rotate-left"></i>
                         &nbsp; Lịch sử mua hàng
                       </Link>

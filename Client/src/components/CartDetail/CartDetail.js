@@ -54,7 +54,6 @@ const recommend = [
 
 function CartDetail() {
   const cartCtx = useContext(ItemContent);
-  const isEmptyCart = cartCtx.items.length === 0;
   const [subtotal, set_subtotal] = useState(0);
   const [item_count, set_item_count] = useState(0);
   const [items, set_items] = useState([

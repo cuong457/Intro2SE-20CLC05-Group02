@@ -11,6 +11,19 @@ const signToken = (userId) => {
   });
 };
 
+exports.createJwt = (req, res, next) => {
+  const user = req.body;
+  const token = signToken(user._id);
+
+  res.status(200).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 const createSendToken = (user, req, res, redirect = false) => {
   //   res.header("Access-Control-Allow-Credentials", true);
   // 1) create token
@@ -43,6 +56,75 @@ const createSendToken = (user, req, res, redirect = false) => {
     res.redirect("/");
   }
 };
+
+exports.updateMe = catchAsync(async function (req, res, next) {
+  const { username } = req.body;
+
+  if (!username || username.length === 0) {
+    return next(new AppError(400, "vui lòng nhập username"));
+  }
+
+  // khong co new: true thì trả về đối tượng cũ chưa update
+  const updatedUser = await UserModel.findByIdAndUpdate(
+    req.user._id,
+    { usn: username },
+    {
+      new: true,
+      // chỉ validate các fields được update
+      runValidators: true,
+    }
+  );
+
+  // remove password field from res data
+  updatedUser.psw = undefined;
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
+exports.updatePassword = catchAsync(async function (req, res, next) {
+  const { password, newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    return next(
+      new AppError(400, "new password and confirm password are not the same")
+    );
+  }
+
+  const user = await UserModel.findById(req.user._id);
+  if (!user) {
+    return next(new AppError(400, "Không thấy tài khoản để update"));
+  }
+
+  if (user.psw !== password) {
+    return next(new AppError(400, "Mật khẩu hiện tại không đúng"));
+  }
+
+  // khong co new: true thì trả về đối tượng cũ chưa update
+  const updatedUser = await UserModel.findByIdAndUpdate(
+    req.user._id,
+    { psw: newPassword },
+    {
+      new: true,
+      // chỉ validate các fields được update
+      runValidators: true,
+    }
+  );
+
+  // remove password field from res data
+  updatedUser.psw = undefined;
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser,
+    },
+  });
+});
 
 exports.getUsers = catchAsync(async function (req, res, next) {
   try {
@@ -94,6 +176,21 @@ exports.createUser = catchAsync(async function (req, res, next) {
   console.log("send token");
   // 4) send back to client
   createSendToken(storedUser, req, res);
+});
+
+exports.signOut = catchAsync(async (req, res, next) => {
+  const cookieOptions = {
+    // expires in 10 mins
+    expires: new Date(Date.now() + 10 * 60 * 1000),
+    httpOnly: true,
+  };
+
+  res.cookie("jwt", "loggedout", cookieOptions);
+
+  res.status(200).json({
+    status: "success",
+    message: "logout successfully",
+  });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

@@ -58,6 +58,18 @@ export const createUser = function (data) {
     .then((response) => {
       console.log(response);
       CookieService.set("jwt", response.data.token, { path: "/" });
+      window.location.href = "#success";
+    })
+    .catch(console.error());
+};
+
+// login
+export const loginWithJwt = function (data) {
+  axios
+    .post(`${URL}/api/v1/users/create-jwt`, data)
+    .then((response) => {
+      console.log(response);
+      CookieService.set("jwt", response.data.token, { path: "/" });
       //   window.location.href = "#success";
     })
     .catch(console.error());

@@ -53,7 +53,7 @@ const cartReducer = (prevState, action) => {
   } else if (action.type === "SET") {
     const items = action.items;
     const totalAmount = items.reduce((accum, item) => {
-      return accum + item.price;
+      return accum + item.price * item.quantity;
     }, 0);
     console.log("total amount", totalAmount);
 
