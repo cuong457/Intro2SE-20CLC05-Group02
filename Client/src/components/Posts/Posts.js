@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import $ from 'jquery'
+import $, { data } from 'jquery'
 
 import PostList from '../PostList/PostList'
 
@@ -82,7 +82,7 @@ let posts = [
 
 function Posts() {
     const [datapage_callAPI, setInitData] = useState([]);
-    const [posts, setPosts] = useState([]);
+    let [posts, setPosts] = useState([]);
 
     let [current_post, setCurrentPosts]= useState([]);
     const [lastpost_index, setLastPostIndex] = useState(1);
@@ -114,6 +114,7 @@ function Posts() {
     
     const handleChangePost = (type) => {
         if(type === 'all') {
+            posts=datapage_callAPI;
             setPosts(datapage_callAPI);
             let newPageCount = posts.length % LIST_LENGTH !== 0 ? Math.floor(posts.length / LIST_LENGTH) + 1 : Math.floor(posts.length / LIST_LENGTH);
             setPageCount(newPageCount)
@@ -126,6 +127,7 @@ function Posts() {
                     list_1star.push(post);
             })
             console.log("vcl", list_1star);
+            posts=list_1star;
             setPosts(list_1star);
             let newPageCount = list_1star.length % LIST_LENGTH !== 0 ? Math.floor(list_1star.length / LIST_LENGTH) + 1 : Math.floor(list_1star.length / LIST_LENGTH);
             setPageCount(newPageCount)

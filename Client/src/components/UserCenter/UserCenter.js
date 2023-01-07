@@ -137,7 +137,7 @@ function renderPercent (type) {
 
 function UserCenter() {
     const [initData, setInitData] = useState([]);
-    const [users, setUsers] = useState([]);
+    let [users, setUsers] = useState([]);
 
     const [current_user, setCurrentUser] = useState([]);
     const [lastuser_index, setLastUserIndex] = useState(0);
@@ -335,7 +335,7 @@ function UserCenter() {
             })
 
             const result = await sortEngine(option);
-            console.log(result);
+            users=result;
             setUsers(result);
 
             let newPageCount = users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH);
