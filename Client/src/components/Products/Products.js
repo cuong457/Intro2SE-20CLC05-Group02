@@ -54,6 +54,7 @@ function Products (props) {
 
     useEffect(() => {
         const getData = async () => {
+            
             const foods_data = await fetchProducts();
             const data = foods_data.data;
             

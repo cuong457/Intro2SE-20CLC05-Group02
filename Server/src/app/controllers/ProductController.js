@@ -5,7 +5,13 @@ const CartModel = require("../models/Cart");
 
 exports.getItems = async function (req, res, next) {
   try {
-    const product = await ProductModel.find({});
+    const options = {};
+
+    if (req.query.name) {
+      options["name"] = req.query.name;
+    }
+
+    const product = await ProductModel.find(options);
     res.status(200).json(product);
   } catch (err) {
     res.status(500).json({ error: err });

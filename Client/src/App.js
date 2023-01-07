@@ -57,8 +57,7 @@ export default class App extends React.Component {
         keySearch: ''
     }
     callbackSetKeySearch = (k) => {
-        this.setState({keySearch: k});
-        console.log("Key: " + k);
+        this.setState((prevState) => ({...prevState, keySearch: k }));
     }
     setUserAccount = (id, usn, psw, status, type) => {
         if (status === STATUS.NORMAL) {
@@ -72,7 +71,7 @@ export default class App extends React.Component {
         this.setState({user_account: {usn: "", psw: "", status: STATUS.ANONYOUS, type: TYPE.NORMAL_USER}})
     }
 
-    render() {
+    render() {        
         return (
             <React.Fragment>
                 <BrowserRouter>

@@ -18,8 +18,11 @@ export const GetRandom = (arr, n) => {
   return result;
 };
 
-export const fetchProducts = () => {
-  return axios.get(`${URL}/api/v1/products`);
+export const fetchProducts = (options = {}) => {
+  //const query = options ? `?name=${options}` : '';
+  const query = '';
+
+  return axios.get(`${URL}/api/v1/products${query}`);
 };
 
 export const fetchRecommend = async () => {
