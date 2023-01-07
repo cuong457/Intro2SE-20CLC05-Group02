@@ -228,7 +228,7 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import SellerStore from "../SellerStore/SellerStore";
-import { fetchProducts } from "../../api";
+import { fetchProducts, deteteProduct } from "../../api";
 import { Link } from "react-router-dom";
 
 import rightArrow from "../../assets/images/icons/right.png";
@@ -277,6 +277,32 @@ const SellerPage = () => {
 
     getData();
   }, []);
+  const callbackDeleteFood = (id) => {
+    let newFoods = [];
+    datapage_callAPI.forEach((food) => {
+      if (food._id !== id) {
+        newFoods.push(food);
+      } else {
+        // CALL API TO DELETE FOOD HERE
+        deteteProduct(id)
+          .then((response) => {
+            console.log(response);
+            alert("delele successfully");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+    foods = newFoods;
+    setDatapageCallAPI(newFoods);
+    let newPageCount =
+      newFoods.length % 9 !== 0
+        ? Math.floor(newFoods.length / 9) + 1
+        : Math.floor(newFoods.length / 9);
+    setPageCount(newPageCount);
+    changepagenumber(1, newPageCount);
+  };
   const changepagenumber = (index, total) => {
     if (index > 0 && index <= total) {
       let newFoodList = [];
@@ -360,6 +386,7 @@ const SellerPage = () => {
       return <></>;
     }
   };
+
   return (
     <div class="bg-white">
       <div class="container py-5">
@@ -449,7 +476,10 @@ const SellerPage = () => {
               {/* Hiện danh sách món ăn của seller */}
               <div class="card-body">
                 <div class="row">
-                  <SellerStore foods={current_food} />
+                  <SellerStore
+                    foods={current_food}
+                    callbackDeleteMethod={callbackDeleteFood}
+                  />
                 </div>
               </div>
               {/* Thanh đổi trang */}

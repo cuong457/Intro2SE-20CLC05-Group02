@@ -48,7 +48,13 @@ exports.resizeUploadImages = catchAsync(async (req, res, next) => {
 
 exports.getItems = async function (req, res, next) {
   try {
-    const product = await ProductModel.find({});
+    const options = {};
+
+    if (req.query.name) {
+      options["name"] = req.query.name;
+    }
+
+    const product = await ProductModel.find(options);
     res.status(200).json(product);
   } catch (err) {
     res.status(500).json({ error: err });
@@ -179,3 +185,15 @@ exports.createNewProduct = catchAsync(async (req, res, next) => {
 });
 
 // cart
+
+exports.deleteProduct = catchAsync(async (req, res, next) => {
+  const prod = await ProductModel.findByIdAndDelete(req.params.id);
+
+  if (!prod) {
+    return next(new AppError(400, "cannot find product"));
+  }
+
+  res.status(200).json({
+    status: "success",
+  });
+});

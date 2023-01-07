@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import $ from 'jquery'
 
 import SellerList from '../SellerList/SellerList'
@@ -24,6 +24,7 @@ import seller16 from '../../assets/images/logo/vinny.png'
 import rightArrow from '../../assets/images/icons/right.png'
 import leftArrow from '../../assets/images/icons/left.png'
 
+import { fetchUsers, fetchSortUser } from '../../api'
 
 const seller_detail = [
     {time: '4/9/2022', sellers: 1500, sales: 3000},
@@ -73,6 +74,18 @@ let sellers = [
     {img: seller15, name: "Shokudo", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'shokudo'},
     {img: seller16, name: "Vinny", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'vinny'}
 ];
+
+const TYPE = {
+    NORMAL_USER: 0,
+    ADMIN: 1,
+    SELLER: -1
+}
+
+const option = {
+    name: false, 
+    time: false,
+    des: false,
+};
 
 function convertSellersToString(number_of_seller) {
     if(number_of_seller / 1000 > 1) {
@@ -124,17 +137,45 @@ function renderPercent (type) {
 }
 
 function SellerCenter() {
-    const [current_seller, setCurrentSeller] = useState([
-        {img: seller1, name: "Sunrise Foods", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'sunrisefoods'},
-        {img: seller2, name: "Assi Korean Food", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'assikoreanfood'},
-        {img: seller3, name: "Burger Zone", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'burgerzone'},
-        {img: seller4, name: "Caravansekai", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'caravansekai'},
-        {img: seller5, name: "Flavor of India", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'flavorofindia'},
-        {img: seller6, name: "La Friggitoria", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'lafriggitoria'}
-    ]);
+    const [thisIsCallFromAPI, setInitData] = useState([]);
+    let [sellers, setSellers] = useState([]);
+
+    const [current_seller, setCurrentSeller] = useState([]);
     const [lastseller_index, setLastSellerIndex] = useState(current_seller.length - 1);
     const [page_count, setPageCount] = useState(sellers.length % LIST_LENGTH !== 0 ? Math.floor(sellers.length / LIST_LENGTH) + 1 : Math.floor(sellers.length / LIST_LENGTH));
     
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const users = await fetchUsers();
+
+                const array = [];
+                users.data.forEach(element => {
+                    if (element["type"] === TYPE.SELLER) {
+                        element["key"] = element._id;
+                        array.push(element);
+                    }
+                });
+         
+                let current = [];
+                for (let index = 0; index < array.length && index < 6; index++) {
+                    current.push(array[index]);
+                }
+                
+                setSellers(array);
+                setInitData(array);
+                setCurrentSeller(current);
+
+                setPageCount(array.length % LIST_LENGTH !== 0 ? Math.floor(array.length / LIST_LENGTH) + 1 : Math.floor(array.length / LIST_LENGTH));
+                setLastSellerIndex(current.length - 1);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        getData()
+    }, []);
+
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -259,22 +300,50 @@ function SellerCenter() {
         }
     }
     // Order 1-increase 0-decrease
-    const sortEngine = () => {
+    const sortEngine = async () => {
+        try {
+            const response = await fetchSortUser(option);
 
+            return response.data;
+        } catch (err) {
+            console.log(err);
+        }
     }
-    const handleSort = (id) => {
+    const handleSort = async (id) => {
         let sort_btn_list = document.querySelectorAll(".sort-btn");
         if(sort_btn_list) {
             sort_btn_list.forEach(btn => {
                 if(btn.id === id) {
                     if(btn.classList.contains('sort-btn-active')) {
                         btn.classList.remove('sort-btn-active');
+
+                        const subOne = id.substr(id.indexOf('-') + 1);
+                        const subTwo = subOne.substr(0, subOne.indexOf('-'))
+                        option[subTwo] = false
                     }
                     else {
                         btn.classList.add('sort-btn-active');
+
+                        const subOne = id.substr(id.indexOf('-') + 1);
+                        const subTwo = subOne.substr(0, subOne.indexOf('-'))
+                        option[subTwo] = true;
                     }
                 }
             })
+
+            const raw_data = await sortEngine(option);
+            const result = []
+            raw_data.forEach((element) => {
+                if (element["type"] === TYPE.SELLER) {
+                    result.push(element);
+                }
+            });
+            sellers=result;
+            setSellers(result);
+
+            let newPageCount = sellers.length % LIST_LENGTH !== 0 ? Math.floor(sellers.length / LIST_LENGTH) + 1 : Math.floor(sellers.length / LIST_LENGTH);
+            setPageCount(newPageCount);
+            changepagenumber(1, newPageCount);
         }
     }
     return (
@@ -327,7 +396,7 @@ function SellerCenter() {
                                     type='button' 
                                     className='sort-btn m-2'
                                     id='seller-name-sort'
-                                    onClick={() => handleSort('seller-name-sort')}
+                                    onClick={async () => await handleSort('seller-name-sort')}
                                 >
                                     Name
                                 </button>
@@ -335,7 +404,7 @@ function SellerCenter() {
                                     type='button' 
                                     className='sort-btn m-2'
                                     id='seller-sales-sort'
-                                    onClick={() => handleSort('seller-sales-sort')}
+                                    onClick={async () => await handleSort('seller-sales-sort')}
                                 >
                                     Total sales
                                 </button>
@@ -343,7 +412,7 @@ function SellerCenter() {
                                     type='button' 
                                     className='sort-btn m-2'
                                     id='seller-des-sort'
-                                    onClick={() => handleSort('seller-des-sort')}
+                                    onClick={async () => await handleSort('seller-des-sort')}
                                 >
                                     Desending Order
                                 </button>

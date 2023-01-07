@@ -1,20 +1,33 @@
 import React from 'react';
+import $ from 'jquery'
 import { useNavigate, Link } from 'react-router-dom';
 
 import NotifyDropdown from './NotifyDropdown'
 
 import sunrise_logo from '../../assets/images/logo/SunriseFoods-logo.png'
 
-function Header() {
+function Header(props) {
     const navigate = useNavigate();
     const searchProcess = () => {
-        navigate("/products");
+        const key = $('#search-box').val().trim();
+        if(key !== '') {
+            props.callbackSetKey(key);
+            navigate("/products");
+        }
     }
 
     const handleKeydown = (event) => {
         if(event.key === 'Enter') {
-            navigate("/products");
+            const key = $('#search-box').val().trim();
+            if(key !== '') {
+                props.callbackSetKey(key);
+                navigate("/products");
+            }
         }
+    }
+    const chooseMenu = (k) => {
+        props.callbackSetKey(k);
+        navigate("/products");
     }
 
     return (
@@ -147,11 +160,11 @@ function Header() {
                                     </button>
                                 </div>
                                 <div className="mt-2" id="hrz-menu">
-                                    <Link to="/products" className="nav-menu-font">Cơm</Link>
-                                    <Link to="/products" className="nav-menu-font">Phở</Link>
-                                    <Link to="/products" className="nav-menu-font">Đồ ăn vặt</Link>
-                                    <Link to="/products" className="nav-menu-font">Trà sữa</Link>
-                                    <Link to="/products" className="nav-menu-font">Bún đậu mắm tôm</Link>
+                                    <button className="emptyBtn nav-menu-font" onClick={() => chooseMenu('Cơm')}>Cơm</button>
+                                    <button className="emptyBtn nav-menu-font" onClick={() => chooseMenu('Phở')}>Phở</button>
+                                    <button className="emptyBtn nav-menu-font" onClick={() => chooseMenu('Đồ ăn vặt')}>Đồ ăn vặt</button>
+                                    <button className="emptyBtn nav-menu-font" onClick={() => chooseMenu('Trà sữa')}>Trà sữa</button>
+                                    <button className="emptyBtn nav-menu-font" onClick={() => chooseMenu('Bún đậu mắm tôm')}>Bún đậu mắm tôm</button>
                                 </div>
                             </div>
                             <div className="col d-flex justify-content-end" id="cart">

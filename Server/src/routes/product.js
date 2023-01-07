@@ -10,9 +10,12 @@ const {
   uploadTourImages,
   resizeUploadImages,
   createNewProduct,
+  deleteProduct,
 } = require("../app/controllers/ProductController");
 
 const { protect, restrictTo } = require("../app/controllers/UserController");
+
+router.delete("/:id/delete", [protect, deleteProduct]);
 
 router
   .route("/:slug")

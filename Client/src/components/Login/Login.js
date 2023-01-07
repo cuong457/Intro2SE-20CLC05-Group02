@@ -4,24 +4,6 @@ import { loginWithJwt, fetchUsers } from "../../api";
 
 import $ from "jquery";
 
-// const STATUS = {
-//     BAN: -1,
-//     NORMAL: 1,
-//     ANONYOUS: 0
-// }
-
-// const TYPE = {
-//     NORMAL_USER: 0,
-//     ADMIN: 1,
-//     SELLER: -1
-// }
-
-// const accounts = [
-//     {usn: "user1", psw: "user123456", status: STATUS.NORMAL, type: TYPE.NORMAL_USER},
-//     {usn: "admin", psw: "admin123456", status: STATUS.NORMAL, type: TYPE.ADMIN},
-//     {usn: "seller", psw: "seller123456", status: STATUS.NORMAL, type: TYPE.SELLER}
-// ];
-
 function Login(props) {
   let navigate = useNavigate();
   const [error_login, setError_login] = useState("");

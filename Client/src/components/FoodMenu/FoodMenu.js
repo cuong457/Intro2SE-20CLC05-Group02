@@ -33,8 +33,8 @@ function FoodMenu(props) {
                                 <Link to={`/item/${food.slug}`} className='thumnail-ref-container'><img src={require(`../../assets/images/FoodThumnail/${food.img.thumbnail}`)} className="w-100 pb-2" alt='thumnail'/></Link>
                             </div>
                             <div className="col-7">
-                                <p className="me-title wrap-text mb-0" id="name-me-title">{food.name}</p>
-                                <p className="sm-title text-indigo mb-0">Thương Hiệu: {food.brand}</p>
+                                <Link to={`/item/${food.slug}`} className="erase-underline text-black me-title wrap-text mb-0" id="name-me-title">{food.name}</Link>
+                                <p to={`/item/${food.slug}`} className="sm-title text-indigo mb-0">Thương Hiệu: {food.brand}</p>
                                 <RatingStarGenerator star={food.rating}/>
                                 <p className="sm-title">1 offer from <span className="rtab-money">{food.price}.000 VNĐ</span></p>
                                 <p className="sm-title mb-0">Tình trạng: <span className="text-green">{food.status}</span></p>

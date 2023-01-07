@@ -2,12 +2,6 @@
 import BrandMenu from '../BrandMenu/BrandMenu'
 import FoodList from '../FoodList/FoodList'
 
-import foodThum1 from '../../assets/images/FoodThumnail/bun.png'
-import foodThum2 from '../../assets/images/FoodThumnail/pho.png'
-import foodThum3 from '../../assets/images/FoodThumnail/doannhanh.png'
-import foodThum4 from '../../assets/images/FoodThumnail/dohan.png'
-import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
-
 import sunrise_logo from '../../assets/images/logo/SunriseFoods-logo.png'
 import flavorofindia_logo from '../../assets/images/logo/FlavourOfIndia-logo.png'
 import panzerhot_logo from '../../assets/images/logo/PanzerHot-logo.png'
@@ -52,7 +46,7 @@ const isMoreRateThan = (a, b) => {
     else return false;
 }
 
-function Products () {
+function Products (props) {
     const [ datapage_callAPI, setDatapageCallAPI ] = useState([]);
     const [ current_food, setCurrenFood ] = useState([]);
     const [ lastfood_index, setLastFoodIndex ] = useState(8);
@@ -60,6 +54,7 @@ function Products () {
 
     useEffect(() => {
         const getData = async () => {
+            
             const foods_data = await fetchProducts();
             const data = foods_data.data;
             

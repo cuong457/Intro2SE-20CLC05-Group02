@@ -18,8 +18,11 @@ export const GetRandom = (arr, n) => {
   return result;
 };
 
-export const fetchProducts = () => {
-  return axios.get(`${URL}/api/v1/products`);
+export const fetchProducts = (options = {}) => {
+  //const query = options ? `?name=${options}` : '';
+  const query = '';
+
+  return axios.get(`${URL}/api/v1/products${query}`);
 };
 
 export const fetchRecommend = async () => {
@@ -43,6 +46,10 @@ export const fetchProductDetail = (slug) => {
       return error;
     });
 };
+
+export const deteteProduct = (id) => {
+  return axios.delete(`${URL}/api/v1/products/${id}/delete`);
+}
 
 // =======================================================
 
@@ -83,7 +90,6 @@ export const loginWithJwt = function (data) {
   axios
     .post(`${URL}/api/v1/users/create-jwt`, data)
     .then((response) => {
-      console.log(response);
       CookieService.set("jwt", response.data.token, { path: "/" });
       //   window.location.href = "#success";
     })
@@ -91,11 +97,15 @@ export const loginWithJwt = function (data) {
 };
 
 export const banUser = function(user) {
-    return axios.patch(`${URL}/api/v1/admin/ban/${user._id}`);
+  return axios.patch(`${URL}/api/v1/admin/ban/${user._id}`);
 }
 
 export const unbanUser = function(user) {
-    return axios.patch(`${URL}/api/v1/admin/unban/${user._id}`);
+  return axios.patch(`${URL}/api/v1/admin/unban/${user._id}`);
+}
+
+export const toSeller = function(_id) {
+  return axios.patch(`${URL}/api/v1/users/${_id}/to-seller`);
 }
 
 // =======================================================

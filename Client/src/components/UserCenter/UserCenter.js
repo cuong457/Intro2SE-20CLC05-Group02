@@ -4,23 +4,6 @@ import $ from 'jquery'
 
 import SellerList from '../SellerList/SellerList'
 
-import user1 from '../../assets/images/user/avt/003.jpeg'
-import user2 from '../../assets/images/user/avt/004.jpeg'
-import user3 from '../../assets/images/user/avt/005.jpeg'
-import user4 from '../../assets/images/user/avt/006.jpeg'
-import user5 from '../../assets/images/user/avt/007.jpeg'
-import user6 from '../../assets/images/user/avt/008.jpeg'
-import user7 from '../../assets/images/user/avt/009.jpeg'
-import user8 from '../../assets/images/user/avt/010.jpeg'
-import user9 from '../../assets/images/logo/hawaii.png'
-import user10 from '../../assets/images/logo/ichisando.png'
-import user11 from '../../assets/images/logo/longboard.png'
-import user12 from '../../assets/images/logo/panadicto.png'
-import user13 from '../../assets/images/logo/PanzerHot-logo.png'
-import user14 from '../../assets/images/logo/quellipizza.png'
-import user15 from '../../assets/images/logo/shokudo.png'
-import user16 from '../../assets/images/logo/vinny.png'
-
 import rightArrow from '../../assets/images/icons/right.png'
 import leftArrow from '../../assets/images/icons/left.png'
 
@@ -35,44 +18,6 @@ const user_detail = [
 
 const LIST_LENGTH = 6;
 const MAX_PAGENUMBER_SHOW = 3;
-
-const thisIsCallFromAPI = [
-    {img: user1, name: "Raiden Shogun", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'sunrisefoods'},
-    {img: user2, name: "Kamisato Ayaka", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'assikoreanfood'},
-    {img: user3, name: "Ganyu", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'burgerzone'},
-    {img: user4, name: "I Dont Know", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'caravansekai'},
-    {img: user5, name: "Lightning Keqing", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'flavorofindia'},
-    {img: user6, name: "Nilou", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'lafriggitoria'},
-    {img: user7, name: "Yae Miko", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'goichi'},
-    {img: user8, name: "Lumine", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'gyroshop'},
-    {img: user9, name: "Hawaii", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'hawaii'},
-    {img: user10, name: "Ichi Sando", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'ichisando'},
-    {img: user11, name: "Longboard", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'longboard'},
-    {img: user12, name: "Pan Adicto", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'panadicto'},
-    {img: user13, name: "Panzer Hot", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'panzerhot'},
-    {img: user14, name: "Quelli Pizza", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'quellipizza'},
-    {img: user15, name: "Shokudo", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'shokudo'},
-    {img: user16, name: "Vinny", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'vinny'}
-];
-
-let users = [
-    {img: user1, name: "Raiden Shogun", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'sunrisefoods'},
-    {img: user2, name: "Kamisato Ayaka", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'assikoreanfood'},
-    {img: user3, name: "Ganyu", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'burgerzone'},
-    {img: user4, name: "I Dont Know", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'caravansekai'},
-    {img: user5, name: "Lightning Keqing", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'flavorofindia'},
-    {img: user6, name: "Nilou", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'lafriggitoria'},
-    {img: user7, name: "Yae Miko", rating: 4, rvcount: 12.567, total_sales: 890, usn: 'goichi'},
-    {img: user8, name: "Lumine", rating: 3.5, rvcount: 8.291, total_sales: 250, usn: 'gyroshop'},
-    {img: user9, name: "Hawaii", rating: 5, rvcount: 163.523, total_sales: 9990, usn: 'hawaii'},
-    {img: user10, name: "Ichi Sando", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'ichisando'},
-    {img: user11, name: "Longboard", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'longboard'},
-    {img: user12, name: "Pan Adicto", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'panadicto'},
-    {img: user13, name: "Panzer Hot", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'panzerhot'},
-    {img: user14, name: "Quelli Pizza", rating: 3.5, rvcount: 1.286, total_sales: 560, usn: 'quellipizza'},
-    {img: user15, name: "Shokudo", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'shokudo'},
-    {img: user16, name: "Vinny", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'vinny'}
-];
 
 const TYPE = {
     NORMAL_USER: 0,
@@ -144,10 +89,10 @@ function UserCenter() {
     const [page_count, setPageCount] = useState(1);
     
     useEffect(() => {
-        const getData = async function() {
+        const getData = async () => {
             try {
                 const users = await fetchUsers();
-                
+
                 const array = [];
                 users.data.forEach(element => {
                     if (element["type"] === TYPE.NORMAL_USER) {
@@ -271,11 +216,13 @@ function UserCenter() {
         if(val !== '') {
             let newCurrentUsers = [];
             for(let i = 0; i < users.length; i++) {
-                if(users[i].name.toLowerCase().search(val) !== -1) {
-                    newCurrentUsers.push(users[i]);
+                if(users[i].name) {
+                    if(users[i].name.toLowerCase().search(val) !== -1) {
+                        newCurrentUsers.push(users[i]);
+                    }
                 }
             }
-            setUsers(newCurrentUsers);
+            users = newCurrentUsers;
             let newPageCount = users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH);
             setPageCount(newPageCount);
             changepagenumber(1, newPageCount);
@@ -310,8 +257,6 @@ function UserCenter() {
             console.log(err);
         }
     }
-
-    
     const handleSort = async (id) => {
         let sort_btn_list = document.querySelectorAll(".sort-btn");
         if(sort_btn_list) {
@@ -334,7 +279,13 @@ function UserCenter() {
                 }
             })
 
-            const result = await sortEngine(option);
+            const raw_data = await sortEngine(option);
+            const result = []
+            raw_data.forEach((element) => {
+                if (element["type"] === TYPE.NORMAL_USER) {
+                    result.push(element);
+                }
+            });
             users=result;
             setUsers(result);
 

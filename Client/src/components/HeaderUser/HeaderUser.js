@@ -1,12 +1,13 @@
 // Import library
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import $ from "jquery";
 // Import component
 import NotifyDropdownUser from "./NotifyDropdownUser";
 // Import image
 import sunrise_logo from "../../assets/images/logo/SunriseFoods-logo.png";
 import avt from "../../assets/images/user/avt/001.jpg";
+import { toSeller } from "../../api";
 
 const onMouseUp = (e) => {
   let avt_dropdown = $(".user-dropdown-content");
@@ -31,13 +32,20 @@ function HeaderUser(props) {
   let sellerActiveCln = "";
 
   const searchProcess = () => {
-    navigate("/products");
+    const key = $('#search-box').val().trim();
+    if(key !== '') {
+      props.callbackSetKey(key);
+      navigate("/products");
+    }
   };
 
   const handleKeydown = (event) => {
-    console.log(props.userAccount.id);
     if (event.key === "Enter") {
-      navigate("/products");
+      const key = $('#search-box').val().trim();
+      if(key !== '') {
+          props.callbackSetKey(key);
+          navigate("/products");
+      }
     }
   };
 
@@ -313,10 +321,23 @@ function HeaderUser(props) {
               <button
                 className="btn btn-primary"
                 onClick={() => {
-                  // CALL API TO SET TO BE SELLER
+                  // console.log(props.userAccount.id);
+                  toSeller(props.userAccount.id);
+                  navigate('/seller');
+
+                  $('#show-seller-register').addClass('undisplay');
                 }}
               >
                 <span className="me-title">REGISTER TO BE SELLER</span>
+              </button>
+              <button 
+                type="button" 
+                className="close-btn-popup"
+                onClick={() => {
+                  $('#show-seller-register').removeClass('active');
+                }}
+              >
+                <i className="fa-regular fa-circle-xmark"></i>
               </button>
             </div>
           </div>

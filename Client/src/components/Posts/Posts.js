@@ -81,7 +81,7 @@ let posts = [
 ];
 
 function Posts() {
-    const [datapage_callAPI, setInitData] = useState([]);
+    let [datapage_callAPI, setInitData] = useState([]);
     let [posts, setPosts] = useState([]);
 
     let [current_post, setCurrentPosts]= useState([]);
