@@ -31,13 +31,20 @@ function HeaderUser(props) {
   let sellerActiveCln = "";
 
   const searchProcess = () => {
-    navigate("/products");
+    const key = $('#search-box').val().trim();
+    if(key !== '') {
+        props.callbackSetKey(key);
+        navigate("/products");
+    }
   };
 
   const handleKeydown = (event) => {
-    console.log(props.userAccount.id);
     if (event.key === "Enter") {
-      navigate("/products");
+      const key = $('#search-box').val().trim();
+      if(key !== '') {
+          props.callbackSetKey(key);
+          navigate("/products");
+      }
     }
   };
 
@@ -314,9 +321,19 @@ function HeaderUser(props) {
                 className="btn btn-primary"
                 onClick={() => {
                   // CALL API TO SET TO BE SELLER
+                  navigate('/');
                 }}
               >
                 <span className="me-title">REGISTER TO BE SELLER</span>
+              </button>
+              <button 
+                type="button" 
+                className="close-btn-popup"
+                onClick={() => {
+                  $('#show-seller-register').removeClass('active');
+                }}
+              >
+                <i className="fa-regular fa-circle-xmark"></i>
               </button>
             </div>
           </div>

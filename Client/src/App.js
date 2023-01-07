@@ -46,194 +46,125 @@ const TYPE = {
 };
 const isSeller = true;
 export default class App extends React.Component {
-  state = {
-    user_account: {
-      _id: "",
-      usn: "",
-      psw: "",
-      status: STATUS.ANONYOUS,
-      type: TYPE.NORMAL_USER,
-    },
-  };
-  setUserAccount = (id, usn, psw, status, type) => {
-    if (status === STATUS.NORMAL) {
-      this.setState({ user_account: { id, usn, psw, status, type } });
-    } else if (status === STATUS.BAN) {
-      // Handle
+    state = {
+        user_account: {
+            _id: "",
+            usn: "",
+            psw: "",
+            status: STATUS.ANONYOUS, 
+            type: TYPE.NORMAL_USER
+        },
+        keySearch: ''
     }
-  };
-  removeUserAccount = () => {
-    this.setState({
-      user_account: {
-        usn: "",
-        psw: "",
-        status: STATUS.ANONYOUS,
-        type: TYPE.NORMAL_USER,
-      },
-    });
-  };
+    callbackSetKeySearch = (k) => {
+        this.setState({keySearch: k});
+        console.log("Key: " + k);
+    }
+    setUserAccount = (id, usn, psw, status, type) => {
+        if (status === STATUS.NORMAL) {
+            this.setState({user_account: {id, usn, psw, status, type}});
+        }
+        else if(status === STATUS.BAN) {
+            // Handle
+        }
+    }
+    removeUserAccount = () => {
+        this.setState({user_account: {usn: "", psw: "", status: STATUS.ANONYOUS, type: TYPE.NORMAL_USER}})
+    }
 
-  render() {
-    return (
-      <React.Fragment>
-        <BrowserRouter>
-          <div className="bg-eee">
-            <Routes>
-              <Route
-                path={"/"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <HomeDetail />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <HomeDetail />
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path={"/cartdetail/:id"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <CartDetail />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <CartDetail />
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path={"/item/:slug"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <ItemDetail />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <ItemDetail />
-                      <Footer />
-                    </>
-                  )
-                }
-              />
+    render() {
+        return (
+            <React.Fragment>
+                <BrowserRouter>
+                    <div className='bg-eee'>
+                        <Routes>    
+                            <Route 
+                                path={"/"} 
+                                element={ 
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <><HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                        <HomeDetail/>
+                                        <Footer/></>
+                                    ) : (
+                                        <><Header callbackSetKey={this.callbackSetKeySearch}/><HomeDetail/><Footer/></>
+                                    )
+                                }
+                            />
+                            <Route 
+                                path={"/cartdetail/:id"} 
+                                element={ 
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <><HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                        <CartDetail/>
+                                        <Footer/></>
+                                    ) : (
+                                        <>  
+                                            <Header callbackSetKey={this.callbackSetKeySearch}/><CartDetail/><Footer/>
+                                        </>
+                                    )
+                                } 
+                            />
+                            <Route 
+                                path={"/item/:slug"}  
+                                element={ 
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <><HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                        <ItemDetail/>
+                                        <Footer/></>
+                                    ) : (
+                                        <>  
+                                            <Header callbackSetKey={this.callbackSetKeySearch}/>
+                                            <ItemDetail/>
+                                            <Footer/>
+                                        </>
+                                    )
+                                } 
+                            />
 
-              <Route
-                path={"/buy"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <BuyDetail />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <BuyDetail />
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path={"/products"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <Products />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <Products />
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path={"/me"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <ProfilePage userAccount={this.state.user_account} />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <h3>not log in or banned</h3>
-                      {/* <ProfilePage /> */}
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path={"/orders"}
-                element={
-                  this.state.user_account.status === STATUS.NORMAL ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <OrderPage userAccount={this.state.user_account} />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <Header />
-                      <h3>not log in or banned</h3>
-                      {/* <ProfilePage /> */}
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path={"/login"}
-                element={<LoginPage setAccount={this.setUserAccount} />}
-              />
-              <Route path={"/register"} element={<RegisterPage />} />
+                            <Route 
+                                path={"/buy"}  
+                                element={ 
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <><HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                        <BuyDetail/>
+                                        <Footer/></>
+                                    ) : (
+                                        <>  
+                                            <Header callbackSetKey={this.callbackSetKeySearch}/>
+                                            <BuyDetail/>
+                                            <Footer/>
+                                        </>
+                                    )
+                                } 
+                            />
+                            <Route 
+                                path={"/products"}  
+                                element={ 
+                                    this.state.user_account.status === STATUS.NORMAL ? (
+                                        <><HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                        <Products key={this.state.keySearch}/>
+                                        <Footer/></>
+                                    ) : (
+                                        <>  
+                                            <Header callbackSetKey={this.callbackSetKeySearch}/>
+                                            <Products key={this.state.keySearch}/>
+                                            <Footer/>
+                                        </>
+                                    )
+                                } 
+                            />
+                            <Route 
+                                path={"/login"} 
+                                element={
+                                    <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                } 
+                            />
+                            <Route 
+                                path={"/register"} 
+                                element={<RegisterPage/>} 
+                            />
 
               {/*{
                                 isSeller === true ? (
@@ -246,145 +177,138 @@ export default class App extends React.Component {
                                 )
                             }
                             */}
-              <Route
-                path="/seller-register"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type !== TYPE.SELLER ? (
-                    <SellerRegister setAccount={this.setUserAccount} />
-                  ) : (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <SellerPage />
-                      <Footer />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path="/seller"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type === TYPE.SELLER ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <SellerPage />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <LoginPage setAccount={this.setUserAccount} />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path="/seller/add"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type === TYPE.SELLER ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <AddItem />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <LoginPage setAccount={this.setUserAccount} />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path="/seller/orders"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type === TYPE.SELLER ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <SellerOrderPage />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <LoginPage setAccount={this.setUserAccount} />
-                    </>
-                  )
-                }
-              />
+                            <Route 
+                                path="/seller-register" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type !== TYPE.SELLER ? (
+                                        <SellerRegister setAccount={this.setUserAccount}/>
+                                    ) : (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerPage/>
+                                            <Footer/>
+                                        </>
+                                    )
+                                    
+                                }
 
-              <Route
-                path="/seller/item/edit/:slug"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type === TYPE.SELLER ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <EditSellerItem />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <LoginPage setAccount={this.setUserAccount} />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path="/seller/profile"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type === TYPE.SELLER ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <SellerProfilePage />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <LoginPage setAccount={this.setUserAccount} />
-                    </>
-                  )
-                }
-              />
-              <Route
-                path="/seller/storeprofile"
-                element={
-                  this.state.user_account.status === STATUS.NORMAL &&
-                  this.state.user_account.type === TYPE.SELLER ? (
-                    <>
-                      <HeaderUser
-                        logoutMethod={this.removeUserAccount}
-                        userAccount={this.state.user_account}
-                      />
-                      <SellerStoreProfilePage />
-                      <Footer />
-                    </>
-                  ) : (
-                    <>
-                      <LoginPage setAccount={this.setUserAccount} />
-                    </>
-                  )
-                }
-              />
+                            />
+                            <Route 
+                                path="/seller" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerPage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                } 
+
+                            />
+                            <Route 
+                                path="/seller/add" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <AddItem/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage setAccount={this.setUserAccount}
+                                        />
+                                        </>
+                                    )
+                                } 
+                            />
+                            <Route 
+                                path="/seller/orders" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerOrderPage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage setAccount={this.setUserAccount}/>
+                                        </>
+                                    )
+                                    
+                                }
+
+                            />
+
+                            <Route 
+                                path="/seller/item/edit/:slug" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <EditSellerItem/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                }
+                                
+                            />
+                            <Route 
+                                path="/seller/profile" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerProfilePage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                } 
+
+                            />
+                            <Route 
+                                path="/seller/storeprofile" 
+                                element={
+                                    this.state.user_account.status === STATUS.NORMAL && this.state.user_account.type === TYPE.SELLER ? (
+                                        <>
+                                            <HeaderUser callbackSetKey={this.callbackSetKeySearch} logoutMethod={this.removeUserAccount} userAccount={this.state.user_account}/>
+                                            <SellerStoreProfilePage/>
+                                            <Footer/>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginPage 
+                                        setAccount={this.setUserAccount}
+                                    />
+                                        </>
+                                    )
+                                    
+                                }
+
+                            />
 
               <Route
                 path={"/admin/dashboard"}
