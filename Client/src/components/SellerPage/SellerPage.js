@@ -269,6 +269,22 @@ const SellerPage = () => {
 
         getData();
     }, [])
+    const callbackDeleteFood = (slg) => {
+        let newFoods = [];
+        datapage_callAPI.forEach(food => {
+            if(food.slug !== slg) {
+                newFoods.push(food);
+            }
+            else {
+                // CALL API TO DELETE FOOD HERE
+            }
+        });
+        foods = newFoods;
+        setDatapageCallAPI(newFoods);
+        let newPageCount = newFoods.length % 9 !== 0 ? Math.floor(newFoods.length / 9) + 1 : Math.floor(newFoods.length / 9);
+        setPageCount(newPageCount);
+        changepagenumber(1, newPageCount);
+    }
     const changepagenumber = (index, total) => {
         if(index > 0 && index <= total) {
             let newFoodList = [];
@@ -407,7 +423,7 @@ const SellerPage = () => {
                             {/* Hiện danh sách món ăn của seller */}
                             <div class="card-body">
                                 <div class="row">
-                                    <SellerStore foods={current_food} />
+                                    <SellerStore foods={current_food} callbackDeleteMethod={callbackDeleteFood}/>
                                 </div>
                             </div>
                             {/* Thanh đổi trang */}
