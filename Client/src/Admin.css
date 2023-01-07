@@ -324,7 +324,7 @@ body {
     border-radius: 1rem;
 }
 .admin-card-back {
-    transform: rotateY(180deg);
+    /* transform: rotateY(180deg); */
     padding: 10px;
 }
 .admin-card-front-body {
