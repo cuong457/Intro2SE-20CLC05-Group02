@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css'
 import './Admin.css'
+import { Navigate } from "react-router-dom";
 
 import Header from './components/Header/Header'
 import HeaderUser from './components/HeaderUser/HeaderUser'
@@ -216,9 +217,8 @@ export default class App extends React.Component {
                                         </>
                                     ) : (
                                         <>
-                                            <LoginPage 
-                                        setAccount={this.setUserAccount}
-                                    />
+                                            <LoginPage setAccount={this.setUserAccount}
+                                        />
                                         </>
                                     )
                                 } 
@@ -304,49 +304,36 @@ export default class App extends React.Component {
                             />
 
                             <Route 
-                                path={"/admin"}  
-                                // element={
-                                //     this.state.user_account.type == TYPE.ADMIN ? (<Admin/>) : (
-                                //         <><Header/><Products/><Footer/></>
-                                //     )
-                                // } 
-                                element={<AdminNavbar/>}
-                            />
-                            <Route 
                                 path={"/admin/dashboard"}  
-                                // element={
-                                //     this.state.user_account.type == TYPE.ADMIN ? (<Admin/>) : (
-                                //         <><Header/><Products/><Footer/></>
-                                //     )
-                                // } 
-                                element={<><AdminNavbar/><AdminDashboard/></>}
+                                element={
+                                    this.state.user_account.type == TYPE.ADMIN ? (<><AdminNavbar/><AdminDashboard/></>) : (
+                                        <Navigate to="/login" setAccount={this.setUserAccount} replace={true} />
+                                    )
+                                }
                             />
                             <Route 
                                 path={"/admin/usercenter"}  
-                                // element={
-                                //     this.state.user_account.type == TYPE.ADMIN ? (<Admin/>) : (
-                                //         <><Header/><Products/><Footer/></>
-                                //     )
-                                // } 
-                                element={<><AdminNavbar/><UserCenter/></>}
+                                element={
+                                    this.state.user_account.type == TYPE.ADMIN ? (<><AdminNavbar/><UserCenter/></>) : (
+                                        <Navigate to="/login" setAccount={this.setUserAccount} replace={true} />
+                                    )
+                                }
                             />
                             <Route 
                                 path={"/admin/sellercenter"}  
-                                // element={
-                                //     this.state.user_account.type == TYPE.ADMIN ? (<Admin/>) : (
-                                //         <><Header/><Products/><Footer/></>
-                                //     )
-                                // } 
-                                element={<><AdminNavbar/><SellerCenter/></>}
+                                element={
+                                    this.state.user_account.type == TYPE.ADMIN ? (<><AdminNavbar/><SellerCenter/></>) : (
+                                        <Navigate to="/login" setAccount={this.setUserAccount} replace={true} />
+                                    )
+                                } 
                             />
                             <Route 
                                 path={"/admin/posts"}  
-                                // element={
-                                //     this.state.user_account.type == TYPE.ADMIN ? (<Admin/>) : (
-                                //         <><Header/><Products/><Footer/></>
-                                //     )
-                                // } 
-                                element={<><AdminNavbar/><Posts/></>}
+                                element={
+                                    this.state.user_account.type == TYPE.ADMIN ? (<><AdminNavbar/><Posts/></>) : (
+                                        <Navigate to="/login" setAccount={this.setUserAccount} replace={true} />
+                                    )
+                                } 
                             />
                         </Routes>
                     </div>

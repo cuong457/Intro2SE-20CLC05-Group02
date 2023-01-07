@@ -60,7 +60,9 @@ function HeaderUser(props) {
   const clickAdmin = () => {
     navigate("/admin/dashboard");
   };
-  const clickSeller = () => {};
+  const clickSeller = () => {
+    navigate("/seller");
+  };
 
   if (props.userAccount.type === TYPE.ADMIN) {
     adminActiveCln = "active";
@@ -202,7 +204,7 @@ function HeaderUser(props) {
                         className="text-black emptyBtn text-align-left"
                         onClick={() => clickAdmin()}
                       >
-                        <i className="fa-solid fa-right-from-bracket"></i>
+                        <i className="fa-solid fa-mug-hot"></i>
                         &nbsp; Trang Admin
                       </button>
                     </div>
@@ -215,7 +217,7 @@ function HeaderUser(props) {
                         className="text-black emptyBtn text-align-left"
                         onClick={() => clickSeller()}
                       >
-                        <i className="fa-solid fa-right-from-bracket"></i>
+                        <i className="fa-solid fa-piggy-bank"></i>
                         &nbsp; Trang người bán
                       </button>
                     </div>
