@@ -6,8 +6,8 @@ import { fetchProducts } from '../../api'
 function SellerStore(props) {
     console.log(props.foods)
     const foods = props.foods;
-    const deleteFood = (slg) => {
-        props.callbackDeleteMethod(slg);
+    const deleteFood = (id) => {
+        props.callbackDeleteMethod(id);
     }
 
     const foodlist = foods.map((food) => {
@@ -22,7 +22,7 @@ function SellerStore(props) {
                             
                             <div class="d-flex justify-content-between text-center">
                                 <Link to={`/seller/item/edit/${food.slug}`}><button class="btn btn-outline-info rtab-detail-button" onclick="changepage()">Edit</button></Link>
-                                <button class="btn btn-danger rtab-detail-button" onClick={() => deleteFood(food.slug)}>Delete</button>
+                                <button class="btn btn-danger rtab-detail-button" onClick={() => deleteFood(food._id)}>Delete</button>
                             </div>
                         </div>
                     </div>

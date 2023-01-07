@@ -230,7 +230,7 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery'
 import SellerStore from '../SellerStore/SellerStore'
-import { fetchProducts } from '../../api'
+import { fetchProducts, deteteProduct } from '../../api'
 
 import rightArrow from '../../assets/images/icons/right.png'
 import leftArrow from '../../assets/images/icons/left.png'
@@ -269,14 +269,22 @@ const SellerPage = () => {
 
         getData();
     }, [])
-    const callbackDeleteFood = (slg) => {
+    const callbackDeleteFood = (id) => {
         let newFoods = [];
         datapage_callAPI.forEach(food => {
-            if(food.slug !== slg) {
+            if(food._id !== id) {
                 newFoods.push(food);
             }
             else {
                 // CALL API TO DELETE FOOD HERE
+                deteteProduct(id)
+                    .then((response) => {
+                        console.log(response);
+                        alert("delele successfully");
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
             }
         });
         foods = newFoods;

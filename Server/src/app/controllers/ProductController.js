@@ -116,3 +116,15 @@ exports.deleteItem = catchAsync(async (req, res, next) => {
 });
 
 // cart
+
+exports.deleteProduct = catchAsync(async (req, res, next) => {
+  const prod = await ProductModel.findByIdAndDelete(req.params.id);
+
+  if (!prod) {
+    return next(new AppError(400, "cannot find product"));
+  }
+
+  res.status(200).json({
+    status: "success",
+  });
+});

@@ -47,6 +47,10 @@ export const fetchProductDetail = (slug) => {
     });
 };
 
+export const deteteProduct = (id) => {
+  return axios.delete(`${URL}/api/v1/products/${id}/delete`);
+}
+
 // =======================================================
 
 export const fetchUsers = () => {
