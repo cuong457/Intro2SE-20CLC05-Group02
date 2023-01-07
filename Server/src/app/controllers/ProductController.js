@@ -2,6 +2,49 @@ const catchAsync = require("../../utils/catchAsync");
 const AppError = require("../../utils/AppError");
 const ProductModel = require("../models/Product");
 const CartModel = require("../models/Cart");
+const multer = require("multer");
+const sharp = require("sharp");
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  // only support image files
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new AppError(400, "only image files are supported"));
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+exports.uploadTourImages = upload.fields([
+  { name: "photo", maxCount: 1 },
+  { name: "photos", maxCount: 3 },
+]);
+
+exports.resizeUploadImages = catchAsync(async (req, res, next) => {
+  if (!req.files["photos"] && !req.files["photo"]) {
+    return next();
+  }
+
+  if (req.files["photo"]) {
+    const foodThumbnailName = `food-${Math.ceil(
+      Math.random() * 1000
+    )}-${Date.now()}-cover.png`;
+    req.body.photo = `/${foodThumbnailName}`;
+
+    await sharp(req.files["photo"][0].buffer)
+      .resize(610, 610)
+      .toFormat("png")
+      // start at root folder
+      .toFile(`../Client/public/${req.body.photo}`);
+  }
+
+  next();
+});
 
 exports.getItems = async function (req, res, next) {
   try {
@@ -105,6 +148,32 @@ exports.deleteItem = catchAsync(async (req, res, next) => {
     status: "success",
     data: {
       cart: newCart,
+    },
+  });
+});
+
+exports.createNewProduct = catchAsync(async (req, res, next) => {
+  const newFoodObj = {};
+
+  const imgFields = [];
+  Object.keys(req.body).forEach((element) => {
+    if (!imgFields.includes(element)) {
+      newFoodObj[element] = req.body[element];
+    }
+  });
+
+  console.log(newFoodObj);
+
+  const new_product = await ProductModel.create(newFoodObj);
+
+  if (!new_product) {
+    return next(new AppError(400, "Create product failed."));
+  }
+
+  res.status(200).json({
+    message: "success",
+    data: {
+      new_product,
     },
   });
 });

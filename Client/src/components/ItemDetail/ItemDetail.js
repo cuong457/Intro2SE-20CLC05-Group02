@@ -130,7 +130,11 @@ const ItemDetail = () => {
           <div className="col-3" id="itdetail-mainimg">
             <Link to={`/item/${food.slug}`}>
               <img
-                src={require(`../../assets/images/foods/${food.img.detail}`)}
+                src={
+                  food.photo
+                    ? food.photo
+                    : require(`../../assets/images/foods/${food.img.detail}`)
+                }
                 className="img-fluid itdetail-food-img"
                 alt={food.name}
               />
@@ -155,7 +159,11 @@ const ItemDetail = () => {
               <div className="col-4">
                 <Link to={food.link}>
                   <img
-                    src={require(`../../assets/images/foods/${food.img.detail}`)}
+                    src={
+                      food.photo
+                        ? food.photo
+                        : require(`../../assets/images/foods/${food.img.detail}`)
+                    }
                     className="img-fluid itdetail-food-img"
                     alt={food.name}
                   />

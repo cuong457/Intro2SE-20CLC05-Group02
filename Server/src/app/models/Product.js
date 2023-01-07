@@ -1,26 +1,29 @@
-const mongoose = require('mongoose');
-const slug = require('mongoose-slug-generator');
+const mongoose = require("mongoose");
+const slug = require("mongoose-slug-generator");
 
 const Schema = mongoose.Schema;
 
-const ProductSchema = new Schema (
-    {
-        name: { type: String, required: true },
-        img: { 
-            thumbnail: { type: String },
-            detail: { type: String },
-        },
-        rating: { type: Number },
-        rvcount: { type: Number },
-        price: { type: Number, required: true },
-        brand: { type: String },
-        status: { type: Boolean },
-        
-        slug: { type: String, slug: 'name', unique: true },
+const ProductSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    img: {
+      thumbnail: { type: String, default: "pho.png" },
+      detail: { type: String, default: "food_3.png" },
     },
-    {
-        timestamps: true,
+    rating: { type: Number, default: 0 },
+    rvcount: { type: Number, default: 5 },
+    price: { type: Number, required: true },
+    brand: { type: String, default: "Sunrise Food" },
+    status: { type: Boolean },
+
+    slug: { type: String, slug: "name", unique: true },
+    photo: {
+      type: String,
     },
+  },
+  {
+    timestamps: true,
+  }
 );
 //Custom query helper
 // ProductSchema.query.sortable = function (req) {
@@ -36,4 +39,4 @@ const ProductSchema = new Schema (
 // Add plugin
 mongoose.plugin(slug);
 
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model("Product", ProductSchema);
