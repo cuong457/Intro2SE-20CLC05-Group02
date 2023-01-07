@@ -4,7 +4,6 @@ const productRouter = require("./product");
 const userRouter = require("./user");
 const cartRouter = require("./cart");
 const orderRouter = require("./order");
-const globalErrorHandler = require("./errorHandler");
 const adminRouter = require("./admin");
 
 function route(app) {
