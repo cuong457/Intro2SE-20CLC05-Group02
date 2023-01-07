@@ -1,12 +1,13 @@
 // Import library
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import $ from "jquery";
 // Import component
 import NotifyDropdownUser from "./NotifyDropdownUser";
 // Import image
 import sunrise_logo from "../../assets/images/logo/SunriseFoods-logo.png";
 import avt from "../../assets/images/user/avt/001.jpg";
+import { toSeller } from "../../api";
 
 const onMouseUp = (e) => {
   let avt_dropdown = $(".user-dropdown-content");
@@ -320,8 +321,11 @@ function HeaderUser(props) {
               <button
                 className="btn btn-primary"
                 onClick={() => {
-                  // CALL API TO SET TO BE SELLER
-                  navigate('/');
+                  // console.log(props.userAccount.id);
+                  toSeller(props.userAccount.id);
+                  navigate('/seller');
+
+                  $('#show-seller-register').addClass('undisplay');
                 }}
               >
                 <span className="me-title">REGISTER TO BE SELLER</span>

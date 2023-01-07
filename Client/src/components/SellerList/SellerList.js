@@ -11,6 +11,8 @@ import React from 'react'
 
 function SellerList(props) {
     const sellers = props.seller_list;
+    if (!sellers.length) return(<div></div>);
+
     const moveToBan = (target) => {
         if ($('#' + target.usn).css("transform") === 'none'){
             $('#' + target.usn).css("transform","rotateY(180deg)");
@@ -49,31 +51,34 @@ function SellerList(props) {
         // Call API to set status of target to STATUS.NORMAL
         unbanUser(target);
     }
-    React.useEffect(() => {
-        sellers.map((seller, index) => {
-            if(seller.status === -1) {
-                $('#ban-btn' + seller.usn).addClass('undisplay');
-            }
-            else {
-                $('#unban-btn' + seller.usn).addClass('undisplay');
-            }
-        })
+    
+    console.log(sellers);
+    sellers.map((seller, index) => {
+        if(seller.status === -1) {
+            $('#ban-btn' + seller.usn).addClass('undisplay');
+        }
+        else {
+            $('#unban-btn' + seller.usn).addClass('undisplay');
+        }
     })
-
+    
     let sellerlist = sellers.map((seller, index) => {
+
         return  (
             <div className="col-12 col-sm-6 col-xxl-4 pb-4 d-flex justify-content-center" key={index}>
                 <div className="card admin-card" id={seller.usn}>
                     <div className="admin-card-front">
-                        {/* <img src={require(`../../${seller.photo}`)} className="card-img-top p-3" alt='card'/> */}
-                        <img src={user2} className="card-img-top p-3" alt='card'/>
+                        {seller.img
+                            ? <img src={require(`../../${seller.img}`)} className="card-img-top p-3" alt='card'/>
+                            : <div></div>
+                        }
                         <div className="admin-card-front-body">
                             <p className="me-title text-lightblue">{seller.name}</p>
                             {seller.rating ? <RatingStarGenerator star={seller.rating}/> : '' }
                             {seller.type === 0 ? <p className="sm-title">Created at: <span className="rtab-money">{(new Date(seller.createdAt)).toDateString()}</span></p> : ''}
-                            {seller.type === 0 ? <p className="sm-title">Total spent: <span className="rtab-money">$5.324</span></p> : ''}
+                            {seller.type === 0 ? <p className="sm-title">Total spent: <span className="rtab-money">${seller.sales}</span></p> : ''}
                             <p className="review-count">{seller.rvcount}</p>
-                            {seller.type === -1 ? <p className="sm-title">Total sales <span className="rtab-money">${seller.total_sales}</span></p> : ''}
+                            {seller.type === -1 ? <p className="sm-title">Total sales <span className="rtab-money">${seller.sales}</span></p> : ''}
                             
                             <div className="text-center">
                                 <button 

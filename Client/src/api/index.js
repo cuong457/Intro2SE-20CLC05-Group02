@@ -83,7 +83,6 @@ export const loginWithJwt = function (data) {
   axios
     .post(`${URL}/api/v1/users/create-jwt`, data)
     .then((response) => {
-      console.log(response);
       CookieService.set("jwt", response.data.token, { path: "/" });
       //   window.location.href = "#success";
     })
@@ -91,11 +90,15 @@ export const loginWithJwt = function (data) {
 };
 
 export const banUser = function(user) {
-    return axios.patch(`${URL}/api/v1/admin/ban/${user._id}`);
+  return axios.patch(`${URL}/api/v1/admin/ban/${user._id}`);
 }
 
 export const unbanUser = function(user) {
-    return axios.patch(`${URL}/api/v1/admin/unban/${user._id}`);
+  return axios.patch(`${URL}/api/v1/admin/unban/${user._id}`);
+}
+
+export const toSeller = function(_id) {
+  return axios.patch(`${URL}/api/v1/users/${_id}/to-seller`);
 }
 
 // =======================================================

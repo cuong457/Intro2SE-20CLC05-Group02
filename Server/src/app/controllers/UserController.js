@@ -6,6 +6,8 @@ const AppError = require("../../utils/AppError");
 const { promisify } = require("util");
 
 const signToken = (userId) => {
+  console.log(userId);
+  console.log(process.env.JWT_SECRET);
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
@@ -361,4 +363,16 @@ exports.unbanUser = catchAsync(async function(req, res, next) {
     } catch (err) {
         return next(new AppError(404, "User not found or user hasn't been banned yet"));
     }
+});
+
+exports.toSeller = catchAsync(async function(req, res, next) {
+  try {
+      const user = await UserModel.findByIdAndUpdate(req.params.id, { type: -1 })
+
+      res.status(200).json({
+          message: "success"
+      });
+  } catch (err) {
+      return next(new AppError(404, "User not found"));
+  }
 });

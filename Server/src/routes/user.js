@@ -9,17 +9,17 @@ const {
   protect,
   restrictTo,
   createJwt,
+  toSeller,
 } = require("../app/controllers/UserController");
+
+router.patch("/:id/to-seller", toSeller);
 
 // register
 router.post("/create", createUser);
 router.post("/create-jwt", createJwt);
 
-// update profile
-router.patch("/me", [protect, updateMe]);
-router.patch("/password", [protect, updatePassword]);
+router.post('/create', createUser);
+router.get('/', getUsers);
 
-//
-router.get("/", getUsers);
 
 module.exports = router;

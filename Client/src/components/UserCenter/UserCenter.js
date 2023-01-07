@@ -144,10 +144,10 @@ function UserCenter() {
     const [page_count, setPageCount] = useState(1);
     
     useEffect(() => {
-        const getData = async function() {
+        const getData = async () => {
             try {
                 const users = await fetchUsers();
-                
+
                 const array = [];
                 users.data.forEach(element => {
                     if (element["type"] === TYPE.NORMAL_USER) {
@@ -271,11 +271,13 @@ function UserCenter() {
         if(val !== '') {
             let newCurrentUsers = [];
             for(let i = 0; i < users.length; i++) {
-                if(users[i].name.toLowerCase().search(val) !== -1) {
-                    newCurrentUsers.push(users[i]);
+                if(users[i].name) {
+                    if(users[i].name.toLowerCase().search(val) !== -1) {
+                        newCurrentUsers.push(users[i]);
+                    }
                 }
             }
-            setUsers(newCurrentUsers);
+            users = newCurrentUsers;
             let newPageCount = users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH);
             setPageCount(newPageCount);
             changepagenumber(1, newPageCount);
@@ -310,8 +312,6 @@ function UserCenter() {
             console.log(err);
         }
     }
-
-    
     const handleSort = async (id) => {
         let sort_btn_list = document.querySelectorAll(".sort-btn");
         if(sort_btn_list) {
@@ -334,7 +334,13 @@ function UserCenter() {
                 }
             })
 
-            const result = await sortEngine(option);
+            const raw_data = await sortEngine(option);
+            const result = []
+            raw_data.forEach((element) => {
+                if (element["type"] === TYPE.NORMAL_USER) {
+                    result.push(element);
+                }
+            });
             users=result;
             setUsers(result);
 
