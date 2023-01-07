@@ -79,12 +79,15 @@ function HeaderUser(props) {
               {/* {{! Left links field }} */}
               <ul className="navbar-nav me-auto" id="nav-leftlink">
                 <li className="nav-item">
-                  <Link
-                    className="nav-link active navbar-font-link pb-2 m-0"
-                    to="#"
+                  <button
+                    type="button"
+                    className="nav-link active navbar-font-link pb-2 m-0 emptyBtn"
+                    onClick={() => {
+                      $('#show-seller-register').addClass('active');
+                    }}
                   >
                     Trở thành người bán hàng
-                  </Link>
+                  </button>
                 </li>
 
                 <li className="nav-item">
@@ -298,6 +301,27 @@ function HeaderUser(props) {
           </div>
         </div>
       </header>
+      <div className="overlay" id='show-seller-register'>
+        <div className="popup">
+          <div className="content">
+            <p className="xlg-title text-center pb-4">BE A MEMBER WITH US!</p>
+            <p className="lg-title wrap-text text-justify">
+              With one click, you can upload your foods with your awesome brand.
+              We will help you to sale it by our effort. Just be a member!
+            </p>
+            <div className="text-center pt-4">
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  // CALL API TO SET TO BE SELLER
+                }}
+              >
+                <span className="me-title">REGISTER TO BE SELLER</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
