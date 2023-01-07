@@ -54,6 +54,10 @@ export default class App extends React.Component {
             status: STATUS.ANONYOUS,
             type: TYPE.NORMAL_USER,
         },
+        keySearch: '',
+    };
+    callbackSetKeySearch = (k) => {
+        this.setState((prevState) => ({...prevState, keySearch: k }));
     };
     setUserAccount = (id, usn, psw, status, type) => {
         if (status === STATUS.NORMAL) {
@@ -73,7 +77,7 @@ export default class App extends React.Component {
         });
     };
 
-    render() {
+    render() {        
         return (
             <React.Fragment>
                 <BrowserRouter>

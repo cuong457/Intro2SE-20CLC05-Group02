@@ -1,6 +1,7 @@
 import React from 'react'
 //import $ from 'jquery'
 import './SellerStoreProfilePage.css'
+import { Link } from 'react-router-dom'
 
 import avt3 from '../../assets/images/user/avt/003.jpeg'
 
@@ -67,34 +68,34 @@ class SellerStoreProfilePage extends React.Component {
                   <img src={flavorofindia_logo} class="" alt="" />
                 </div>
                 {/* Hiện các item mà seller đã đăng cũng là Layout Default của seller */}
-                <a href="/seller" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
+                <Link to="/seller" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
                   <div class="">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                     <span class="ps-4 me-title">Store</span>
                   </div>
                   <span class="badge badge-pill bg-danger float-end text-center">{foods.length}</span>
-                </a>
+                </Link>
                 {/* Tới trang đơn đặt hàng cùng thông báo */}
-                <a href="/seller/orders" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
+                <Link to="/seller/orders" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between">
                   <div class="">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                     <span class="ps-4 me-title">Orders</span>
                   </div>
                   <span class="badge badge-pill bg-danger float-end text-center">{orders.length}</span>
-                </a>
+                </Link>
                 {/* Tới trang Profile của người bán để chỉnh sửa thông tin cửa hàng */}
                 <div class="list-group-item nav-item">
-                  <div href="#Profilecollapse" data-bs-toggle="collapse" aria-controls="Profilecollapse" aria-expanded="false" >
+                  <div to="#Profilecollapse" data-bs-toggle="collapse" aria-controls="Profilecollapse" aria-expanded="false" >
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                     <span class="ps-4 me-title">Profile</span>
                   </div>
                   <div class="collapse" id="Profilecollapse">
-                    <a href="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                    <Link to="/seller/profile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
                       <span class="ps-4 me-title">Seller Profile</span>
-                    </a>
-                    <a href="/seller/storeprofile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
+                    </Link>
+                    <Link to="/seller/storeprofile" class="list-group-item list-group-item-action nav-item d-flex align-content-center justify-content-between border-0">
                       <span class="ps-4 me-title">Store Profile</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

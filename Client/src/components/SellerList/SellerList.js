@@ -39,9 +39,10 @@ function SellerList(props) {
         if(is_valid) {
             $('#ban-btn' + target.usn).addClass('undisplay');
             $('#unban-btn' + target.usn).removeClass('undisplay');
-            if ($('#' + target.usn).css( "transform") !== 'none'){
-                $('#' + target.usn).css("transform","");
-            }
+            // if ($('#' + target.usn).css( "transform") !== 'none'){
+            //     $('#' + target.usn).css("transform","");
+            // }
+            $('#' + target.usn).removeClass("undisplay");
             // Call API to set status of target to STATUS.BAN
             // and time till unban or never
             banUser(target);

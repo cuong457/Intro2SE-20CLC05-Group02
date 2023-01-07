@@ -34,8 +34,8 @@ function HeaderUser(props) {
   const searchProcess = () => {
     const key = $('#search-box').val().trim();
     if(key !== '') {
-        props.callbackSetKey(key);
-        navigate("/products");
+      props.callbackSetKey(key);
+      navigate("/products");
     }
   };
 
