@@ -10,10 +10,10 @@ function PostList(props) {
         return  (
             <div className="col-6 col-lg-4 pb-3" key={index}>
                 <div className="card card-hover food-card">
-                    <Link to={post.link}><img src={post.img} className="card-img-top p-3" alt='post'/></Link>
+                    <Link to={`/item/${post.slug}`}><img src={require(`../../assets/images/FoodThumnail/${post.img.thumbnail}`)} className="card-img-top p-3" alt='post'/></Link>
                     <div className="card-body food-body">
                         <Link 
-                            to={post.link} 
+                            to={`/item/${post.slug}`} 
                             className="erase-underline"
                         >
                             <p className="me-title text-lightblue">{post.name}</p>

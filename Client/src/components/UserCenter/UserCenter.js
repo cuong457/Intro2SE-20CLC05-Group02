@@ -24,7 +24,7 @@ import user16 from '../../assets/images/logo/vinny.png'
 import rightArrow from '../../assets/images/icons/right.png'
 import leftArrow from '../../assets/images/icons/left.png'
 
-import { fetchUsers } from '../../api'
+import { fetchUsers, fetchSortUser } from '../../api'
 
 const user_detail = [
     {time: '4/9/2022', users: 3400, sales: 4000},
@@ -73,6 +73,18 @@ let users = [
     {img: user15, name: "Shokudo", rating: 4, rvcount: 15.927, total_sales: 1020, usn: 'shokudo'},
     {img: user16, name: "Vinny", rating: 3, rvcount: 26.546, total_sales: 890, usn: 'vinny'}
 ];
+
+const TYPE = {
+    NORMAL_USER: 0,
+    ADMIN: 1,
+    SELLER: -1
+}
+
+const option = {
+    name: false, 
+    time: false,
+    des: false,
+};
 
 function convertUsersToString(number_of_user) {
     if(number_of_user / 1000 > 1) {
@@ -125,11 +137,11 @@ function renderPercent (type) {
 
 function UserCenter() {
     const [initData, setInitData] = useState([]);
-    const [users, setUsers] = useState([]);
+    let [users, setUsers] = useState([]);
 
     const [current_user, setCurrentUser] = useState([]);
-    const [lastuser_index, setLastUserIndex] = useState(current_user.length - 1);
-    const [page_count, setPageCount] = useState(users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH));
+    const [lastuser_index, setLastUserIndex] = useState(0);
+    const [page_count, setPageCount] = useState(1);
     
     useEffect(() => {
         const getData = async function() {
@@ -138,22 +150,23 @@ function UserCenter() {
                 
                 const array = [];
                 users.data.forEach(element => {
-                    element["key"] = element._id;
-                    array.push(element);
+                    if (element["type"] === TYPE.NORMAL_USER) {
+                        element["key"] = element._id;
+                        array.push(element);
+                    }
                 });
-
-                console.log(array);
-
-                setUsers(array);
-                setInitData(array);
-
+         
                 let current = [];
                 for (let index = 0; index < array.length && index < 6; index++) {
                     current.push(array[index]);
                 }
-
+                
+                setUsers(array);
+                setInitData(array);
                 setCurrentUser(current);
 
+                setPageCount(array.length % LIST_LENGTH !== 0 ? Math.floor(array.length / LIST_LENGTH) + 1 : Math.floor(array.length / LIST_LENGTH));
+                setLastUserIndex(current.length - 1);
             } catch (err) {
                 console.log(err);
             }
@@ -263,8 +276,9 @@ function UserCenter() {
                 }
             }
             setUsers(newCurrentUsers);
-            setPageCount(users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH));
-            changepagenumber(1, page_count);
+            let newPageCount = users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH);
+            setPageCount(newPageCount);
+            changepagenumber(1, newPageCount);
         }
     }
     const cancelSearch = () => {
@@ -272,8 +286,9 @@ function UserCenter() {
         if(val !== '') {
             $('#seller-search-box').val('');
             setUsers(initData);
-            setPageCount(users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH));
-            changepagenumber(1, page_count);
+            let newPageCount = users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH);
+            setPageCount(newPageCount);
+            changepagenumber(1, newPageCount);
         }
     }
     const showCancelButton = () => {
@@ -285,10 +300,53 @@ function UserCenter() {
             $('.cancel-btn-searchbox').addClass('undisplay');
         }
     }
+    // Order 1-increase 0-decrease
+    const sortEngine = async (option) => {
+        try {
+            const response = await fetchSortUser(option);
+
+            return response.data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    
+    const handleSort = async (id) => {
+        let sort_btn_list = document.querySelectorAll(".sort-btn");
+        if(sort_btn_list) {
+            sort_btn_list.forEach(btn => {
+                if(btn.id === id) {
+                    if(btn.classList.contains('sort-btn-active')) {
+                        btn.classList.remove('sort-btn-active');
+
+                        const subOne = id.substr(id.indexOf('-') + 1);
+                        const subTwo = subOne.substr(0, subOne.indexOf('-'))
+                        option[subTwo] = false
+                    }
+                    else {
+                        btn.classList.add('sort-btn-active');
+
+                        const subOne = id.substr(id.indexOf('-') + 1);
+                        const subTwo = subOne.substr(0, subOne.indexOf('-'))
+                        option[subTwo] = true;
+                    }
+                }
+            })
+
+            const result = await sortEngine(option);
+            users=result;
+            setUsers(result);
+
+            let newPageCount = users.length % LIST_LENGTH !== 0 ? Math.floor(users.length / LIST_LENGTH) + 1 : Math.floor(users.length / LIST_LENGTH);
+            setPageCount(newPageCount);
+            changepagenumber(1, newPageCount);
+        }
+    }
     return (
         <div className='admin-content pt-2'>
             <div className='row'>
-                <div className='col-12 col-xl-3 ps-0 pe-4'>
+                <div className='col-12 col-xl-3 admin-content-left-side'>
                     <div className='row'>
                         <div className='col-6 col-xl-12 pb-3'>
                             <div className='admin-sm-card'>
@@ -320,6 +378,42 @@ function UserCenter() {
                                     )}
                                 </p>
                                 {renderPercent('sales')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className='row'>
+                        <div className='col'>
+                            <div className='filter-card'>
+                                <p className='formal-font text-me text-bold pb-1'>
+                                <i className="fa-solid fa-arrow-down-a-z"></i>
+                                    &nbsp;&nbsp;Sort by
+                                </p>
+                                <hr className='mt-2'/>
+                                <button 
+                                    type='button' 
+                                    className='sort-btn m-2'
+                                    id='user-name-sort'
+                                    onClick={async () => await handleSort('user-name-sort')}
+                                >
+                                    Name
+                                </button>
+                                <button 
+                                    type='button' 
+                                    className='sort-btn m-2'
+                                    id='user-time-sort'
+                                    onClick={async () => await handleSort('user-time-sort')}
+                                >
+                                    Create time
+                                </button>
+                                <button 
+                                    type='button' 
+                                    className='sort-btn m-2'
+                                    id='user-des-sort'
+                                    onClick={async () => await handleSort('user-des-sort')}
+                                >
+                                    Desending Order
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -58,83 +58,85 @@ function AdminNavbar() {
                     <p className='logo-font text-white'>SUNRISE FOODS</p>
                 </div>
                 <div className='admin-nav-list'>
-                    <ul className='vertical-navbar'>
-                        <li className='v-nav-title'>
-                            <p className='sm-title text-white'>Menu</p>
-                        </li>
-                        <li className='v-nav-item' id='dashboard-title'>
-                            <Link 
-                                to='/admin/dashboard' 
-                                className='erase-underline text-white'
-                                onClick={() => clickTitle('#dashboard-title', 'Dashboard')}
-                            >
-                                <i className="fa-solid fa-circle-dollar-to-slot pe-3"></i>
-                           
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className='v-nav-item' id='usercenter-title'>
-                            <Link 
-                                to='/admin/usercenter' 
-                                className='erase-underline text-white'
-                                onClick={() => clickTitle('#usercenter-title', 'User Center')}
-                            >
-                                <i className="fa-solid fa-users pe-3"></i>
-                                User Center
-                            </Link>
-                        </li>
-                        <li className='v-nav-item' id='sellercenter-title'>
-                            <Link 
-                                to='/admin/sellercenter' 
-                                className='erase-underline text-white'
-                                onClick={() => clickTitle('#sellercenter-title', 'Seller Center')}
-                            >
-                                <i className="fa-solid fa-handshake pe-3"></i>
-                                Seller Center
-                            </Link>
-                        </li>
-                        <li className='v-nav-title'>
-                            <p className='sm-title text-white'>Manage Page</p>
-                        </li>
-                        <li className='v-nav-item' id='posts-title'>
-                            <Link 
-                                to='/admin/posts' 
-                                className='erase-underline text-white'
-                                onClick={() => clickTitle('#posts-title', 'Posts')}
-                            >
-                                <i className="fa-solid fa-mug-hot pe-3"></i>
-                                Posts
-                            </Link>
-                        </li>
-                        <li className='v-nav-item' id='banners-title'>
-                            <Link 
-                                to='/admin/banners' 
-                                className='erase-underline text-white'
-                                onClick={() => clickTitle('#banners-title', 'Banners')}
-                            >
-                                <i className="fa-solid fa-rectangle-ad pe-3"></i>
-                                Banners
-                            </Link>
-                        </li>
-                        <li className='v-nav-title'>
-                            <p className='sm-title text-white'>Analysis</p>
-                        </li>
-                        <li className='v-nav-item' id='businesschart-title'>
-                            <Link 
-                                to='/admin/bussinesschart' 
-                                className='erase-underline text-white'
-                                onClick={() => clickTitle('#businesschart-title', 'Business Chart')}
-                            >
-                                <i className="fa-solid fa-chart-line pe-3"></i>
-                                Business Chart
-                            </Link>
-                        </li>
-                    </ul>
+                    <div className='col d-flex justify-content-center'>
+                        <ul className='vertical-navbar'>
+                            <li className='v-nav-title'>
+                                <p className='sm-title text-white'>Menu</p>
+                            </li>
+                            <li className='v-nav-item' id='dashboard-title'>
+                                <Link 
+                                    to='/admin/dashboard' 
+                                    className='erase-underline text-white'
+                                    onClick={() => clickTitle('#dashboard-title', 'Dashboard')}
+                                >
+                                    <i className="fa-solid fa-circle-dollar-to-slot pe-3"></i>
+                            
+                                    Dashboard
+                                </Link>
+                            </li>
+                            <li className='v-nav-item' id='usercenter-title'>
+                                <Link 
+                                    to='/admin/usercenter' 
+                                    className='erase-underline text-white'
+                                    onClick={() => clickTitle('#usercenter-title', 'User Center')}
+                                >
+                                    <i className="fa-solid fa-users pe-3"></i>
+                                    User Center
+                                </Link>
+                            </li>
+                            <li className='v-nav-item' id='sellercenter-title'>
+                                <Link 
+                                    to='/admin/sellercenter' 
+                                    className='erase-underline text-white'
+                                    onClick={() => clickTitle('#sellercenter-title', 'Seller Center')}
+                                >
+                                    <i className="fa-solid fa-handshake pe-3"></i>
+                                    Seller Center
+                                </Link>
+                            </li>
+                            <li className='v-nav-title'>
+                                <p className='sm-title text-white'>Manage Page</p>
+                            </li>
+                            <li className='v-nav-item' id='posts-title'>
+                                <Link 
+                                    to='/admin/posts' 
+                                    className='erase-underline text-white'
+                                    onClick={() => clickTitle('#posts-title', 'Posts')}
+                                >
+                                    <i className="fa-solid fa-mug-hot pe-3"></i>
+                                    Posts
+                                </Link>
+                            </li>
+                            <li className='v-nav-item' id='banners-title'>
+                                <Link 
+                                    to='/admin/banners' 
+                                    className='erase-underline text-white'
+                                    onClick={() => clickTitle('#banners-title', 'Banners')}
+                                >
+                                    <i className="fa-solid fa-rectangle-ad pe-3"></i>
+                                    Banners
+                                </Link>
+                            </li>
+                            <li className='v-nav-title'>
+                                <p className='sm-title text-white'>Analysis</p>
+                            </li>
+                            <li className='v-nav-item' id='businesschart-title'>
+                                <Link 
+                                    to='/admin/bussinesschart' 
+                                    className='erase-underline text-white'
+                                    onClick={() => clickTitle('#businesschart-title', 'Business Chart')}
+                                >
+                                    <i className="fa-solid fa-chart-line pe-3"></i>
+                                    Business Chart
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div className="v-navbar-field-instead">
                 <div className='admin-logo'>
-                    <p className='logo-font text-white'>SFs</p>
+                    <p className='logo-font text-white'>SFS</p>
                 </div>
                 <div className='admin-nav-list'>
                     <ul className='vertical-navbar ps-2 pe-2'>

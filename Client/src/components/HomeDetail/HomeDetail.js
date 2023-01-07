@@ -18,14 +18,6 @@ import smbanner4 from '../../assets/images/banners/small-banner-4.png'
 import rectbanner1 from '../../assets/images/banners/rect-banner-1.png'
 import rectbanner2 from '../../assets/images/banners/rect-banner-2.png'
 
-
-import foodThum1 from '../../assets/images/FoodThumnail/bun.png'
-import foodThum2 from '../../assets/images/FoodThumnail/pho.png'
-import foodThum3 from '../../assets/images/FoodThumnail/doannhanh.png'
-import foodThum4 from '../../assets/images/FoodThumnail/dohan.png'
-import foodThum5 from '../../assets/images/FoodThumnail/lau.png'
-import foodThum6 from '../../assets/images/FoodThumnail/donhat.png'
-
 import { fetchRecommend } from '../../api'
 
 const MENU_TYPE = {SMALL: 0,LARGE: 1};
@@ -51,20 +43,18 @@ let rect_banners = [
     {img: rectbanner2, link: "re_banner2.com", index: 1, id: "#sale-banner"}
 ]
 
-let sale_thumnails_1 = [
-    {img: foodThum1, name: "Bún Đậu Mắm Tôm", link: "/item/bun-dau-mam-tom-chuan-ngon", brand: "Sunrise Foods", rating: 4, rvcount: 12.567, price: 89, status: "Còn hàng"},
-    {img: foodThum2, name: "Cơm Tấm Thôn Quê", link: "/item", brand: "Sunrise Foods", rating: 3.5, rvcount: 8.291, price: 25, status: "Còn hàng"},
-]
 
 const HomeDetail = () => {
     let [recommend, setRecommend] = useState([]);
+    let [sale_thumnails_1, setSale_thumnails_1] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const food_data = await fetchRecommend();
-                
-                setRecommend(food_data);    
+                setRecommend(food_data);
+                setSale_thumnails_1([food_data[0], food_data[1]]);
+
             } catch (err) {
                 console.log(err);
             }
@@ -72,7 +62,6 @@ const HomeDetail = () => {
 
         getData();
     }, []);
-
     return (
         <div className="container pt-4 mt-4 moveup-fadein-animation">
             <section>

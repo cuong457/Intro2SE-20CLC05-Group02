@@ -127,8 +127,22 @@ exports.updatePassword = catchAsync(async function (req, res, next) {
 });
 
 exports.getUsers = catchAsync(async function (req, res, next) {
+  const sortQuery = req.query.sort;
+  const sortOptions = {};
+
+  if (sortQuery) {
+    const option_list = sortQuery.split("-");
+    const sortOrder = option_list.includes("des") ? -1 : 1;
+
+    option_list.forEach((option) => {
+      if (option && option !== 'des') sortOptions[option] = sortOrder
+    });
+  }
+  
   try {
-    const user = await UserModel.find({});
+    const user = await UserModel.find({})
+      .sort(sortOptions);
+
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err });
@@ -324,3 +338,27 @@ exports.restrictTo = (...roles) => {
     next();
   });
 };
+
+exports.banUser = catchAsync(async function(req, res, next) {
+    try {
+        const user = await UserModel.findByIdAndUpdate(req.params.id, { status: -1 })
+
+        res.status(200).json({
+            message: "success"
+        });
+    } catch (err) {
+        return next(new AppError(404, "User not found or user is already banned"));
+    }
+});
+
+exports.unbanUser = catchAsync(async function(req, res, next) {
+    try {
+        const user = await UserModel.findByIdAndUpdate(req.params.id, { status: 1 });
+
+        res.status(200).json({
+            message: "success"
+        });
+    } catch (err) {
+        return next(new AppError(404, "User not found or user hasn't been banned yet"));
+    }
+});

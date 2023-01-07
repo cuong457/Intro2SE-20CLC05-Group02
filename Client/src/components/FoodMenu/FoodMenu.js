@@ -19,7 +19,7 @@ function FoodMenu(props) {
         menu = foods.map((food, index) => {
             return  <div className="col-6 col-md-4 col-xl-2 m-auto p-4 large-thumnail" key={index}>
                         <Link to={`/item/${food.slug}`}><img src={require(`../../assets/images/FoodThumnail/${food.img.thumbnail}`)} className="img-fluid pb-3" alt='food'/></Link>
-                        <Link to={food.link} className="erase-underline"><p className="me-title text-lightblue">{food.name}</p></Link>
+                        <Link to={`/item/${food.slug}`} className="erase-underline"><p className="me-title text-lightblue">{food.name}</p></Link>
                         <RatingStarGenerator star={food.rating}/>
                         <p className="review-count">{food.rvcount}</p>
                         <p className="sm-title">1 offer from <span className="rtab-money">{food.price}.000 VNĐ</span></p>
@@ -30,7 +30,7 @@ function FoodMenu(props) {
             return  <div className='col-12 col-sm-6 large-thumnail' key={index}>
                         <div className="row ps-2">
                             <div className="col-5 pe-0">
-                                <Link to={food.link} className='thumnail-ref-container'><img src={food.img} className="w-100 pb-2" alt='thumnail'/></Link>
+                                <Link to={`/item/${food.slug}`} className='thumnail-ref-container'><img src={require(`../../assets/images/FoodThumnail/${food.img.thumbnail}`)} className="w-100 pb-2" alt='thumnail'/></Link>
                             </div>
                             <div className="col-7">
                                 <p className="me-title wrap-text mb-0" id="name-me-title">{food.name}</p>
