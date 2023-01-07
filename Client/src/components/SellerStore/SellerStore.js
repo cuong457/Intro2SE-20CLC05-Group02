@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import { fetchProducts } from '../../api'
 
 function SellerStore(props) {
-    
 
     const foods = props.foods;
     const foodlist = foods.map((food) => {

@@ -331,11 +331,11 @@ body {
     padding: 20px;
 }
 .food-body {
-    background-color: transparent!important;
+    background-color: transparent !important;
 }
 .food-card {
-    border: 1px solid black!important;
-    border-radius: 1rem!important;
+    border: 1px solid black !important;
+    border-radius: 1rem !important;
 }
 .ban-icon {
     width: 100px;
